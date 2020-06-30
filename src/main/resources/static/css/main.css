@@ -496,7 +496,7 @@ input {
 }
 
 .card-3 .card-heading {
-  background: url("../images/Libros.jpg") top left/cover no-repeat;
+  background: url("../images/Libros.jpg") top center/cover no-repeat;
   display: table-cell;
   width: 50%;
 }
