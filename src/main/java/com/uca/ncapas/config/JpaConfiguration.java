@@ -25,7 +25,7 @@ public class JpaConfiguration {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource());
 		em.setPersistenceUnitName("modelo-persistence");
-		em.setPackagesToScan("com.uca.capas.modelo.domain");
+		em.setPackagesToScan("com.uca.ncapas.domain");
 		
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
@@ -55,7 +55,7 @@ public class JpaConfiguration {
 		dataSource.setDriverClassName("org.postgresql.Driver");
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/BaseMAE");
 		dataSource.setUsername("postgres");
-		dataSource.setPassword("6891ahtram9102");
+		dataSource.setPassword("012rmv90");//6891ahtram9102
 		return dataSource;
 	}
 	
