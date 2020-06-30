@@ -14,4 +14,11 @@ public class MainController {
 		return mav;
 	}
 	
+	@RequestMapping("/signup")
+	public ModelAndView Signup() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("crearCuenta");
+		return mav;
+	}
+	
 }
