@@ -35,10 +35,29 @@ public class MainController {
 		return mav;
 	}
 	
+	
+	//**************************CATALOGOS*********************************//
+	
 	@RequestMapping("/catalogoEscuela")
 	public ModelAndView CatalogoEscuela() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("catalogoEscuela");
+		mav.setViewName("catalogos/catalogoEscuela");
 		return mav;
 	}
+	
+	@RequestMapping("/catalogoMateria")
+	public ModelAndView CatalogoMateria() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("catalogos/catalogoMateria");
+		return mav;
+	}
+	
+	@RequestMapping("/catalogoUsuario")
+	public ModelAndView CatalogoUsuario() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("catalogos/catalogoUsuario");
+		return mav;
+	}
+	
+	
 }
