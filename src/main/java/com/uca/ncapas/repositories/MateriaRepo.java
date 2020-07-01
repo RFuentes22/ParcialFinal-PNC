@@ -1,5 +1,13 @@
 package com.uca.ncapas.repositories;
 
-public interface MateriaRepo {
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.uca.ncapas.domain.administracion.Materia;
+
+public interface MateriaRepo extends JpaRepository<Materia, Integer>{
+	
+	public List<Materia> findBySnombre(String snombre);
+	
 }
