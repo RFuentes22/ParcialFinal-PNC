@@ -21,4 +21,24 @@ public class MainController {
 		return mav;
 	}
 	
+	@RequestMapping("/adminview")
+	public ModelAndView AdminView() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("adminView");
+		return mav;
+	}
+	
+	@RequestMapping("/coordinatorview")
+	public ModelAndView CoordinatorView() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("coordinatorView");
+		return mav;
+	}
+	
+	@RequestMapping("/catalogoEscuela")
+	public ModelAndView CatalogoEscuela() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("catalogoEscuela");
+		return mav;
+	}
 }
