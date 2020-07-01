@@ -1,10 +1,14 @@
 package com.uca.ncapas.domain.proceso_negocio;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.uca.ncapas.domain.administracion.Centro_escolar;
+import com.uca.ncapas.domain.administracion.Departamento;
+import com.uca.ncapas.domain.administracion.Municipio;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Entity
@@ -12,44 +16,102 @@ import java.sql.Date;
 public class Estudiante {
 
     @Id
+    @GeneratedValue(generator="estudiante_c_estudiante_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "estudiante_c_estudiante_seq", sequenceName = "proceso_negocio.estudiante_c_estudiante_seq")
     @Column(name = "c_estudiante")
     private Integer cestudiante;
 
     @Column(name = "nombres")
+    @NotNull(message = "El Nombre del estudiante no puede quedar vacio")
+    @Size(max = 100, message = "El Nombre del estudiante debe tener maximo 100 caracteres")
     private String snombres;
 
     @Column(name = "apellidos")
+    @NotNull(message = "El Apellido del estudiante no puede quedar vacio")
+    @Size(max = 100, message = "El Apellido del estudiante debe tener maximo 100 caracteres")
     private String sapellidos;
 
     @Column(name = "carnet")
+    @NotNull(message = "El Carnet del estudiante no puede quedar vacio")
+    @Size(max = 9, message = "El Carnet del estudiante debe tener maximo 9 caracteres")
     private Integer ccarnet;
 
     @Column(name = "fnacimiento")
+    @NotEmpty(message = "La Fecha de nacimiento del estudiante no puede quedar vacio")
     private Date ffnacimiento;
 
     @Column(name = "direccion")
+    @NotNull(message = "La Direccion del estudiante no puede quedar vacio")
+    @Size(max = 150, message = "La Direccion del estudiante debe tener maximo 150 caracteres")
     private String sdireccion;
 
     @Column(name = "departamento")
+    @NotEmpty(message = "El Departamento del estudiante no puede quedar vacio")
     private Integer cdepartamento;
 
     @Column(name = "municipio")
+    @NotEmpty(message = "El Municipio del estudiante no puede quedar vacio")
     private Integer cmunicipio;
 
     @Column(name = "telefono")
+    @NotNull(message = "El campo Telefono no puede quedar vacio")
+    @Size(max = 10, message = "El campo Telefono debe tener maximo 10 caracteres")
     private Integer itelefono;
 
     @Column(name = "celular")
+    @NotNull(message = "El campo Celular no puede quedar vacio")
+    @Size(max = 10, message = "El campo Celular debe tener maximo 10 caracteres")
     private Integer icelular;
 
     @Column(name = "escuela")
+    @NotEmpty(message = "Escuela del estudiante no puede quedar vacio")
     private Integer cescuela;
 
     @Column(name = "nombre_madre")
+    @NotNull(message = "El Nombre de la Madre del estudiante no puede quedar vacio")
+    @Size(max = 150, message = "El Nombre de la Madre del estudiante debe tener maximo 150 caracteres")
     private String snombre_madre;
 
     @Column(name = "nombre_padre")
+    @NotNull(message = "El Nombre del Padre del estudiante no puede quedar vacio")
+    @Size(max = 150, message = "El Nombre del Padre del estudiante debe tener maximo 150 caracteres")
     private String snombre_padre;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "escuela",unique=true,insertable = false, updatable = false)
+    private Centro_escolar centro_escolar;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "municipio",unique=true,insertable = false, updatable = false)
+    private Municipio municipio;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "departamento",unique=true,insertable = false, updatable = false)
+    private Departamento departamento;
+
+    public Centro_escolar getCentro_escolar() {
+        return centro_escolar;
+    }
+
+    public void setCentro_escolar(Centro_escolar centro_escolar) {
+        this.centro_escolar = centro_escolar;
+    }
+
+    public Municipio getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
 
     public Integer getCestudiante() {
         return cestudiante;

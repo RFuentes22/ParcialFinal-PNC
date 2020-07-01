@@ -1,10 +1,10 @@
 package com.uca.ncapas.domain.administracion;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Entity
@@ -12,38 +12,75 @@ import java.sql.Date;
 public class Usuario {
 
     @Id
+    @GeneratedValue(generator="usuario_c_usuario_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "usuario_c_usuario_seq", sequenceName = "administracion.usuario_c_usuario_seq")
     @Column(name = "c_usuario")
     private Integer cusuario;
 
     @Column(name = "usuario")
+    @NotNull(message = "El Nombre del usuario no puede quedar vacio")
+    @Size(max = 20, message = "El Nombre del usuario debe tener maximo 20 caracteres")
     private String susuario;
 
     @Column(name = "contrasena")
+    @NotNull(message = "La Contraseña del usuario no puede quedar vacio")
+    @Size(max = 50, message = "La Contraseña del usuario debe tener maximo 50 caracteres")
     private String scontrasena;
 
     @Column(name = "estado")
+    @NotEmpty(message = "El Estado del usuario no puede quedar vacio")
     private Boolean bestado;
 
     @Column(name = "admin")
+    @NotEmpty(message = "El Rol del usuario no puede quedar vacio")
     private Boolean badmin;
 
     @Column(name = "fnacimiento")
+    @NotEmpty(message = "La Fecha de nacimiento del usuario no puede quedar vacio")
     private Date ffnacimiento;
 
     @Column(name = "edad")
     private Integer iedad;
 
     @Column(name = "direccion")
+    @NotNull(message = "La Direccion del Usuario no puede quedar vacio")
+    @Size(max = 150, message = "La Direccion del Usuario debe tener maximo 150 caracteres")
     private String sdireccion;
 
     @Column(name = "departamento")
+    @NotEmpty(message = "El Departamento del usuario no puede quedar vacio")
     private Integer idepartamento;
 
     @Column(name = "municipio")
+    @NotEmpty(message = "El municipio del usuario no puede quedar vacio")
     private Integer imunicipio;
 
     @Column(name = "activo")
     private Boolean bactivo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "departamento",unique=true,insertable = false, updatable = false)
+    private Departamento departamento;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "municipio",unique=true,insertable = false, updatable = false)
+    private Municipio municipio;
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    public Municipio getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
+    }
 
     public Integer getCusuario() {
         return cusuario;

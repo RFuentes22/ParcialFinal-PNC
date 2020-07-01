@@ -13,4 +13,6 @@ public interface UsuarioService {
 	public Usuario findOne(Integer code) throws DataAccessException;
 	
 	public void save(Usuario u) throws DataAccessException;
+	
+	public Usuario findUsuario(String cadena) throws DataAccessException;
 }
