@@ -21,7 +21,7 @@ public class Municipio {
     private Integer cdepatamento;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "c_departamento")
+    @JoinColumn(name = "c_departamento",unique=true,insertable = false, updatable = false)
     private Departamento departamento;
 
     @OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY)

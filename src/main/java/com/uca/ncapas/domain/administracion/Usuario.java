@@ -59,11 +59,11 @@ public class Usuario {
     private Boolean bactivo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "departamento")
+    @JoinColumn(name = "departamento",unique=true,insertable = false, updatable = false)
     private Departamento departamento;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "municipio")
+    @JoinColumn(name = "municipio",unique=true,insertable = false, updatable = false)
     private Municipio municipio;
 
     public Departamento getDepartamento() {

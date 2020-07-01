@@ -33,11 +33,11 @@ public class Centro_escolar {
     private Integer imunicipio;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "municipio")
+    @JoinColumn(name = "municipio",unique=true,insertable = false, updatable = false)
     private Municipio municipio;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "departamento")
+    @JoinColumn(name = "departamento",unique=true,insertable = false, updatable = false)
     private Departamento departamento;
 
     public Municipio getMunicipio() {

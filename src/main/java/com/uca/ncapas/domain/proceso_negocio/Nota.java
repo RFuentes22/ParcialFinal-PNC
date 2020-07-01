@@ -38,11 +38,11 @@ public class Nota {
     private Float inota;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "c_estudiante")
+    @JoinColumn(name = "c_estudiante",unique=true,insertable = false, updatable = false)
     private Estudiante estudiante;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "c_materia")
+    @JoinColumn(name = "c_materia",unique=true,insertable = false, updatable = false)
     private Materia materia;
 
 

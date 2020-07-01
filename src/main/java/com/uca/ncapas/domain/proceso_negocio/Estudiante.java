@@ -78,15 +78,15 @@ public class Estudiante {
     private String snombre_padre;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "escuela")
+    @JoinColumn(name = "escuela",unique=true,insertable = false, updatable = false)
     private Centro_escolar centro_escolar;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "municipio")
+    @JoinColumn(name = "municipio",unique=true,insertable = false, updatable = false)
     private Municipio municipio;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "departamento")
+    @JoinColumn(name = "departamento",unique=true,insertable = false, updatable = false)
     private Departamento departamento;
 
     public Centro_escolar getCentro_escolar() {
