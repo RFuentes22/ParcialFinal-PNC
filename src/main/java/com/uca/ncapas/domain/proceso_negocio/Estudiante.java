@@ -37,10 +37,10 @@ public class Estudiante {
     private Integer cmunicipio;
 
     @Column(name = "telefono")
-    private String stelefono;
+    private Integer itelefono;
 
     @Column(name = "celular")
-    private String scelular;
+    private Integer icelular;
 
     @Column(name = "escuela")
     private Integer cescuela;
@@ -115,20 +115,20 @@ public class Estudiante {
         this.cmunicipio = cmunicipio;
     }
 
-    public String getStelefono() {
-        return stelefono;
+    public Integer getItelefono() {
+        return itelefono;
     }
 
-    public void setStelefono(String stelefono) {
-        this.stelefono = stelefono;
+    public void setItelefono(Integer itelefono) {
+        this.itelefono = itelefono;
     }
 
-    public String getScelular() {
-        return scelular;
+    public Integer getIcelular() {
+        return icelular;
     }
 
-    public void setScelular(String scelular) {
-        this.scelular = scelular;
+    public void setIcelular(Integer icelular) {
+        this.icelular = icelular;
     }
 
     public Integer getCescuela() {
