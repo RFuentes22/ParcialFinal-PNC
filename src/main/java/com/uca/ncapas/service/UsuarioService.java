@@ -14,5 +14,5 @@ public interface UsuarioService {
 	
 	public void save(Usuario u) throws DataAccessException;
 	
-	public Usuario findUsuario(String cadena) throws DataAccessException;
+	public Usuario findUserByLogin(String user,String pass) throws DataAccessException;
 }

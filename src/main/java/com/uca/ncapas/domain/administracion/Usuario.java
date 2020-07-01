@@ -47,11 +47,11 @@ public class Usuario {
     @Size(max = 150, message = "La Direccion del Usuario debe tener maximo 150 caracteres")
     private String sdireccion;
 
-    @Column(name = "departamento")
+    @Column(name = "c_departamento")
     @NotEmpty(message = "El Departamento del usuario no puede quedar vacio")
     private Integer idepartamento;
 
-    @Column(name = "municipio")
+    @Column(name = "c_municipio")
     @NotEmpty(message = "El municipio del usuario no puede quedar vacio")
     private Integer imunicipio;
 
@@ -59,12 +59,13 @@ public class Usuario {
     private Boolean bactivo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "departamento",unique=true,insertable = false, updatable = false)
+    @JoinColumn(name = "c_departamento",unique=true,insertable = false, updatable = false)
     private Departamento departamento;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "municipio",unique=true,insertable = false, updatable = false)
+    @JoinColumn(name = "c_municipio",unique=true,insertable = false, updatable = false)
     private Municipio municipio;
+
 
     public Departamento getDepartamento() {
         return departamento;
