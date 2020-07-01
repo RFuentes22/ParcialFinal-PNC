@@ -1,6 +1,10 @@
 package com.uca.ncapas.domain.proceso_negocio;
 
 
+import com.uca.ncapas.domain.administracion.Centro_escolar;
+import com.uca.ncapas.domain.administracion.Departamento;
+import com.uca.ncapas.domain.administracion.Municipio;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -72,6 +76,42 @@ public class Estudiante {
     @NotNull(message = "El Nombre del Padre del estudiante no puede quedar vacio")
     @Size(max = 150, message = "El Nombre del Padre del estudiante debe tener maximo 150 caracteres")
     private String snombre_padre;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "escuela")
+    private Centro_escolar centro_escolar;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "municipio")
+    private Municipio municipio;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "departamento")
+    private Departamento departamento;
+
+    public Centro_escolar getCentro_escolar() {
+        return centro_escolar;
+    }
+
+    public void setCentro_escolar(Centro_escolar centro_escolar) {
+        this.centro_escolar = centro_escolar;
+    }
+
+    public Municipio getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
 
     public Integer getCestudiante() {
         return cestudiante;

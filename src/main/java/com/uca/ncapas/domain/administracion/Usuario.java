@@ -58,6 +58,30 @@ public class Usuario {
     @Column(name = "activo")
     private Boolean bactivo;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "departamento")
+    private Departamento departamento;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "municipio")
+    private Municipio municipio;
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    public Municipio getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
+    }
+
     public Integer getCusuario() {
         return cusuario;
     }

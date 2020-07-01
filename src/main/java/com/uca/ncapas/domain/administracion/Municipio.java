@@ -1,10 +1,10 @@
 package com.uca.ncapas.domain.administracion;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.uca.ncapas.domain.proceso_negocio.Estudiante;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(schema = "administracion", name = "municipio")
@@ -19,6 +19,29 @@ public class Municipio {
 
     @Column(name = "c_departamento")
     private Integer cdepatamento;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "c_departamento")
+    private Departamento departamento;
+
+    @OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY)
+    private List<Estudiante> estudianteList;
+
+    public List<Estudiante> getEstudianteList() {
+        return estudianteList;
+    }
+
+    public void setEstudianteList(List<Estudiante> estudianteList) {
+        this.estudianteList = estudianteList;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
 
     public Integer getCmunicipio() {
         return cmunicipio;

@@ -32,6 +32,30 @@ public class Centro_escolar {
     @Column(name = "municipio")
     private Integer imunicipio;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "municipio")
+    private Municipio municipio;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "departamento")
+    private Departamento departamento;
+
+    public Municipio getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
     public Integer getCescuela() {
         return cescuela;
     }
