@@ -35,7 +35,6 @@ public class MainController {
 		return mav;
 	}
 	
-	
 	//**************************CATALOGOS*********************************//
 	
 	@RequestMapping("/catalogoEscuela")

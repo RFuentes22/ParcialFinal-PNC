@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 
 <head>
     <!-- Required meta tags-->
@@ -10,7 +10,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Registrar Cuenta</title>
+    <title>Au Register Forms by Colorlib</title>
 
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -23,73 +23,91 @@
     <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="css/main.css" rel="stylesheet" media="all">
+    <link href="css/main2.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+    
 </head>
 
 <body>
-    <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
-        <div class="wrapper wrapper--w780">
-            <div class="card card-3">
-               
+    <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
                 <div class="card-body">
-                    <h2 class="title" align="center">Informacion de Registro</h2>
-                     <!--FORM-->
+                    <h2 class="title" align="center">Formulario de Registro</h2>
                     <form method="POST">
-                        <div class="input-group">
-                            <input class="input--style-3" type="text" placeholder="Nombre" name="name">
-                        </div>
-                        <div class="input-group">
-                            <input class="input--style-3" type="text" placeholder="Apellido" name="lastname">
-                        </div>
-                        <div class="input-group">
-                            <input class="input--style-3 js-datepicker" type="text" placeholder="Fecha de Nacimiento" name="birthday">
-                            <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                        </div>
-                        <div class="input-group">
-                            <div class="rs-select2 js-select-simple select--no-search">
-                                <select name="departamento">
-                                    <option disabled="disabled" selected="selected">Departamento</option>
-                                    <option>Depto1</option>
-                                    <option>Depto2</option>
-                                    <option>Depto3</option>
-                                </select>
-                                <div class="select-dropdown"></div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Nombre</label>
+                                    <input class="input--style-4" type="text" name="first_name">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Apellido</label>
+                                    <input class="input--style-4" type="text" name="last_name">
+                                </div>
                             </div>
                         </div>
-                        <div class="input-group">
-                            <div class="rs-select2 js-select-simple select--no-search">
-                                <select name="municipio">
-                                    <option disabled="disabled" selected="selected">Municipio</option>
-                                    <option>Municipio1</option>
-                                    <option>Municipio2</option>
-                                    <option>Municipio3</option>
-                                </select>
-                                <div class="select-dropdown"></div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Fecha de Nacimiento</label>
+                                    <div class="input-group-icon">
+                                        <input class="input--style-4 js-datepicker" type="text" name="birthday">
+                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="input-group">
-                            <input class="input--style-3" type="text" placeholder="Direccion de residencia" name="address">
-                        </div>
-                       
-                        <div class="input-group">
-                            <input class="input--style-3" type="text" placeholder="Nombre de Usuario" name="username">
-                        </div>
-                        <div class="input-group">
-                            <input class="input--style-3" type="password" placeholder="Contraseña" name="password">
-                        </div>
-                        <div class="input-group">
-                            <div class="rs-select2 js-select-simple select--no-search">
-                                <select name="tipoDeUsuario">
-                                    <option disabled="disabled" selected="selected">Tipo de Usuario</option>
-                                    <option>Administrador</option>
-                                    <option>Coordinador</option>
-                                </select>
-                                <div class="select-dropdown"></div>
+                        
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <div class="input-group">
+                            			<label class="label">Departamento</label>
+                            			<div class="rs-select2 js-select-simple select--no-search">
+		                                	<select name="subject">
+		                                    	<option disabled="disabled" selected="selected">Seleccionar</option>
+		                                    	<option>Subject 1</option>
+		                                    	<option>Subject 2</option>
+		                                    	<option>Subject 3</option>
+		                                	</select>
+		                                	<div class="select-dropdown"></div>
+		                            	</div>
+                        			</div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <div class="input-group">
+                            			<label class="label">Municipio</label>
+                            			<div class="rs-select2 js-select-simple select--no-search">
+			                                <select name="subject">
+			                                    <option disabled="disabled" selected="selected">Seleccionar</option>
+			                                    <option>Subject 1</option>
+			                                    <option>Subject 2</option>
+			                                    <option>Subject 3</option>
+			                                </select>
+			                                <div class="select-dropdown"></div>
+			                            </div>
+                        			</div>
+                                </div>
                             </div>
                         </div>
-                        <div class="p-t-10" align="center">
-                            <button class="btn btn--pill btn--green" type="submit">Crear Cuenta</button>
-                        </div>
+                      	<div class="row row-space">
+                      		<div class="row row-space">
+                                <div class="input-group">
+                                    <label class="label">Direccion de residencia</label>
+                                    <input class="input--style-4" type="text" name="address">
+                                </div>	
+                      		</div>
+                      	</div>
+                      	
+                        <button class="login100-form-btn" th:onclick="|window.location.href='/signup'|">
+							Crear Cuenta
+						</button>
                     </form>
                 </div>
             </div>
