@@ -15,21 +15,16 @@ import java.util.List;
 @Controller
 public class AdminController {
 
-
     @Autowired
     private UsuarioService usuarioService;
 
     Usuario usuario = null;
-
     Boolean flagEstadoUser = false;
 
     @PostMapping(value = "/validLogin")
     public ModelAndView validLogin(@RequestParam(value = "user") String user, @RequestParam(value = "password") String pass) {
         ModelAndView mav = new ModelAndView();
         usuario = usuarioService.findUserByLogin(user, pass);
-
-        //List<Usuario> usuarioList = null;
-        //usuarioList = usuarioService.findAll();
 
         if (flagEstadoUser) {
             mav.addObject("estado", 1);
