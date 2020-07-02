@@ -19,32 +19,47 @@ public class AdminController {
     @Autowired
     private UsuarioService usuarioService;
 
+    Usuario usuario = null;
+
     Boolean flagEstadoUser = false;
 
     @PostMapping(value = "/validLogin")
     public ModelAndView validLogin(@RequestParam(value = "user") String user, @RequestParam(value = "password") String pass) {
         ModelAndView mav = new ModelAndView();
-        Usuario usuario = usuarioService.findUserByLogin(user, pass);
+        usuario = usuarioService.findUserByLogin(user, pass);
 
         //List<Usuario> usuarioList = null;
         //usuarioList = usuarioService.findAll();
 
-        if(flagEstadoUser){
+        if (flagEstadoUser) {
             mav.addObject("estado", 1);
             mav.setViewName("index");
-        }else {
+        } else {
             if (usuario == null) {
                 System.out.println("Fallo login");
                 mav.setViewName("index");
             } else {
                 mav.setViewName("adminView");
+                usuario.setBestado(true);
+                usuarioService.save(usuario);
                 System.out.println("Succes login");
                 flagEstadoUser = true;
-
             }
         }
 
         return mav;
     }
 
+    @PostMapping(value = "/cerrarsesion")
+    public ModelAndView validLogin() {
+        ModelAndView mav = new ModelAndView();
+
+        usuario.setBestado(false);
+        usuarioService.save(usuario);
+        System.out.println("Succes Close");
+        mav.setViewName("index");
+        flagEstadoUser = false;
+
+        return mav;
+    }
 }

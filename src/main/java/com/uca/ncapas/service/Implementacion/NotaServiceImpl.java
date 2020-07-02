@@ -1,4 +1,4 @@
-package com.uca.ncapas.Implementacion;
+package com.uca.ncapas.service.Implementacion;
 
 import java.util.List;
 

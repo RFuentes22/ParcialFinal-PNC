@@ -28,15 +28,14 @@ public class Usuario {
     private String scontrasena;
 
     @Column(name = "estado")
-    @NotEmpty(message = "El Estado del usuario no puede quedar vacio")
     private Boolean bestado;
 
     @Column(name = "admin")
-    @NotEmpty(message = "El Rol del usuario no puede quedar vacio")
+    //@NotEmpty(message = "El Rol del usuario no puede quedar vacio")
     private Boolean badmin;
 
     @Column(name = "fnacimiento")
-    @NotEmpty(message = "La Fecha de nacimiento del usuario no puede quedar vacio")
+   // @NotEmpty(message = "La Fecha de nacimiento del usuario no puede quedar vacio")
     private Date ffnacimiento;
 
     @Column(name = "edad")
@@ -48,11 +47,11 @@ public class Usuario {
     private String sdireccion;
 
     @Column(name = "c_departamento")
-    @NotEmpty(message = "El Departamento del usuario no puede quedar vacio")
+    //@NotEmpty(message = "El Departamento del usuario no puede quedar vacio")
     private Integer idepartamento;
 
     @Column(name = "c_municipio")
-    @NotEmpty(message = "El municipio del usuario no puede quedar vacio")
+   // @NotEmpty(message = "El municipio del usuario no puede quedar vacio")
     private Integer imunicipio;
 
     @Column(name = "activo")

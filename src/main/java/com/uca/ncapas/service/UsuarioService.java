@@ -12,7 +12,9 @@ public interface UsuarioService {
 	
 	public Usuario findOne(Integer code) throws DataAccessException;
 	
-	public void save(Usuario u) throws DataAccessException;
+	public void save(Usuario usuario) throws DataAccessException;
 	
 	public Usuario findUserByLogin(String user,String pass) throws DataAccessException;
+
+
 }
