@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-	<title>Login V16</title>
+	<title>Inicio de Sesion Sistema MAE</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -69,6 +69,12 @@
 						<div class="alert alert-danger">
 							<strong>¡Error!</strong> Tu cuenta no esta activa <br>
 							Consulta al administrador.
+						</div>
+					</div>
+					<div th:if="${passw == 1}" class="container">
+						<div class="alert alert-danger">
+							<strong>¡Error!</strong> Usuario o Contraseña es incorrecto.
+
 						</div>
 					</div>
 				<div class="container-login100-form-btn m-t-32">

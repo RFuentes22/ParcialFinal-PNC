@@ -32,6 +32,7 @@ public class AdminController {
         } else {
             if (usuario == null) {
                 System.out.println("Fallo login");
+                mav.addObject("passw", 1);
                 mav.setViewName("index");
             } else {
                 if (validarActivoUser(usuario)) {
