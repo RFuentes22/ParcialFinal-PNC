@@ -34,15 +34,30 @@ public class AdminController {
                 System.out.println("Fallo login");
                 mav.setViewName("index");
             } else {
-                mav.setViewName("adminView");
-                usuario.setBestado(true);
-                usuarioService.save(usuario);
-                System.out.println("Succes login");
-                flagEstadoUser = true;
+                if (validarActivoUser(usuario)) {
+                    mav.setViewName("adminView");
+                    usuario.setBestado(true);
+                    usuarioService.save(usuario);
+                    System.out.println("Succes login");
+                    flagEstadoUser = true;
+                }else{
+                    mav.addObject("activo", 0);
+                    mav.setViewName("index");
+                }
             }
         }
 
         return mav;
+    }
+
+    public Boolean validarActivoUser(Usuario usuario) {
+        if (usuario.getBadmin()) {
+            return true;
+        }else{
+            if (usuario.getBactivo()){
+                return true;
+            }else{return false;}
+        }
     }
 
     @PostMapping(value = "/cerrarsesion")
