@@ -106,5 +106,29 @@ public class MainController {
         mav.setViewName("catalogos/crearUsuario");
         return mav;
     }
+    
+  //**************************PROCESOS DE NEGOCIO*********************************//
+    
+    @RequestMapping("/alumnos")
+    public ModelAndView ExpedienteAlumnos() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("negocio/expedienteAlumnos");
+        return mav;
+    }
+    
+    @RequestMapping("/lista")
+    public ModelAndView ListaAlumnos() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("negocio/listaAlumnos");
+        return mav;
+    }
+    
+    @RequestMapping("/expediente")
+    public ModelAndView NuevoAlumno() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("negocio/crearEstudiante");
+        return mav;
+    }
+
 
 }
