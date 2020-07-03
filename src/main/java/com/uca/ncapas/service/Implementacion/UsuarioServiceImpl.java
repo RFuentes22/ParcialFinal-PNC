@@ -23,7 +23,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario findOne(Integer code) throws DataAccessException {
-        return null;
+        return usuarioRepo.getOne(code);
     }
 
     @Override
