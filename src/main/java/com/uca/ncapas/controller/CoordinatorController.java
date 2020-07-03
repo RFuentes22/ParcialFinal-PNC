@@ -19,22 +19,24 @@ public class CoordinatorController {
     @RequestMapping("/coordinatorview")
     public ModelAndView CoordinatorView() {
         ModelAndView mav = new ModelAndView();
+        mav.setViewName(validloginCoord() ? "coordinatorview" : "index");
 
-        System.out.println(idusuario);
+        return mav;
+    }
 
-        if (idusuario == 0) {
-            mav.setViewName("index");
-        } else {
-            usuario = usuarioService.findOne(idusuario);
-            if (usuario.getBestado().equals(false)) {
-                mav.setViewName("index");
-            } else {
-                mav.setViewName("coordinatorview");
-            }
-        }
+    @RequestMapping("/expediente")
+    public ModelAndView NuevoAlumno() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("negocio/crearEstudiante");
 
 
         return mav;
     }
 
+
+    public Boolean validloginCoord() {
+        if (idusuario == 0) return false;
+        usuario = usuarioService.findOne(idusuario);
+        return !usuario.getBestado().equals(false);
+    }
 }

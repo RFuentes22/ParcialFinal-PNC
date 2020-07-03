@@ -17,7 +17,7 @@ import com.uca.ncapas.repositories.UsuarioRepo;
 import com.uca.ncapas.service.DepartamentoService;
 
 @Controller
-public class signController {
+public class SignController {
 	
 	@Autowired
 	UsuarioRepo usuarioRepo;

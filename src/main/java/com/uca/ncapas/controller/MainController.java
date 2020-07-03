@@ -79,7 +79,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/cerrarsesion")
-    public ModelAndView validLogin() {
+    public ModelAndView closeLogin() {
         ModelAndView mav = new ModelAndView();
         if (usuario.getBestado()) {
             usuario.setBestado(false);
@@ -174,13 +174,6 @@ public class MainController {
     public ModelAndView ListaAlumnos() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("negocio/listaAlumnos");
-        return mav;
-    }
-
-    @RequestMapping("/expediente")
-    public ModelAndView NuevoAlumno() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("negocio/crearEstudiante");
         return mav;
     }
 
