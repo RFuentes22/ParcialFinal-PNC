@@ -45,12 +45,14 @@
                                 <div class="input-group">
                                     <label class="label">Nombre</label>
                                     <input class="input--style-4" type="text" th:field="*{nameuser}">
+                                    <span th:errors="*{nameuser}" style="color:#FF0000"></span>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Apellido</label>
                                     <input class="input--style-4" type="text" th:field="*{lastnameuser}">
+                                    <span th:errors="*{lastnameuser}" style="color:#FF0000"></span>
                                 </div>
                             </div>
                         </div>
@@ -61,6 +63,7 @@
                                     <div class="input-group-icon">
                                         <input class="input--style-4 js-datepicker" type="text" th:field="*{ffnacimiento}">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                        <span th:errors="*{ffnacimiento}" style="color:#FF0000"></span>
                                     </div>
                                 </div>
                             </div>
@@ -100,18 +103,21 @@
                    		<div class="row row-space">
                            	<label class="label">Direccion de residencia</label>
                            	<input class="input--style-4" type="text" th:field="*{sdireccion}">
+                           	<span th:errors="*{sdireccion}" style="color:#FF0000"></span>
                    		</div>
                     	<div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Nombre de Usuario</label>
                                     <input class="input--style-4" type="text" th:field="*{susuario}">
+                                    <span th:errors="*{susuario}" style="color:#FF0000"></span>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Contraseña</label>
                                     <input class="input--style-4" type="password" th:field="*{scontrasena}">
+                                    <span th:errors="*{scontrasena}" style="color:#FF0000"></span>
                                 </div>
                             </div>
                         </div>
