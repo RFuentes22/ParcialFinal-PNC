@@ -19,69 +19,26 @@ public class AdminController {
     @Autowired
     private UsuarioService usuarioService;
 
+    static int idusuario = 0;
     Usuario usuario = null;
 
-    Boolean flagEstadoUser = false;
-
-    @PostMapping(value = "/validLogin")
-    public ModelAndView validLogin(@RequestParam(value = "user") String user, @RequestParam(value = "password") String pass) {
+    @RequestMapping("/adminview")
+    public ModelAndView AdminView() {
         ModelAndView mav = new ModelAndView();
-        usuario = usuarioService.findUserByLogin(user, pass);
+        System.out.println(idusuario);
 
-        if (flagEstadoUser) {
-            mav.addObject("estado", 1);
+        if (idusuario == 0) {
             mav.setViewName("index");
         } else {
-            if (usuario == null) {
-                mav.addObject("passw", 1);
-                System.out.println("Fallo login");
+            usuario = usuarioService.findOne(idusuario);
+            if (usuario.getBestado().equals(false)) {
                 mav.setViewName("index");
             } else {
-                if (validarActivoUser(usuario)) {
-                    mav.setViewName("adminView");
-                    usuario.setBestado(true);
-                    usuarioService.save(usuario);
-                    flagEstadoUser = true;
-                    System.out.println("Succes login");
-                } else {
-                    mav.addObject("activo", 0);
-                    mav.setViewName("index");
-                }
+                mav.setViewName("adminView");
             }
         }
 
         return mav;
     }
 
-    @RequestMapping("/adminview")
-    public ModelAndView AdminView() {
-        ModelAndView mav = new ModelAndView();
-        if (!flagEstadoUser) {
-            mav.setViewName("index");
-        } else {
-            mav.setViewName("adminView");
-        }
-        return mav;
-    }
-
-    @RequestMapping(value = "/cerrarsesion")
-    public ModelAndView validLogin() {
-        ModelAndView mav = new ModelAndView();
-        if (flagEstadoUser) {
-            usuario.setBestado(false);
-            usuarioService.save(usuario);
-            System.out.println("Succes Close");
-            flagEstadoUser = false;
-        }
-        mav.setViewName("index");
-        return mav;
-    }
-
-    public Boolean validarActivoUser(Usuario usuario) {
-        if (usuario.getBadmin()) {
-            return true;
-        } else {
-            return usuario.getBactivo();
-        }
-    }
 }
