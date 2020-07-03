@@ -11,6 +11,15 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/main.css">
 	
+	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    setTimeout(function() {
+	        $("#aviso").fadeOut(1500);
+	    },3000);
+	});
+	</script>
+	
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -38,6 +47,7 @@
       		<button class="btn-new" th:onclick="|window.location.href='/materia'|">
 				Nueva Materia
 			</button>
+			<br><label th:if="${save == 1}" class="label" id="aviso">MATERIA GUARDADA CON EXITO</label>
       	</p>
 		
 		<div class="panel__block"></div>
