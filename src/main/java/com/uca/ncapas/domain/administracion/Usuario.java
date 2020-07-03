@@ -23,12 +23,12 @@ public class Usuario {
     private String susuario;
 
     @Column(name = "nombre")
-    @NotNull(message = "El Nombre del usuario no puede quedar vacio")
+   // @NotNull(message = "El Nombre del usuario no puede quedar vacio")
     @Size(max = 40, message = "El Nombre del usuario debe tener maximo 40 caracteres")
     private String nameuser;
 
     @Column(name = "apellido")
-    @NotNull(message = "El Apellido del usuario no puede quedar vacio")
+    //@NotNull(message = "El Apellido del usuario no puede quedar vacio")
     @Size(max = 40, message = "El Apellido del usuario debe tener maximo 40 caracteres")
     private String lastnameuser;
 

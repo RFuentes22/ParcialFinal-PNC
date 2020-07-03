@@ -39,9 +39,9 @@ public class AdminController {
                     mav.setViewName("adminView");
                     usuario.setBestado(true);
                     usuarioService.save(usuario);
-                    System.out.println("Succes login");
                     flagEstadoUser = true;
-                }else{
+                    System.out.println("Succes login");
+                } else {
                     mav.addObject("activo", 0);
                     mav.setViewName("index");
                 }
@@ -51,26 +51,35 @@ public class AdminController {
         return mav;
     }
 
+    @RequestMapping("/adminview")
+    public ModelAndView AdminView() {
+        ModelAndView mav = new ModelAndView();
+        if (!flagEstadoUser) {
+            mav.setViewName("index");
+        } else {
+            mav.setViewName("adminView");
+        }
+        return mav;
+    }
+
+    @RequestMapping(value = "/cerrarsesion")
+    public ModelAndView validLogin() {
+        ModelAndView mav = new ModelAndView();
+        if (flagEstadoUser) {
+            usuario.setBestado(false);
+            usuarioService.save(usuario);
+            System.out.println("Succes Close");
+            flagEstadoUser = false;
+        }
+        mav.setViewName("index");
+        return mav;
+    }
+
     public Boolean validarActivoUser(Usuario usuario) {
         if (usuario.getBadmin()) {
             return true;
-        }else{
-            if (usuario.getBactivo()){
-                return true;
-            }else{return false;}
+        } else {
+            return usuario.getBactivo();
         }
-    }
-
-    @PostMapping(value = "/cerrarsesion")
-    public ModelAndView validLogin() {
-        ModelAndView mav = new ModelAndView();
-
-        usuario.setBestado(false);
-        usuarioService.save(usuario);
-        System.out.println("Succes Close");
-        mav.setViewName("index");
-        flagEstadoUser = false;
-
-        return mav;
     }
 }

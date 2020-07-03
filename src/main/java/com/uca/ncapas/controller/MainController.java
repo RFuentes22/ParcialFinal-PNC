@@ -27,13 +27,6 @@ public class MainController {
         return mav;
     }
 
-    @RequestMapping("/adminview")
-    public ModelAndView AdminView() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("adminView");
-        return mav;
-    }
-
     @RequestMapping("/coordinatorview")
     public ModelAndView CoordinatorView() {
         ModelAndView mav = new ModelAndView();
@@ -63,6 +56,5 @@ public class MainController {
         mav.setViewName("catalogos/catalogoUsuario");
         return mav;
     }
-
 
 }
