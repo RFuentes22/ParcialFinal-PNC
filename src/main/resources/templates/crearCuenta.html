@@ -88,11 +88,8 @@
                                     <div class="input-group">
                             			<label class="label">Municipio</label>
                             			<div class="rs-select2 js-select-simple select--no-search">
-			                                <select name="municipio" id="id2">
-			                                    <option disabled selected>Seleccionar</option>
-			                                   <option th:each="muni : ${municipios}"
-								                th:value="${muni.cmunicipio}"
-								                th:text="${muni.snombre}"></option>
+			                                <select  th:field="*{idepartamento}" id="mun">
+			                                    <option  selected value="">Seleccionar</option>                         
 			                                </select>
 			                                <div class="select-dropdown"></div>
 			                            </div>
@@ -163,10 +160,12 @@
 	    dataType: "json",
 	    success: function (response) {
 	      if (response) {
-	        $("#id2 option:not(:disabled)").remove();
+	    	$("#mun option:not(:disabled)").remove();
+	    	//$('#mun option[]').remove();
 	        $.each(response, function(crearCuenta, option) {
-	            console.log("option: "+option)
-	            $("#id2").append('<option value="'+ option.cmunicipio +'">'+ option.snombre +'</option>') 
+	            console.log('<option value="'+option.cmunicipio+'" text="'+option.snombre+'"></option>')
+	            $("#mun").append('<option value="'+option.cmunicipio+'">'+option.snombre+'</option>') 
+	            
 	        });
 	      }
 	    }

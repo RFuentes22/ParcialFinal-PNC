@@ -1,6 +1,7 @@
 package com.uca.ncapas.domain.administracion;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.uca.ncapas.domain.proceso_negocio.Estudiante;
 
 import javax.persistence.*;
@@ -22,11 +23,14 @@ public class Municipio {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "c_departamento",unique=true,insertable = false, updatable = false)
+    @JsonIgnore
     private Departamento departamento;
 
     @OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Estudiante> estudianteList;
 
+    @JsonIgnore
     public List<Estudiante> getEstudianteList() {
         return estudianteList;
     }
@@ -35,6 +39,7 @@ public class Municipio {
         this.estudianteList = estudianteList;
     }
 
+    @JsonIgnore
     public Departamento getDepartamento() {
         return departamento;
     }

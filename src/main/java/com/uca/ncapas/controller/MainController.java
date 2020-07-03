@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -51,15 +52,15 @@ public class MainController {
         return mav;
     }
 
-    @PostMapping(value = "/municipio")
-    @ResponseBody
-    public List<Municipio> getModals(@RequestParam(value = "dep", required = true) String dep) {
-      System.out.println("valor pasado como pasametro: " + dep);
-    //  List<Municipio> municipios = null;
-     // municipios = municipioService.findDepartamento(Integer.valueOf(dep));
-     // model.addObject("municipios", municipios);
-      return dep != null ? municipioService.findDepartamento(Integer.valueOf(dep)) : null;
-    }
+    @RequestMapping(value = "/municipio", method = RequestMethod.POST)
+	    @ResponseBody
+	    public List<Municipio> getModals(@RequestParam(value = "dep", required = true) String dep) {
+	      System.out.println("valor pasado como pasametro: " + dep);
+	    //  List<Municipio> municipios = null;
+	     // municipios = municipioService.findDepartamento(Integer.valueOf(dep));
+	     // model.addObject("municipios", municipios);
+	      return dep != null ? municipioService.findDepartamento(Integer.valueOf(dep)) : null;
+	    }
 
 
 
