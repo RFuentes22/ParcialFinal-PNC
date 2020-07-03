@@ -18,9 +18,19 @@ public class Usuario {
     private Integer cusuario;
 
     @Column(name = "usuario")
-    @NotNull(message = "El Nombre del usuario no puede quedar vacio")
-    @Size(max = 20, message = "El Nombre del usuario debe tener maximo 20 caracteres")
+    @NotNull(message = "El Usuario no puede quedar vacio")
+    @Size(max = 20, message = "El Usuario debe tener maximo 20 caracteres")
     private String susuario;
+
+    @Column(name = "nombre")
+    @NotNull(message = "El Nombre del usuario no puede quedar vacio")
+    @Size(max = 40, message = "El Nombre del usuario debe tener maximo 40 caracteres")
+    private String nameuser;
+
+    @Column(name = "apellido")
+    @NotNull(message = "El Apellido del usuario no puede quedar vacio")
+    @Size(max = 40, message = "El Apellido del usuario debe tener maximo 40 caracteres")
+    private String lastnameuser;
 
     @Column(name = "contrasena")
     @NotNull(message = "La Contraseña del usuario no puede quedar vacio")
@@ -65,6 +75,21 @@ public class Usuario {
     @JoinColumn(name = "c_municipio",unique=true,insertable = false, updatable = false)
     private Municipio municipio;
 
+    public String getNameuser() {
+        return nameuser;
+    }
+
+    public void setNameuser(String nameuser) {
+        this.nameuser = nameuser;
+    }
+
+    public String getLastnameuser() {
+        return lastnameuser;
+    }
+
+    public void setLastnameuser(String lastnameuser) {
+        this.lastnameuser = lastnameuser;
+    }
 
     public Departamento getDepartamento() {
         return departamento;

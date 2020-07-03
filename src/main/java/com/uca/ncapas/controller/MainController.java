@@ -12,10 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController {
 
-    //mav.addObject("usuario", new Usuario());
-
-    AdminController adminController = new AdminController();
-
     @RequestMapping("/login")
     public ModelAndView Login() {
         ModelAndView mav = new ModelAndView();

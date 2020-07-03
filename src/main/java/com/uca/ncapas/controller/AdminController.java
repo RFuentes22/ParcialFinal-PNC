@@ -15,12 +15,10 @@ import java.util.List;
 @Controller
 public class AdminController {
 
-
     @Autowired
     private UsuarioService usuarioService;
 
     Usuario usuario = null;
-
     Boolean flagEstadoUser = false;
 
     @PostMapping(value = "/validLogin")
@@ -28,26 +26,39 @@ public class AdminController {
         ModelAndView mav = new ModelAndView();
         usuario = usuarioService.findUserByLogin(user, pass);
 
-        //List<Usuario> usuarioList = null;
-        //usuarioList = usuarioService.findAll();
-
         if (flagEstadoUser) {
             mav.addObject("estado", 1);
             mav.setViewName("index");
         } else {
             if (usuario == null) {
                 System.out.println("Fallo login");
+                mav.addObject("passw", 1);
                 mav.setViewName("index");
             } else {
-                mav.setViewName("adminView");
-                usuario.setBestado(true);
-                usuarioService.save(usuario);
-                System.out.println("Succes login");
-                flagEstadoUser = true;
+                if (validarActivoUser(usuario)) {
+                    mav.setViewName("adminView");
+                    usuario.setBestado(true);
+                    usuarioService.save(usuario);
+                    System.out.println("Succes login");
+                    flagEstadoUser = true;
+                }else{
+                    mav.addObject("activo", 0);
+                    mav.setViewName("index");
+                }
             }
         }
 
         return mav;
+    }
+
+    public Boolean validarActivoUser(Usuario usuario) {
+        if (usuario.getBadmin()) {
+            return true;
+        }else{
+            if (usuario.getBactivo()){
+                return true;
+            }else{return false;}
+        }
     }
 
     @PostMapping(value = "/cerrarsesion")

@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+<<<<<<< HEAD
 	<title>Iniciar Sesion</title>
+=======
+	<title>Inicio de Sesion Sistema MAE</title>
+>>>>>>> branch 'master' of https://github.com/RFuentes22/ParcialFinal-PNC.git
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -62,7 +66,19 @@
 					<div th:if="${estado == 1}" class="container">
 						<div class="alert alert-danger">
 							<strong>¡Error!</strong> Ya has iniciado sesion, si quieres entrar con <br>
-							otra cuenta debes salir de sesion.
+							otra cuenta debes cerrar sesion.
+						</div>
+					</div>
+					<div th:if="${activo == 0}" class="container">
+						<div class="alert alert-danger">
+							<strong>¡Error!</strong> Tu cuenta no esta activa <br>
+							Consulta al administrador.
+						</div>
+					</div>
+					<div th:if="${passw == 1}" class="container">
+						<div class="alert alert-danger">
+							<strong>¡Error!</strong> Usuario o Contraseña es incorrecto.
+
 						</div>
 					</div>
 				<div class="container-login100-form-btn m-t-32">
