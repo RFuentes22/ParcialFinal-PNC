@@ -63,13 +63,6 @@ public class MainController {
 
 
 
-    @RequestMapping("/adminview")
-    public ModelAndView AdminView() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("adminView");
-        return mav;
-    }
-
     @RequestMapping("/coordinatorview")
     public ModelAndView CoordinatorView() {
         ModelAndView mav = new ModelAndView();
