@@ -67,6 +67,27 @@ public class MainController {
         mav.setViewName("catalogos/catalogoUsuario");
         return mav;
     }
+    
+    @RequestMapping("/escuela")
+    public ModelAndView CrearEscuela() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("catalogos/crearEscuela");
+        return mav;
+    }
+
+    @RequestMapping("/materia")
+    public ModelAndView CrearMateria() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("catalogos/crearMateria");
+        return mav;
+    }
+
+    @RequestMapping("/usuario")
+    public ModelAndView CrearUsuario() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("catalogos/crearUsuario");
+        return mav;
+    }
 
 
 }
