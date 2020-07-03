@@ -36,16 +36,13 @@ public class MainController {
     public ModelAndView Signup() {
         ModelAndView mav = new ModelAndView();
         List<Departamento> departamentos = null;
-        List<Municipio> municipios = null;
         try {
 			departamentos = departamentoService.findAll();
-			municipios = municipioService.findAll();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
         mav.addObject("usuario", new Usuario());
         mav.addObject("departamentos", departamentos);
-        mav.addObject("municipios", municipios);
         mav.setViewName("crearCuenta");
         return mav;
     }
@@ -54,9 +51,6 @@ public class MainController {
 	    @ResponseBody
 	    public List<Municipio> getModals(@RequestParam(value = "dep", required = true) String dep) {
 	      System.out.println("valor pasado como pasametro: " + dep);
-	    //  List<Municipio> municipios = null;
-	     // municipios = municipioService.findDepartamento(Integer.valueOf(dep));
-	     // model.addObject("municipios", municipios);
 	      return dep != null ? municipioService.findDepartamento(Integer.valueOf(dep)) : null;
 	    }
 
