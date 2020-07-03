@@ -129,6 +129,25 @@ public class MainController {
         mav.setViewName("negocio/crearEstudiante");
         return mav;
     }
+    
+    @RequestMapping("/editarexpediente")
+    public ModelAndView EditarAlumno() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("negocio/editarEstudiante");
+        return mav;
+    }
 
+    @RequestMapping("/materiascursadas")
+    public ModelAndView MateriasCursadas() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("negocio/listaMateria");
+        return mav;
+    }
 
+    @RequestMapping("/nuevamateriacursada")
+    public ModelAndView NuevaMateria() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("negocio/crearMateria");
+        return mav;
+    }
 }
