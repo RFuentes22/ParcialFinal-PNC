@@ -46,13 +46,14 @@
   <article class="panel__wrapper" >
          <div class="card-body">
              <h2 class="title" align="center"><b>Nueva Materia</b></h2>
-             <form method="POST">
+             <form th:action="@{/saveMateria}" th:object="${materia}"  method="POST">
                  <div class="input-group">
                       <label class="label"><b>Nombre de la Materia</b></label>
-                      <input class="input--style-4" type="text" name="materia">
+                      <input class="input--style-4" type="text" th:field="*{snombre}">
+                      <br><span th:errors="*{snombre}" style="color:#FF0000"></span>
                  </div>       
                  <div class="input-group" align="center">
-                 	<button class="btn-new" th:onclick="|window.location.href='/signup'|">
+                 	<button class="btn-new" type="submit">
 						Agregar
 					</button>
                  </div>

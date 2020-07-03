@@ -1,12 +1,17 @@
 package com.uca.ncapas.controller;
 
 import com.uca.ncapas.domain.administracion.Departamento;
+import com.uca.ncapas.domain.administracion.Materia;
 import com.uca.ncapas.domain.administracion.Municipio;
 import com.uca.ncapas.domain.administracion.Usuario;
 import com.uca.ncapas.service.DepartamentoService;
+import com.uca.ncapas.service.MateriaService;
 import com.uca.ncapas.service.MunicipioService;
 import java.util.List;
 import com.uca.ncapas.service.UsuarioService;
+
+import javassist.expr.NewArray;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.w3c.dom.ls.LSInput;
 
 @Controller
 public class MainController {
@@ -27,6 +33,9 @@ public class MainController {
 
     @Autowired
     private UsuarioService usuarioService;
+    
+    @Autowired
+    MateriaService materiaService;
 
     Usuario usuario = null;
     public Boolean flagEstadoUser = false;
@@ -128,6 +137,13 @@ public class MainController {
     @RequestMapping("/catalogoMateria")
     public ModelAndView CatalogoMateria() {
         ModelAndView mav = new ModelAndView();
+        List<Materia> materias = null;
+        try {
+			materias = materiaService.findAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        mav.addObject("materias", materias);
         mav.addObject("save", 0);
         mav.setViewName("catalogos/catalogoMateria");
         return mav;
@@ -150,6 +166,7 @@ public class MainController {
     @RequestMapping("/materia")
     public ModelAndView CrearMateria() {
         ModelAndView mav = new ModelAndView();
+        mav.addObject("materia", new Materia());
         mav.setViewName("catalogos/crearMateria");
         return mav;
     }
