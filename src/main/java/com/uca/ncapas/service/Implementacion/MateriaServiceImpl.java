@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import com.uca.ncapas.domain.administracion.Materia;
 import com.uca.ncapas.repositories.MateriaRepo;
 import com.uca.ncapas.service.MateriaService;
 
+@Service
 public class MateriaServiceImpl implements MateriaService{
 	@Autowired
 	MateriaRepo materiaRepo;
