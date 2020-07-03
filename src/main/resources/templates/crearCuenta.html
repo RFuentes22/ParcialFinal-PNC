@@ -63,7 +63,7 @@
                                     <div class="input-group-icon">
                                         <input class="input--style-4 js-datepicker" type="text" th:field="*{ffnacimiento}">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                        <span th:errors="*{ffnacimiento}" style="color:#FF0000"></span>
+                                        <br><span th:errors="*{ffnacimiento}" style="color:#FF0000"></span>
                                     </div>
                                 </div>
                             </div>
@@ -81,6 +81,7 @@
 								                th:value="${dep.cdepartamento}"
 								                th:text="${dep.snombre}"></option>
 		                                	</select>
+		                                	<br><span th:errors="*{idepartamento}" style="color:#FF0000"></span>
 		                                	<div class="select-dropdown"></div>
 		                            	</div>
                         			</div>
@@ -91,9 +92,10 @@
                                     <div class="input-group">
                             			<label class="label">Municipio</label>
                             			<div class="rs-select2 js-select-simple select--no-search">
-			                                <select  th:field="*{idepartamento}" id="mun">
+			                                <select  th:field="*{imunicipio}" id="mun">
 			                                    <option  selected value="">Seleccionar</option>                         
 			                                </select>
+			                                <br><span th:errors="*{imunicipio}" style="color:#FF0000"></span>
 			                                <div class="select-dropdown"></div>
 			                            </div>
                         			</div>
@@ -103,21 +105,21 @@
                    		<div class="row row-space">
                            	<label class="label">Direccion de residencia</label>
                            	<input class="input--style-4" type="text" th:field="*{sdireccion}">
-                           	<span th:errors="*{sdireccion}" style="color:#FF0000"></span>
+                           	<br><span th:errors="*{sdireccion}" style="color:#FF0000"></span>
                    		</div>
                     	<div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Nombre de Usuario</label>
                                     <input class="input--style-4" type="text" th:field="*{susuario}">
-                                    <span th:errors="*{susuario}" style="color:#FF0000"></span>
+                                    <br><span th:errors="*{susuario}" style="color:#FF0000"></span>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Contraseña</label>
                                     <input class="input--style-4" type="password" th:field="*{scontrasena}">
-                                    <span th:errors="*{scontrasena}" style="color:#FF0000"></span>
+                                    <br><span th:errors="*{scontrasena}" style="color:#FF0000"></span>
                                 </div>
                             </div>
                         </div>

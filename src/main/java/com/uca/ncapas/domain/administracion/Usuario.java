@@ -18,7 +18,7 @@ public class Usuario {
     private Integer cusuario;
 
     @Column(name = "usuario")
-    @NotNull(message = "El Usuario no puede quedar vacio")
+    @NotEmpty(message = "El Usuario no puede quedar vacio")
     @Size(max = 20, message = "El Usuario debe tener maximo 20 caracteres")
     private String susuario;
 
@@ -35,7 +35,7 @@ public class Usuario {
     private String lastnameuser;
 
     @Column(name = "contrasena")
-    @NotNull(message = "La Contraseña del usuario no puede quedar vacio")
+    @NotEmpty(message = "La Contraseña del usuario no puede quedar vacio")
     @Size(max = 50, message = "La Contraseña del usuario debe tener maximo 50 caracteres")
     private String scontrasena;
 
@@ -47,23 +47,23 @@ public class Usuario {
     private Boolean badmin;
 
     @Column(name = "fnacimiento")
-   // @NotEmpty(message = "La Fecha de nacimiento del usuario no puede quedar vacio")
+    @NotNull(message = "La Fecha de nacimiento del usuario no puede quedar vacio")
     private Date ffnacimiento;
 
     @Column(name = "edad")
     private Integer iedad;
 
     @Column(name = "direccion")
-    @NotNull(message = "La Direccion del Usuario no puede quedar vacio")
+    @NotEmpty(message = "La Direccion del Usuario no puede quedar vacio")
     @Size(max = 150, message = "La Direccion del Usuario debe tener maximo 150 caracteres")
     private String sdireccion;
 
     @Column(name = "c_departamento")
-    //@NotEmpty(message = "El Departamento del usuario no puede quedar vacio")
+    @NotNull(message = "El Departamento del usuario no puede quedar vacio")
     private Integer idepartamento;
 
     @Column(name = "c_municipio")
-   // @NotEmpty(message = "El municipio del usuario no puede quedar vacio")
+    @NotNull(message = "El municipio del usuario no puede quedar vacio")
     private Integer imunicipio;
 
     @Column(name = "activo")
