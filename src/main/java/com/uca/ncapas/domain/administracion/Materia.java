@@ -1,7 +1,7 @@
 package com.uca.ncapas.domain.administracion;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -15,8 +15,8 @@ public class Materia {
     private Integer cmateria;
 
     @Column(name = "nombre")
-    @NotNull(message = "El Nombre de la materia no puede quedar vacio")
-    @Size(max = 50, message = "El Nombre de la materia debe tener maximo 50 caracteres")
+    @NotEmpty(message = "El Nombre de la materia no puede quedar vacio")
+    @Size(min = 2,max = 50, message = "El Nombre de la materia debe tener minimo 2 y maximo 50 caracteres")
     private String snombre;
 
     public Integer getCmateria() {
