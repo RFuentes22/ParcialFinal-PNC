@@ -128,7 +128,7 @@ public class MainController {
     @RequestMapping("/catalogoMateria")
     public ModelAndView CatalogoMateria() {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("save", 0);
+        mav.addObject("save", 1);
         mav.setViewName("catalogos/catalogoMateria");
         return mav;
     }
