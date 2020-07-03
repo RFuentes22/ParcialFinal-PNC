@@ -30,12 +30,13 @@ public class MainController {
 
     Usuario usuario = null;
     public Boolean flagEstadoUser = false;
-    AdminController adminController = new AdminController();
-
 
     @RequestMapping("/login")
     public ModelAndView Login() {
         ModelAndView mav = new ModelAndView();
+        if (flagEstadoUser) {
+            mav.addObject("estado", 1);
+        }
         mav.setViewName("index");
 
         return mav;
@@ -64,7 +65,7 @@ public class MainController {
                     usuarioService.save(usuario);
                     flagEstadoUser = true;
                     mav.setViewName("coordinatorView");
-                    CoordinatorController.idusuario=usuario.getCusuario();
+                    CoordinatorController.idusuario = usuario.getCusuario();
                     System.out.println("Succes login Coordinator");
                 } else {
                     mav.addObject("activo", 0);
@@ -83,6 +84,9 @@ public class MainController {
         if (usuario.getBestado()) {
             usuario.setBestado(false);
             usuarioService.save(usuario);
+            flagEstadoUser = false;
+            AdminController.idusuario = 0;
+            CoordinatorController.idusuario = 0;
             System.out.println("Succes Close");
         }
         mav.setViewName("index");
@@ -94,10 +98,10 @@ public class MainController {
         ModelAndView mav = new ModelAndView();
         List<Departamento> departamentos = null;
         try {
-			departamentos = departamentoService.findAll();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
+            departamentos = departamentoService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mav.addObject("usuario", new Usuario());
         mav.addObject("departamentos", departamentos);
         mav.setViewName("crearCuenta");
@@ -105,13 +109,11 @@ public class MainController {
     }
 
     @RequestMapping(value = "/municipio", method = RequestMethod.POST)
-	    @ResponseBody
-	    public List<Municipio> getModals(@RequestParam(value = "dep", required = true) String dep) {
-	      System.out.println("valor pasado como pasametro: " + dep);
-	      return dep != null ? municipioService.findDepartamento(Integer.valueOf(dep)) : null;
-	    }
-
-
+    @ResponseBody
+    public List<Municipio> getModals(@RequestParam(value = "dep", required = true) String dep) {
+        System.out.println("valor pasado como pasametro: " + dep);
+        return dep != null ? municipioService.findDepartamento(Integer.valueOf(dep)) : null;
+    }
 
 
     //**************************CATALOGOS*********************************//
@@ -180,7 +182,7 @@ public class MainController {
         mav.setViewName("negocio/crearEstudiante");
         return mav;
     }
-    
+
     @RequestMapping("/editarexpediente")
     public ModelAndView EditarAlumno() {
         ModelAndView mav = new ModelAndView();
