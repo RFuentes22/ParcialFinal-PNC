@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!-- Required meta tags-->
@@ -26,6 +26,10 @@
     <link href="css/main2.css" rel="stylesheet" media="all">
     <link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	
+	 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+     <script src="http://code.jquery.com/jquery-latest.js"></script>
+	
     
 </head>
 
@@ -35,18 +39,18 @@
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title" align="center">Formulario de Registro</h2>
-                    <form method="POST">
+                    <form  th:action="@{/crearCuenta}" th:object="${usuario}" method="post">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Nombre</label>
-                                    <input class="input--style-4" type="text" name="name">
+                                    <input class="input--style-4" type="text" th:field="*{nameuser}">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Apellido</label>
-                                    <input class="input--style-4" type="text" name="lastname">
+                                    <input class="input--style-4" type="text" th:field="*{lastnameuser}">
                                 </div>
                             </div>
                         </div>
@@ -55,7 +59,7 @@
                                 <div class="input-group">
                                     <label class="label">Fecha de Nacimiento</label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="birthday">
+                                        <input class="input--style-4 js-datepicker" type="text" th:field="*{ffnacimiento}">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
                                 </div>
@@ -68,11 +72,11 @@
                                     <div class="input-group">
                             			<label class="label">Departamento</label>
                             			<div class="rs-select2 js-select-simple select--no-search">
-		                                	<select name="departamento">
-		                                    	<option disabled="disabled" selected="selected">Seleccionar</option>
-		                                    	<option>Subject 1</option>
-		                                    	<option>Subject 2</option>
-		                                    	<option>Subject 3</option>
+		                                	<select th:field="*{idepartamento}" id="id">
+		                                    	<option selected="selected" value="">Seleccionar</option>
+		                                    	<option th:each="dep : ${departamentos}"
+								                th:value="${dep.cdepartamento}"
+								                th:text="${dep.snombre}"></option>
 		                                	</select>
 		                                	<div class="select-dropdown"></div>
 		                            	</div>
@@ -84,11 +88,11 @@
                                     <div class="input-group">
                             			<label class="label">Municipio</label>
                             			<div class="rs-select2 js-select-simple select--no-search">
-			                                <select name="municipio">
-			                                    <option disabled="disabled" selected="selected">Seleccionar</option>
-			                                    <option>Subject 1</option>
-			                                    <option>Subject 2</option>
-			                                    <option>Subject 3</option>
+			                                <select name="municipio" id="id2">
+			                                    <option disabled selected>Seleccionar</option>
+			                                   <option th:each="muni : ${municipios}"
+								                th:value="${muni.cmunicipio}"
+								                th:text="${muni.snombre}"></option>
 			                                </select>
 			                                <div class="select-dropdown"></div>
 			                            </div>
@@ -98,19 +102,19 @@
                         </div> 	
                    		<div class="row row-space">
                            	<label class="label">Direccion de residencia</label>
-                           	<input class="input--style-4" type="text" name="address">
+                           	<input class="input--style-4" type="text" th:field="*{sdireccion}">
                    		</div>
                     	<div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Nombre de Usuario</label>
-                                    <input class="input--style-4" type="text" name="username">
+                                    <input class="input--style-4" type="text" th:field="*{susuario}">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Contraseña</label>
-                                    <input class="input--style-4" type="password" name="password">
+                                    <input class="input--style-4" type="password" th:field="*{scontrasena}">
                                 </div>
                             </div>
                         </div>
@@ -118,18 +122,18 @@
                            <label class="label">Tipo de Usuario</label>
                            <div class="p-t-10">
                                <label class="radio-container m-r-45">Administrador
-                                   <input type="radio" checked="checked" name="gender">
+                                   <input type="radio" checked="checked" th:field="*{badmin}" th:value="${true}">
                                    <span class="checkmark"></span>
                                </label>
                                <label class="radio-container">Coordinador
-                                   <input type="radio" name="gender">
+                                   <input type="radio" th:field="*{badmin}" th:value="${false}">
                                    <span class="checkmark"></span>
                                </label>
                            </div>
                         </div>
                         
                         <div class="input-group" align="center">
-                        	<button class="login100-form-btn" th:onclick="|window.location.href='/signup'|">
+                        	<button class="login100-form-btn" type="submit">
 								Crear Cuenta
 							</button>
                         </div>
@@ -149,6 +153,26 @@
 
     <!-- Main JS-->
     <script src="js/global.js"></script>
+    
+    <script>
+	$("#id").on("change", function (e) {
+	    $.ajax({
+	    url: "../municipio",
+	    method: "POST",
+	    data: {dep: $(this).val() },
+	    dataType: "json",
+	    success: function (response) {
+	      if (response) {
+	        $("#id2 option:not(:disabled)").remove();
+	        $.each(response, function(crearCuenta, option) {
+	            console.log("option: "+option)
+	            $("#id2").append('<option value="'+ option.cmunicipio +'">'+ option.snombre +'</option>') 
+	        });
+	      }
+	    }
+	  });
+	});
+	</script>
 
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 

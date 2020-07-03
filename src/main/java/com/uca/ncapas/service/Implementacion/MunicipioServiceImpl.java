@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import com.uca.ncapas.domain.administracion.Municipio;
 import com.uca.ncapas.repositories.MunicipioRepo;
 import com.uca.ncapas.service.MunicipioService;
 
+@Service
 public class MunicipioServiceImpl implements MunicipioService{
 	
 	@Autowired
@@ -26,8 +28,7 @@ public class MunicipioServiceImpl implements MunicipioService{
 
 	@Override
 	public List<Municipio> findDepartamento(Integer code) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return municipioRepo.findByCdepatamento(code);
 	}
 
 }
