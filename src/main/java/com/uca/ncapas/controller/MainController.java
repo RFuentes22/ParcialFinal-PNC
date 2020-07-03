@@ -1,16 +1,30 @@
 package com.uca.ncapas.controller;
 
+import com.uca.ncapas.domain.administracion.Departamento;
+import com.uca.ncapas.domain.administracion.Municipio;
 import com.uca.ncapas.domain.administracion.Usuario;
-import com.uca.ncapas.service.UsuarioService;
+import com.uca.ncapas.service.DepartamentoService;
+import com.uca.ncapas.service.MunicipioService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainController {
+
+	 @Autowired
+	 private DepartamentoService departamentoService;
+
+	 @Autowired
+	 MunicipioService municipioService;
 
     @RequestMapping("/login")
     public ModelAndView Login() {
@@ -23,9 +37,32 @@ public class MainController {
     @RequestMapping("/signup")
     public ModelAndView Signup() {
         ModelAndView mav = new ModelAndView();
+        List<Departamento> departamentos = null;
+        List<Municipio> municipios = null;
+        try {
+			departamentos = departamentoService.findAll();
+			municipios = municipioService.findAll();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+        mav.addObject("usuario", new Usuario());
+        mav.addObject("departamentos", departamentos);
+        mav.addObject("municipios", municipios);
         mav.setViewName("crearCuenta");
         return mav;
     }
+
+    @RequestMapping(value = "/municipio", method = RequestMethod.POST)
+	    @ResponseBody
+	    public List<Municipio> getModals(@RequestParam(value = "dep", required = true) String dep) {
+	      System.out.println("valor pasado como pasametro: " + dep);
+	    //  List<Municipio> municipios = null;
+	     // municipios = municipioService.findDepartamento(Integer.valueOf(dep));
+	     // model.addObject("municipios", municipios);
+	      return dep != null ? municipioService.findDepartamento(Integer.valueOf(dep)) : null;
+	    }
+
+
 
     @RequestMapping("/coordinatorview")
     public ModelAndView CoordinatorView() {
@@ -56,7 +93,7 @@ public class MainController {
         mav.setViewName("catalogos/catalogoUsuario");
         return mav;
     }
-    
+
     @RequestMapping("/escuela")
     public ModelAndView CrearEscuela() {
         ModelAndView mav = new ModelAndView();

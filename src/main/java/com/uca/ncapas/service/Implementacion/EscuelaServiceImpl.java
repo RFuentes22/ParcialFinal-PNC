@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import com.uca.ncapas.domain.administracion.Centro_escolar;
 import com.uca.ncapas.repositories.EscuelaRepo;
 import com.uca.ncapas.service.EscuelaService;
 
+@Service
 public class EscuelaServiceImpl implements EscuelaService{
 	
 	@Autowired

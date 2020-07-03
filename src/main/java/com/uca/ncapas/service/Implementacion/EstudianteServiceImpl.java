@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import com.uca.ncapas.domain.proceso_negocio.Estudiante;
 import com.uca.ncapas.repositories.EstudianteRepo;
 import com.uca.ncapas.service.EstudianteService;
 
+@Service
 public class EstudianteServiceImpl implements EstudianteService{
 	@Autowired
 	EstudianteRepo estudianteRepo;

@@ -15,10 +15,12 @@ import java.util.List;
 @Controller
 public class AdminController {
 
+
     @Autowired
     private UsuarioService usuarioService;
 
     Usuario usuario = null;
+
     Boolean flagEstadoUser = false;
 
     @PostMapping(value = "/validLogin")
@@ -26,13 +28,15 @@ public class AdminController {
         ModelAndView mav = new ModelAndView();
         usuario = usuarioService.findUserByLogin(user, pass);
 
+        //List<Usuario> usuarioList = null;
+        //usuarioList = usuarioService.findAll();
+
         if (flagEstadoUser) {
             mav.addObject("estado", 1);
             mav.setViewName("index");
         } else {
             if (usuario == null) {
                 System.out.println("Fallo login");
-                mav.addObject("passw", 1);
                 mav.setViewName("index");
             } else {
                 if (validarActivoUser(usuario)) {
