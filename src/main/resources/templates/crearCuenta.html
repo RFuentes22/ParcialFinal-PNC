@@ -164,7 +164,7 @@
 	    	//$('#mun option[]').remove();
 	        $.each(response, function(crearCuenta, option) {
 	            console.log('<option value="'+option.cmunicipio+'" text="'+option.snombre+'"></option>')
-	            $("#mun").append('<option value="'+option.cmunicipio+'">'+option.snombre+'</option>') 
+	            $("#mun").append('<option th:value="'+option.cmunicipio+'">'+option.snombre+'</option>') 
 	            
 	        });
 	      }
