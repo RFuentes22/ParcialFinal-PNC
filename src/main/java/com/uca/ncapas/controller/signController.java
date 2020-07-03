@@ -41,7 +41,6 @@ public class signController {
 			mav.setViewName("crearCuenta");
 		}else {
 			usuarioRepo.save(usuario);
-			System.out.println("hola");
 			mav.setViewName("index");
 		}
 		
