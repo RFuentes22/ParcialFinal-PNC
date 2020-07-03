@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import com.uca.ncapas.domain.administracion.Departamento;
 import com.uca.ncapas.repositories.DepartamentoRepo;
 import com.uca.ncapas.service.DepartamentoService;
 
+@Service
 public class DepartamentoServiceImpl implements DepartamentoService{
 	
 	@Autowired
