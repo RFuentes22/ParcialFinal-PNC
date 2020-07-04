@@ -135,6 +135,7 @@
                                    <span class="checkmark"></span>
                                </label>
                            </div>
+                           <br><span th:errors="*{badmin}" style="color:#FF0000"></span>
                         </div>
                         
                         <div class="input-group" align="center">
@@ -171,7 +172,7 @@
 	    	$("#mun option:not(:disabled)").remove();
 	    	//$('#mun option[]').remove();
 	        $.each(response, function(crearCuenta, option) {
-	            console.log('<option value="'+option.cmunicipio+'" text="'+option.snombre+'"></option>')
+	            console.log('<option value="'+option.cmunicipio+'">'+option.snombre+'</option>')
 	            $("#mun").append('<option value="'+option.cmunicipio+'">'+option.snombre+'</option>') 
 	            
 	        });

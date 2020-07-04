@@ -12,8 +12,7 @@ import java.sql.Date;
 public class Usuario {
 
     @Id
-    @GeneratedValue(generator="usuario_c_usuario_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "usuario_c_usuario_seq", sequenceName = "administracion.usuario_c_usuario_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "c_usuario")
     private Integer cusuario;
 
