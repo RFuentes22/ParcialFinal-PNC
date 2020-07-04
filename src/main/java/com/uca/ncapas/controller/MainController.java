@@ -185,6 +185,14 @@ public class MainController {
     @RequestMapping("/escuela")
     public ModelAndView CrearEscuela() {
         ModelAndView mav = new ModelAndView();
+        List<Departamento> departamentos = null;
+        try {
+            departamentos = departamentoService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mav.addObject("centro_escolar",new Centro_escolar());
+        mav.addObject("departamentos",departamentos);
         mav.setViewName("catalogos/crearEscuela");
         return mav;
     }
