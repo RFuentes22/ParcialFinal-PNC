@@ -26,6 +26,7 @@ public class SignController {
 	 @Autowired
 	 private DepartamentoService departamentoService;
 
+	static int idusuario = 0;
 		
 	@RequestMapping("/crearCuenta")
 	public ModelAndView createCount(@Valid @ModelAttribute Usuario usuario, BindingResult result ) throws ParseException {
@@ -55,6 +56,7 @@ public class SignController {
 				usuario.setBactivo(true);
 				usuario.setBestado(true);
 				usuarioRepo.save(usuario);
+				MainController.usuario=usuario;
 				mav.setViewName("adminView");
 			}else {
 				usuario.setBactivo(false);

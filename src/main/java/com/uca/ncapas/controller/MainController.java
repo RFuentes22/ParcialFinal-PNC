@@ -44,7 +44,7 @@ public class MainController {
     @Autowired
     MateriaService materiaService;
 
-    Usuario usuario = null;
+    static Usuario usuario = null;
     public Boolean flagEstadoUser = false;
 
     @RequestMapping("/login")
@@ -82,6 +82,7 @@ public class MainController {
                     flagEstadoUser = true;
                     mav.setViewName("coordinatorView");
                     CoordinatorController.idusuario = usuario.getCusuario();
+                    SignController.idusuario = usuario.getCusuario();
                     System.out.println("Succes login Coordinator");
                 } else {
                     mav.addObject("activo", 0);
@@ -103,6 +104,7 @@ public class MainController {
             flagEstadoUser = false;
             AdminController.idusuario = 0;
             CoordinatorController.idusuario = 0;
+            SignController.idusuario = 0;
             System.out.println("Succes Close");
         }
         mav.setViewName("index");
