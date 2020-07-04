@@ -47,7 +47,7 @@ public class Usuario {
 
     @Column(name = "fnacimiento")
     @NotNull(message = "La Fecha de nacimiento del usuario no puede quedar vacio")
-    private Date ffnacimiento;
+    private String ffnacimiento;
 
     @Column(name = "edad")
     private Integer iedad;
@@ -148,11 +148,11 @@ public class Usuario {
         this.badmin = badmin;
     }
 
-    public Date getFfnacimiento() {
+    public String getFfnacimiento() {
         return ffnacimiento;
     }
 
-    public void setFfnacimiento(Date ffnacimiento) {
+    public void setFfnacimiento(String ffnacimiento) {
         this.ffnacimiento = ffnacimiento;
     }
 
