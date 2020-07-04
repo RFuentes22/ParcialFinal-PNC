@@ -113,6 +113,7 @@
                                     <label class="label">Nombre de Usuario</label>
                                     <input class="input--style-4" type="text" th:field="*{susuario}">
                                     <br><span th:errors="*{susuario}" style="color:#FF0000"></span>
+                                    <br><span th:if="${save == 1}" style="color:#FF0000">El nombre de usuario ya existe</span>
                                 </div>
                             </div>
                             <div class="col-2">

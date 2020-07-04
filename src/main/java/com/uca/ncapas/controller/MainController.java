@@ -111,6 +111,7 @@ public class MainController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        mav.addObject("save", 0);
         mav.addObject("usuario", new Usuario());
         mav.addObject("departamentos", departamentos);
         mav.setViewName("crearCuenta");
