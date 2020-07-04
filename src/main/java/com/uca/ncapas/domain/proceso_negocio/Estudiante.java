@@ -15,8 +15,9 @@ import java.sql.Date;
 public class Estudiante {
 
     @Id
-    @GeneratedValue(generator="estudiante_c_estudiante_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "estudiante_c_estudiante_seq", sequenceName = "proceso_negocio.estudiante_c_estudiante_seq")
+    //@GeneratedValue(generator="estudiante_c_estudiante_seq", strategy = GenerationType.AUTO)
+    //@SequenceGenerator(name = "estudiante_c_estudiante_seq", sequenceName = "proceso_negocio.estudiante_c_estudiante_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "c_estudiante")
     private Integer cestudiante;
 
@@ -44,13 +45,16 @@ public class Estudiante {
     @Size(max = 150, message = "La Direccion del estudiante debe tener maximo 150 caracteres")
     private String sdireccion;
 
-    @Column(name = "departamento")
+    @Column(name = "c_departamento")
     @NotNull(message = "El Departamento del estudiante no puede quedar vacio")
     private Integer cdepartamento;
 
-    @Column(name = "municipio")
+    @Column(name = "c_municipio")
     @NotNull(message = "El Municipio del estudiante no puede quedar vacio")
     private Integer cmunicipio;
+
+    @Column(name = "edad")
+    private Integer iedad;
 
     @Column(name = "telefono")
     @NotNull(message = "El campo Telefono no puede quedar vacio")
@@ -62,7 +66,7 @@ public class Estudiante {
     //@Max(value = 10, message = "El campo Celular debe tener maximo 10 caracteres")
     private Integer icelular;
 
-    @Column(name = "escuela")
+    @Column(name = "c_escuela")
     @NotNull(message = "Escuela del estudiante no puede quedar vacio")
     private Integer cescuela;
 
@@ -77,19 +81,27 @@ public class Estudiante {
     private String snombre_padre;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "escuela",unique=true,insertable = false, updatable = false)
+    @JoinColumn(name = "c_escuela",unique=true,insertable = false, updatable = false)
     private Centro_escolar centro_escolar;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "municipio",unique=true,insertable = false, updatable = false)
+    @JoinColumn(name = "c_municipio",unique=true,insertable = false, updatable = false)
     private Municipio municipio;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "departamento",unique=true,insertable = false, updatable = false)
+    @JoinColumn(name = "c_departamento",unique=true,insertable = false, updatable = false)
     private Departamento departamento;
 
     public Centro_escolar getCentro_escolar() {
         return centro_escolar;
+    }
+
+    public Integer getIedad() {
+        return iedad;
+    }
+
+    public void setIedad(Integer iedad) {
+        this.iedad = iedad;
     }
 
     public void setCentro_escolar(Centro_escolar centro_escolar) {
