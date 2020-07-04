@@ -1,5 +1,9 @@
  package com.uca.ncapas.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -27,10 +31,9 @@ public class signController {
 
 		
 	@RequestMapping("/crearCuenta")
-	public ModelAndView createCount(@Valid @ModelAttribute Usuario usuario, BindingResult result ) {
+	public ModelAndView createCount(@Valid @ModelAttribute Usuario usuario, BindingResult result ) throws ParseException {
 		ModelAndView mav = new ModelAndView();
 		List<Departamento> departamentos = null;
-		System.out.println(usuario.getImunicipio().toString());
 		try {
 			departamentos = departamentoService.findAll();
 		}catch (Exception e) {
@@ -41,6 +44,16 @@ public class signController {
 			mav.addObject("departamentos", departamentos);
 			mav.setViewName("crearCuenta");
 		}else {
+			DateFormat fecha = new SimpleDateFormat("dd/mm/yyyy");
+			Date convert = fecha.parse(usuario.getFfnacimiento());
+			Date actual = new Date();
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY");
+			Integer anio = Integer.parseInt(sdf.format(convert));
+			Integer acanio = Integer.parseInt(sdf.format(actual));
+			
+			usuario.setIedad(acanio-anio);
+			
 			usuarioRepo.save(usuario);
 			mav.setViewName("index");
 		}
