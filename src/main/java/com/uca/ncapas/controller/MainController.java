@@ -1,11 +1,14 @@
 package com.uca.ncapas.controller;
 
+import com.uca.ncapas.DTO.EscuelaDTO;
+import com.uca.ncapas.domain.administracion.Centro_escolar;
 import com.uca.ncapas.domain.administracion.Departamento;
 import com.uca.ncapas.domain.administracion.Materia;
 import com.uca.ncapas.domain.administracion.Municipio;
 import com.uca.ncapas.domain.administracion.Usuario;
 import com.uca.ncapas.service.DepartamentoService;
 import com.uca.ncapas.service.MateriaService;
+import com.uca.ncapas.service.EscuelaService;
 import com.uca.ncapas.service.MunicipioService;
 import java.util.List;
 import com.uca.ncapas.service.UsuarioService;
@@ -30,6 +33,9 @@ public class MainController {
 
     @Autowired
     MunicipioService municipioService;
+
+    @Autowired
+    EscuelaService escuelaService;
 
     @Autowired
     private UsuarioService usuarioService;
@@ -88,7 +94,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/cerrarsesion")
-    public ModelAndView validLogin() {
+    public ModelAndView closeLogin() {
         ModelAndView mav = new ModelAndView();
         if (usuario.getBestado()) {
             usuario.setBestado(false);
@@ -124,6 +130,15 @@ public class MainController {
         return dep != null ? municipioService.findDepartamento(Integer.valueOf(dep)) : null;
     }
 
+    @RequestMapping(value = "/schools", method = RequestMethod.POST)
+    @ResponseBody
+    public List<EscuelaDTO> getSchool(@RequestParam(value = "muni", required = true) String muni) {
+        System.out.println("valor pasado como pasametro: " + muni);
+       // return muni != null ? escuelaService.findByMun(Integer.valueOf(muni)) : null;
+        //return muni != null ? escuelaService.filterNombre(muni) : null;
+        System.out.println(escuelaService.findschoolByMun(muni).toString());
+        return muni != null ? escuelaService.findschoolByMun(muni) : null;
+    }
 
     @RequestMapping("/activarCuenta")
     public ModelAndView ActivarCuenta() {
@@ -193,6 +208,7 @@ public class MainController {
         return mav;
     }
 
+
     //**************************PROCESOS DE NEGOCIO*********************************//
 
     @RequestMapping("/alumnos")
@@ -206,13 +222,6 @@ public class MainController {
     public ModelAndView ListaAlumnos() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("negocio/listaAlumnos");
-        return mav;
-    }
-
-    @RequestMapping("/expediente")
-    public ModelAndView NuevoAlumno() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("negocio/crearEstudiante");
         return mav;
     }
 

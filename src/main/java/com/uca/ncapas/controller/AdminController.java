@@ -4,13 +4,8 @@ import com.uca.ncapas.domain.administracion.Usuario;
 import com.uca.ncapas.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 public class AdminController {
@@ -25,20 +20,15 @@ public class AdminController {
     @RequestMapping("/adminview")
     public ModelAndView AdminView() {
         ModelAndView mav = new ModelAndView();
-        System.out.println(idusuario);
-
-        if (idusuario == 0) {
-            mav.setViewName("index");
-        } else {
-            usuario = usuarioService.findOne(idusuario);
-            if (usuario.getBestado().equals(false)) {
-                mav.setViewName("index");
-            } else {
-                mav.setViewName("adminView");
-            }
-        }
+        mav.setViewName(validloginAdmin() ? "adminView" : "index");
 
         return mav;
     }
 
+
+    public Boolean validloginAdmin() {
+        if (idusuario == 0) return false;
+        usuario = usuarioService.findOne(idusuario);
+        return !usuario.getBestado().equals(false);
+    }
 }
