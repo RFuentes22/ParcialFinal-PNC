@@ -25,6 +25,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	
 </head>
+
 <body>
 <!-- partial:index.partial.html -->
 <nav class="nav">
@@ -46,18 +47,20 @@
   <article class="panel__wrapper" >
                 <div class="card-body">
                     <h2 class="title" align="center"><b>Nuevo Usuario</b></h2>
-                    <form th:action="@{saveUser}" method="POST">
+                    <form th:action="@{/saveUser}" method="POST" th:object="${usuario}">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Nombre</b></label>
                                     <input class="input--style-4" type="text" name="name">
+                                    <br><span th:errors="*{nameuser}" style="color:#FF0000"></span>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Apellido</b></label>
                                     <input class="input--style-4" type="text" name="lastname">
+                                    <br><span th:errors="*{lastnameuser}" style="color:#FF0000"></span>
                                 </div>
                             </div>
                         </div>
@@ -68,6 +71,7 @@
                                     <div class="input-group-icon">
                                         <input class="input--style-4 js-datepicker" type="text" name="birthday">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                        <br><span th:errors="*{ffnacimiento}" style="color:#FF0000"></span>
                                     </div>
                                 </div>
                             </div>
@@ -79,12 +83,14 @@
                                     <div class="input-group">
                             			<label class="label"><b>Departamento</b></label>
                             			<div class="rs-select2 js-select-simple select--no-search">
-		                                	<select name="departamento">
-		                                    	<option disabled="disabled" selected="selected">Seleccionar</option>
-		                                    	<option>Subject 1</option>
-		                                    	<option>Subject 2</option>
-		                                    	<option>Subject 3</option>
+		                                	<select th:field="*{idepartamento}" id="departamento">
+		                                    	<option selected="selected" value="">Seleccionar</option>
+		                                    	<option th:each="dep : ${departamentos}"
+								                		th:value="${dep.cdepartamento}"
+								                		th:text="${dep.snombre}">
+								                </option>
 		                                	</select>
+		                                	<br><span th:errors="*{idepartamento}" style="color:#FF0000"></span>
 		                                	<div class="select-dropdown"></div>
 		                            	</div>
                         			</div>
@@ -95,12 +101,10 @@
                                     <div class="input-group">
                             			<label class="label"><b>Municipio</b></label>
                             			<div class="rs-select2 js-select-simple select--no-search">
-			                                <select name="municipio">
-			                                    <option disabled="disabled" selected="selected">Seleccionar</option>
-			                                    <option>Subject 1</option>
-			                                    <option>Subject 2</option>
-			                                    <option>Subject 3</option>
+			                                <select th:field="*{imunicipio}" id="muni">
+			                                    <option selected value="">Seleccionar</option>
 			                                </select>
+			                                <br><span th:errors="*{imunicipio}" style="color:#FF0000"></span>
 			                                <div class="select-dropdown"></div>
 			                            </div>
                         			</div>
@@ -110,46 +114,49 @@
                    		<div class="row row-space">
                            	<label class="label"><b>Direccion de residencia</b></label>
                            	<input class="input--style-4" type="text" name="address">
+                           	<br><span th:errors="*{sdireccion}" style="color:#FF0000"></span>
                    		</div>
                     	<div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Nombre de Usuario</b></label>
                                     <input class="input--style-4" type="text" name="username">
+                                    <br><span th:errors="*{susuario}" style="color:#FF0000"></span>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Contraseña</b></label>
                                     <input class="input--style-4" type="password" name="password">
+                                    <br><span th:errors="*{scontrasena}" style="color:#FF0000"></span>
                                 </div>
                             </div>
                         </div>
                       	<div class="input-group">
                            <label class="label"><b>Tipo de Usuario</b></label>  
                            <label class="radio-container m-r-45">Administrador
-                           		<input type="radio" checked="checked" name="administrador">
+                           		<input type="radio" checked="checked" th:field="*{badmin}" th:value="${true}">
                            		<span class="checkmark"></span>
                            </label>
                            <label class="radio-container">Coordinador
-                           		<input type="radio" name="coordinador">
+                           		<input type="radio" th:field="*{badmin}" th:value="${false}">
                            		<span class="checkmark"></span>
                            </label>
                         </div>
                         <div class="input-group">
                            <label class="label"><b>Estado</b></label> 
                            <label class="radio-container m-r-45">Activo
-                               <input type="radio" checked="checked" name="estado">
+                               <input type="radio" checked="checked" th:field="*{bestado}" th:value="${true}">
                                <span class="checkmark"></span>
                            </label>
                            <label class="radio-container">Inactivo
-                               <input type="radio" name="estado">
+                               <input type="radio" checked="checked" th:field="*{bestado}" th:value="${false}">
                                <span class="checkmark"></span>
                            </label> 
                         </div>
                         
                         <div class="input-group" align="center">
-                        	<button class="btn-new" th:onclick="|window.location.href='/signup'|">
+                        	<button class="btn-new">
 								Agregar
 							</button>
                         </div>
@@ -177,5 +184,26 @@
 
     <!-- Main JS-->
     <script src="js/global.js"></script>
+    
+<script>
+	$("#departamento").on("change", function (e) {
+	    $.ajax({
+	    url: "../municipio",
+	    method: "POST",
+	    data: {dep: $(this).val() },
+	    dataType: "json",
+	    success: function (response) {
+	      if (response) {
+	    	$("#muni option:not(:disabled)").remove();
+	        $.each(response, function(crearUsuario, option) {
+	            console.log('<option value="'+option.cmunicipio+'" text="'+option.snombre+'"></option>')
+	            $("#muni").append('<option value="'+option.cmunicipio+'">'+option.snombre+'</option>') 
+	            
+	        });
+	      }
+	    }
+	  });
+	});
+</script>
 </body>
 </html>
