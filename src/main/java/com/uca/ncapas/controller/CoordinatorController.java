@@ -1,6 +1,5 @@
 package com.uca.ncapas.controller;
 
-import com.uca.ncapas.domain.administracion.Centro_escolar;
 import com.uca.ncapas.domain.administracion.Departamento;
 import com.uca.ncapas.domain.administracion.Usuario;
 import com.uca.ncapas.domain.proceso_negocio.Estudiante;
@@ -16,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -45,7 +48,7 @@ public class CoordinatorController {
     }
 
     @RequestMapping("/newalumno")
-    public ModelAndView NuevoAlumno(@Valid @ModelAttribute Estudiante estudiante, BindingResult result) {
+    public ModelAndView NuevoAlumno(@Valid @ModelAttribute Estudiante estudiante, BindingResult result) throws ParseException {
         ModelAndView mav = new ModelAndView();
 
         if (validloginCoord()) {
@@ -60,6 +63,14 @@ public class CoordinatorController {
                 mav.addObject("departamentos", departamentos);
                 mav.setViewName("negocio/crearEstudiante");
             } else {
+                DateFormat fecha = new SimpleDateFormat("dd/mm/yyyy");
+                Date convert = fecha.parse(estudiante.getFfnacimiento());
+                Date actual = new Date();
+
+                SimpleDateFormat sdf = new SimpleDateFormat("YYYY");
+                Integer anio = Integer.parseInt(sdf.format(convert));
+                Integer acanio = Integer.parseInt(sdf.format(actual));
+                estudiante.setIedad(acanio-anio);
                 estudianteService.save(estudiante);
                 mav.setViewName("negocio/expedienteAlumnos");
             }

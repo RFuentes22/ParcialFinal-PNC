@@ -2,6 +2,8 @@ package com.uca.ncapas.domain.administracion;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,10 +34,12 @@ public class Centro_escolar {
     @Column(name = "municipio")
     private Integer imunicipio;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "municipio",unique=true,insertable = false, updatable = false)
     private Municipio municipio;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "departamento",unique=true,insertable = false, updatable = false)
     private Departamento departamento;
