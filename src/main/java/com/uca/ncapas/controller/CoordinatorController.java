@@ -62,7 +62,7 @@ public class CoordinatorController {
 
         if(result.hasErrors()) {
             mav.addObject("departamentos", departamentos);
-            mav.addObject("escuelas", escuelas);
+          //  mav.addObject("escuelas", escuelas);
             mav.setViewName("negocio/crearEstudiante");
         }else {
             estudianteService.save(estudiante);

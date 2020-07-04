@@ -1,7 +1,9 @@
 package com.uca.ncapas.service.Implementacion;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.uca.ncapas.DTO.EscuelaDTO;
 import com.uca.ncapas.domain.administracion.Municipio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -43,5 +45,17 @@ public class EscuelaServiceImpl implements EscuelaService{
 		return escuelaRepo.findByImunicipio(code);
 	}
 
+	@Override
+	public List<EscuelaDTO> findschoolByMun(String cadena) throws DataAccessException {
+		List<EscuelaDTO> escuelas = escuelaRepo.mostrarEscuelasByMun(cadena).stream().map(obj -> {
+			EscuelaDTO e = new EscuelaDTO();
+			e.setIdEscuela((Integer) obj[0]);
+			e.setNombre(obj[1].toString());
+			return e;
+		}).collect(Collectors.toList());
+
+		return escuelas;
+
+	}
 
 }

@@ -103,11 +103,9 @@
                                     <div class="input-group">
                             			<label class="label"><b>Municipio</b></label>
                             			<div class="rs-select2 js-select-simple select--no-search">
-                                            <select  th:field="*{cmunicipio}" id="mun">
+                                            <select  th:field="${estudiante.cmunicipio}" id="mun">
                                                 <option  selected="selected" value="">Seleccionar</option>
-                                                <option hidden th:each="dep : ${municipios}"
-                                                        th:value="${dep.cmunicipio}"
-                                                        th:text="${dep.snombre}"></option>
+
                                             </select>
 
 			                                <div class="select-dropdown"></div>
@@ -147,9 +145,7 @@
                                     <div class="rs-select2 js-select-simple select--no-search">
                                         <select th:field="*{cescuela}" id="sch">
                                             <option selected="selected" value="">Seleccionar</option>
-                                            <option th:each="dep : ${escuelas}"
-                                                    th:value="${dep.cescuela}"
-                                                    th:text="${dep.snombre}"></option>
+
                                         </select>
                                         <div class="select-dropdown"></div>
                                     </div>
@@ -232,15 +228,15 @@
         $.ajax({
             url: "../schools",
             method: "POST",
-            data: {dep: $(this).val() },
+            data: {muni:$(this).val() },
             dataType: "json",
             success: function (response) {
                 if (response) {
                     $("#sch option:not(:disabled)").remove();
                     //$('#mun option[]').remove();
                     $.each(response, function(crearEstudiante, option) {
-                        console.log('<option value="'+option.cescuela+'" text="'+option.snombre+'"></option>')
-                        $("#sch").append('<option th:value="'+option.cescuela+'">'+option.snombre+'</option>')
+                        console.log('<option value="'+option.idEscuela+'" text="'+option.nombre+'"></option>')
+                        $("#sch").append('<option th:value="'+option.idEscuela+'">'+option.nombre+'</option>')
 
                     });
                 }

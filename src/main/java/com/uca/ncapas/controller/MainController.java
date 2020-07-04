@@ -1,5 +1,6 @@
 package com.uca.ncapas.controller;
 
+import com.uca.ncapas.DTO.EscuelaDTO;
 import com.uca.ncapas.domain.administracion.Centro_escolar;
 import com.uca.ncapas.domain.administracion.Departamento;
 import com.uca.ncapas.domain.administracion.Municipio;
@@ -7,9 +8,7 @@ import com.uca.ncapas.domain.administracion.Usuario;
 import com.uca.ncapas.service.DepartamentoService;
 import com.uca.ncapas.service.EscuelaService;
 import com.uca.ncapas.service.MunicipioService;
-
 import java.util.List;
-
 import com.uca.ncapas.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -124,9 +123,12 @@ public class MainController {
 
     @RequestMapping(value = "/schools", method = RequestMethod.POST)
     @ResponseBody
-    public List<Centro_escolar> getSchool(@RequestParam(value = "dep", required = true) String dep) {
-        System.out.println("valor pasado como pasametro: " + dep);
-        return dep != null ? escuelaService.findByMun(Integer.valueOf(dep)) : null;
+    public List<EscuelaDTO> getSchool(@RequestParam(value = "muni", required = true) String muni) {
+        System.out.println("valor pasado como pasametro: " + muni);
+       // return muni != null ? escuelaService.findByMun(Integer.valueOf(muni)) : null;
+        //return muni != null ? escuelaService.filterNombre(muni) : null;
+        System.out.println(escuelaService.findschoolByMun(muni).toString());
+        return muni != null ? escuelaService.findschoolByMun(muni) : null;
     }
 
     //**************************CATALOGOS*********************************//
