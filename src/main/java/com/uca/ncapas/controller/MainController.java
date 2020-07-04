@@ -125,6 +125,13 @@ public class MainController {
     }
 
 
+    @RequestMapping("/activarCuenta")
+    public ModelAndView ActivarCuenta() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("activarCuenta");
+        return mav;
+    }
+    
     //**************************CATALOGOS*********************************//
 
     @RequestMapping("/catalogoEscuela")
@@ -172,8 +179,16 @@ public class MainController {
     }
 
     @RequestMapping("/usuario")
-    public ModelAndView CrearUsuario() {
+    public ModelAndView CrearUsuario(Usuario usuario ) {
         ModelAndView mav = new ModelAndView();
+        List<Departamento> departamentos = null;
+        try {
+            departamentos = departamentoService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mav.addObject("usuario",new Usuario());
+        mav.addObject("departamentos",departamentos);
         mav.setViewName("catalogos/crearUsuario");
         return mav;
     }
