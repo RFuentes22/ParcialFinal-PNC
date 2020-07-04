@@ -1,18 +1,12 @@
 package com.uca.ncapas.service.Implementacion;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import com.uca.ncapas.domain.administracion.Municipio;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-
 import com.uca.ncapas.domain.administracion.Centro_escolar;
 import com.uca.ncapas.repositories.EscuelaRepo;
 import com.uca.ncapas.service.EscuelaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class EscuelaServiceImpl implements EscuelaService{
@@ -45,15 +39,6 @@ public class EscuelaServiceImpl implements EscuelaService{
 	public List<Centro_escolar> findByMun(Integer code) throws DataAccessException {
 		return escuelaRepo.findByImunicipio(code);
 	}
-	
-	public Page<Centro_escolar> findAll(Pageable page) throws DataAccessException {
-		return escuelaRepo.findAll(page);
-	}
-	public Long countAll() {
-		return escuelaRepo.count();
-	}
-	public List<Centro_escolar> findAll(Sort sort) {
-		return escuelaRepo.findAll(sort);
-	}
+
 
 }
