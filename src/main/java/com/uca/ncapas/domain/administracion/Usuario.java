@@ -39,7 +39,7 @@ public class Usuario {
     private String scontrasena;
 
     @Column(name = "estado")
-    @NotNull(message = "Debes seleccionar una opcion")
+    //@NotNull(message = "Debes seleccionar una opcion")
     private Boolean bestado;
 
     @Column(name = "admin")
