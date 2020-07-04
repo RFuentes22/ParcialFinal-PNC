@@ -1,6 +1,8 @@
 package com.uca.ncapas.controller;
 
+import com.uca.ncapas.domain.administracion.Centro_escolar;
 import com.uca.ncapas.domain.administracion.Departamento;
+import com.uca.ncapas.domain.administracion.Materia;
 import com.uca.ncapas.domain.administracion.Usuario;
 import com.uca.ncapas.domain.proceso_negocio.Estudiante;
 import com.uca.ncapas.service.DepartamentoService;
@@ -79,6 +81,46 @@ public class CoordinatorController {
 
         return mav;
     }
+
+    @RequestMapping("/alumnos")
+    public ModelAndView ExpedienteAlumnos() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName(validloginCoord() ? "negocio/expedienteAlumnos" : "index");
+        return mav;
+    }
+
+
+
+    @RequestMapping("/lista")
+    public ModelAndView ListaAlumnos() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName(validloginCoord() ? "negocio/listaAlumnos" : "index");
+        return mav;
+    }
+
+    @RequestMapping("/editarexpediente")
+    public ModelAndView EditarAlumno() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName(validloginCoord() ? "negocio/editarEstudiante" : "index");
+        return mav;
+    }
+
+    @RequestMapping("/materiascursadas")
+    public ModelAndView MateriasCursadas() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName(validloginCoord() ? "negocio/listaMateria" : "index");
+        return mav;
+    }
+
+    @RequestMapping("/nuevamateriacursada")
+    public ModelAndView NuevaMateria() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName(validloginCoord() ? "negocio/crearMateria" : "index");
+        return mav;
+    }
+
+
+
 
     /* View vacio */
 
