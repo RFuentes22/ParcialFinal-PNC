@@ -46,26 +46,29 @@
   <article class="panel__wrapper" >
                 <div class="card-body">
                     <h2 class="title" align="center"><b>Nuevo Centro Escolar</b></h2>
-                    <form method="POST">
+                    <form th:action="@{/saveCentro}" method="POST" th:object="${centro_escolar}">
                         
                        <div class="input-group">
                         	<div class="row row-space">
                            	<label class="label"><b>Nombre</b></label>
-                           	<input class="input--style-4" type="text" name="escuela">
+                           	<input class="input--style-4" type="text" name="escuela" th:field="*{snombre}">
+                           	<br><span th:errors="*{snombre}" style="color:#FF0000"></span>
                    			</div> 
                         </div>
-                        <div class="row row-space">
+                          <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <div class="input-group">
                             			<label class="label"><b>Departamento</b></label>
                             			<div class="rs-select2 js-select-simple select--no-search">
-		                                	<select name="departamento">
-		                                    	<option disabled="disabled" selected="selected">Seleccionar</option>
-		                                    	<option>Subject 1</option>
-		                                    	<option>Subject 2</option>
-		                                    	<option>Subject 3</option>
+		                                	<select th:field="*{idepartamento}" id="departamento">
+		                                    	<option selected="selected" value="">Seleccionar</option>
+		                                    	<option th:each="dep : ${departamentos}"
+								                		th:value="${dep.cdepartamento}"
+								                		th:text="${dep.snombre}">
+								                </option>
 		                                	</select>
+		                                	<br><span th:errors="*{idepartamento}" style="color:#FF0000"></span>
 		                                	<div class="select-dropdown"></div>
 		                            	</div>
                         			</div>
@@ -76,32 +79,32 @@
                                     <div class="input-group">
                             			<label class="label"><b>Municipio</b></label>
                             			<div class="rs-select2 js-select-simple select--no-search">
-			                                <select name="municipio">
-			                                    <option disabled="disabled" selected="selected">Seleccionar</option>
-			                                    <option>Subject 1</option>
-			                                    <option>Subject 2</option>
-			                                    <option>Subject 3</option>
+			                                <select th:field="*{imunicipio}" id="muni">
+			                                    <option selected value="">Seleccionar</option>
 			                                </select>
+			                                <br><span th:errors="*{imunicipio}" style="color:#FF0000"></span>
 			                                <div class="select-dropdown"></div>
 			                            </div>
                         			</div>
                                 </div>
                             </div>
-                        </div> 	
+                        </div>  	
                         <div class="input-group">
                         	<div class="row row-space">
                            	<label class="label"><b>Direcci&oacute;n</b></label>
-                           	<input class="input--style-4" type="text" name="address">
+                           	<input class="input--style-4" type="text" name="address" th:field="*{sdireccion}">
+                           	<br><span th:errors="*{sdireccion}" style="color:#FF0000"></span>
                    			</div> 
                         </div>
                    		                    
                         <div class="input-group" align="center">
-                        	<button class="btn-new" th:onclick="|window.location.href='/signup'|">
+                        	<button class="btn-new">
 								Agregar
 							</button>
                         </div>
                         
                     </form>
+                    <p th:if="${exito == 1}" class="mb-0">Centro Escolar guardado con &eacute;xito</p><br/>
                 </div>
     
   </article>
@@ -124,5 +127,26 @@
 
     <!-- Main JS-->
     <script src="js/global.js"></script>
+    
+    <script>
+	$("#departamento").on("change", function (e) {
+	    $.ajax({
+	    url: "../municipio",
+	    method: "POST",
+	    data: {dep: $(this).val() },
+	    dataType: "json",
+	    success: function (response) {
+	      if (response) {
+	    	$("#muni option:not(:disabled)").remove();
+	        $.each(response, function(crearUsuario, option) {
+	            console.log('<option value="'+option.cmunicipio+'" text="'+option.snombre+'"></option>')
+	            $("#muni").append('<option value="'+option.cmunicipio+'">'+option.snombre+'</option>') 
+	            
+	        });
+	      }
+	    }
+	  });
+	});
+</script>
 </body>
 </html>
