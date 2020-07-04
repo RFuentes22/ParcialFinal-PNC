@@ -54,8 +54,17 @@ public class signController {
 			
 			usuario.setIedad(acanio-anio);
 			
-			usuarioRepo.save(usuario);
-			mav.setViewName("index");
+			if(usuario.getBadmin()) {
+				usuario.setBactivo(true);
+				usuario.setBestado(true);
+				usuarioRepo.save(usuario);
+				mav.setViewName("adminView");
+			}else {
+				usuario.setBactivo(false);
+				usuario.setBestado(false);
+				usuarioRepo.save(usuario);
+				mav.setViewName("activarCuenta");
+			}
 		}
 		
 		return mav;
