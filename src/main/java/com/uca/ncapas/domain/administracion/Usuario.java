@@ -18,7 +18,7 @@ public class Usuario {
 
     @Column(name = "usuario")
     //@NotEmpty(message = "El Usuario no puede quedar vacio")
-    @Size(max = 20, message = "El Usuario debe tener maximo 20 caracteres")
+    @Size(min = 6,max = 20, message = "El Usuario debe tener minimo 6 y maximo 20 caracteres")
     private String susuario;
 
     @Column(name = "nombre")
@@ -29,13 +29,13 @@ public class Usuario {
 
     @Column(name = "apellido")
     //@NotNull(message = "El Apellido del usuario no puede quedar vacio")
-    @Size(max = 40, message = "El Apellido del usuario debe tener maximo 40 caracteres")
+    @Size(min =3,max = 40, message = "El Apellido del usuario debe tener minimo 3 y maximo 40 caracteres")
     //@NotEmpty(message = "no vacio")
     private String lastnameuser;
 
     @Column(name = "contrasena")
     //@NotEmpty(message = "La Contraseña del usuario no puede quedar vacio")
-    @Size(max = 50, message = "La Contraseña del usuario debe tener maximo 50 caracteres")
+    @Size(min = 8,max = 15, message = "La Contraseña del usuario debe tener minimo 8 maximo 15 caracteres")
     private String scontrasena;
 
     @Column(name = "estado")
