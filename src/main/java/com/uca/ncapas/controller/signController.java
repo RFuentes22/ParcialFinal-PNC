@@ -30,6 +30,7 @@ public class signController {
 	public ModelAndView createCount(@Valid @ModelAttribute Usuario usuario, BindingResult result ) {
 		ModelAndView mav = new ModelAndView();
 		List<Departamento> departamentos = null;
+		System.out.println(usuario.getImunicipio().toString());
 		try {
 			departamentos = departamentoService.findAll();
 		}catch (Exception e) {
