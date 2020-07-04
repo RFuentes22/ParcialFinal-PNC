@@ -31,7 +31,7 @@ public class UsusarioController {
 	public ModelAndView createCount(@Valid @ModelAttribute Usuario usuario, BindingResult result ) {
 		ModelAndView mav = new ModelAndView();
 		List<Departamento> departamentos = null;
-		System.out.println(usuario.getImunicipio().toString());
+		
 		try {
 			departamentos = departamentoService.findAll();
 		}catch (Exception e) {
@@ -40,10 +40,13 @@ public class UsusarioController {
 		
 		if(result.hasErrors()) {
 			mav.addObject("departamentos", departamentos);
-			mav.setViewName("crearUsuario");
+			mav.setViewName("catalogos/crearUsuario");
 		}else {
 			usuarioRepo.save(usuario);
-			mav.setViewName("index");
+			mav.addObject("usuario", new Usuario());
+			mav.addObject("departamentos",departamentos);
+			mav.addObject("exito", 1);
+			mav.setViewName("catalogos/crearUsuario");
 		}
 		
 		return mav;
