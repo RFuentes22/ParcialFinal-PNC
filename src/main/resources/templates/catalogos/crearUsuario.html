@@ -52,14 +52,14 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Nombre</b></label>
-                                    <input class="input--style-4" type="text" name="name">
+                                    <input class="input--style-4" type="text" name="name" th:field="*{nameuser}">
                                     <br><span th:errors="*{nameuser}" style="color:#FF0000"></span>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Apellido</b></label>
-                                    <input class="input--style-4" type="text" name="lastname">
+                                    <input class="input--style-4" type="text" name="lastname" th:field="*{lastnameuser}">
                                     <br><span th:errors="*{lastnameuser}" style="color:#FF0000"></span>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                 <div class="input-group">
                                     <label class="label"><b>Fecha de Nacimiento</b></label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="birthday">
+                                        <input class="input--style-4 js-datepicker" type="text" name="birthday" th:field="*{ffnacimiento}">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                         <br><span th:errors="*{ffnacimiento}" style="color:#FF0000"></span>
                                     </div>
@@ -113,21 +113,21 @@
                         </div> 	
                    		<div class="row row-space">
                            	<label class="label"><b>Direccion de residencia</b></label>
-                           	<input class="input--style-4" type="text" name="address">
+                           	<input class="input--style-4" type="text" name="address" th:field="*{sdireccion}">
                            	<br><span th:errors="*{sdireccion}" style="color:#FF0000"></span>
                    		</div>
                     	<div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Nombre de Usuario</b></label>
-                                    <input class="input--style-4" type="text" name="username">
+                                    <input class="input--style-4" type="text" name="username" th:field="*{susuario}">
                                     <br><span th:errors="*{susuario}" style="color:#FF0000"></span>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Contraseña</b></label>
-                                    <input class="input--style-4" type="password" name="password">
+                                    <input class="input--style-4" type="password" name="password" th:field="*{scontrasena}">
                                     <br><span th:errors="*{scontrasena}" style="color:#FF0000"></span>
                                 </div>
                             </div>
@@ -142,6 +142,7 @@
                            		<input type="radio" th:field="*{badmin}" th:value="${false}">
                            		<span class="checkmark"></span>
                            </label>
+                           <br><span th:errors="*{badmin}" style="color:#FF0000"></span>
                         </div>
                         <div class="input-group">
                            <label class="label"><b>Estado</b></label> 
@@ -159,9 +160,9 @@
                         	<button class="btn-new">
 								Agregar
 							</button>
-                        </div>
-                        
+                        </div>  
                     </form>
+                    <p th:if="${exito == 1}" class="mb-0">Usuario guardado con &eacute;xito</p><br/>
                 </div>
     
   </article>
