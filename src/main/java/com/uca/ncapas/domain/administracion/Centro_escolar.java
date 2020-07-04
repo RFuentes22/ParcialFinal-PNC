@@ -3,7 +3,7 @@ package com.uca.ncapas.domain.administracion;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -17,12 +17,12 @@ public class Centro_escolar {
     private Integer cescuela;
 
     @Column(name = "nombre")
-    @NotNull(message = "El Nombre del Centro Escolar no puede quedar vacio")
+    @NotEmpty(message = "El Nombre de la materia no puede quedar vacio")
     @Size(max = 150, message = "El Nombre del Centro Escolar debe tener maximo 150 caracteres")
     private String snombre;
 
     @Column(name = "direccion")
-    @NotNull(message = "La Direccion del Centro Escolar no puede quedar vacio")
+    @NotEmpty(message = "El Nombre de la materia no puede quedar vacio")
     @Size(max = 150, message = "La Direccion del Centro Escolar debe tener maximo 150 caracteres")
     private String sdireccion;
 
