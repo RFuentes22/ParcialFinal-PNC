@@ -218,7 +218,7 @@
                     //$('#mun option[]').remove();
                     $.each(response, function(crearEstudiante, option) {
                         console.log('<option value="'+option.cmunicipio+'" text="'+option.snombre+'"></option>')
-                        $("#mun").append('<option th:value="'+option.cmunicipio+'">'+option.snombre+'</option>')
+                        $("#mun").append('<option value="'+option.cmunicipio+'">'+option.snombre+'</option>')
 
                     });
                 }
@@ -239,7 +239,7 @@
                     //$('#mun option[]').remove();
                     $.each(response, function(crearEstudiante, option) {
                         console.log('<option value="'+option.idEscuela+'" text="'+option.nombre+'"></option>')
-                        $("#sch").append('<option th:value="'+option.idEscuela+'">'+option.nombre+'</option>')
+                        $("#sch").append('<option value="'+option.idEscuela+'">'+option.nombre+'</option>')
 
                     });
                 }
