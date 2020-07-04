@@ -37,5 +37,10 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioRepo.findBySusuarioAndScontrasena(user, pass);
     }
 
+	@Override
+	public List<Usuario> findByUser(String user) throws DataAccessException {
+		return usuarioRepo.findBySusuario(user);
+	}
+
 
 }

@@ -44,35 +44,51 @@ public class CoordinatorController {
         return mav;
     }
 
-    @RequestMapping("/expediente")
-    public ModelAndView NuevoAlumno(@Valid @ModelAttribute Estudiante estudiante, BindingResult result ) {
+    @RequestMapping("/newalumno")
+    public ModelAndView NuevoAlumno(@Valid @ModelAttribute Estudiante estudiante, BindingResult result) {
         ModelAndView mav = new ModelAndView();
 
-       // mav.setViewName(validloginCoord() ? "negocio/crearEstudiante" : "index");
-
-
-        List<Departamento> departamentos = null;
-        List<Centro_escolar> escuelas = null;
-        try {
-            departamentos = departamentoService.findAll();
-            escuelas = escuelaService.findAll();
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if(result.hasErrors()) {
-            mav.addObject("departamentos", departamentos);
-          //  mav.addObject("escuelas", escuelas);
+        if (validloginCoord()) {
             mav.setViewName("negocio/crearEstudiante");
-        }else {
-            estudianteService.save(estudiante);
-            mav.setViewName("index");
-        }
+            List<Departamento> departamentos = null;
+            try {
+                departamentos = departamentoService.findAll();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (result.hasErrors()) {
+                mav.addObject("departamentos", departamentos);
+                mav.setViewName("negocio/crearEstudiante");
+            } else {
+                estudianteService.save(estudiante);
+                mav.setViewName("negocio/expedienteAlumnos");
+            }
+        } else mav.setViewName("index");
 
 
         return mav;
     }
 
+    /* View vacio */
+
+    @RequestMapping("/expediente")
+    public ModelAndView Expediente() {
+        ModelAndView mav = new ModelAndView();
+        if (validloginCoord()) {
+            List<Departamento> departamentos = null;
+            try {
+                departamentos = departamentoService.findAll();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mav.addObject("estudiante", new Estudiante());
+            mav.addObject("departamentos", departamentos);
+            mav.setViewName("negocio/crearEstudiante");
+        } else mav.setViewName("index");
+        return mav;
+
+    }
 
     public Boolean validloginCoord() {
         if (idusuario == 0) return false;

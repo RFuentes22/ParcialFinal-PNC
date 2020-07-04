@@ -19,14 +19,15 @@ import com.uca.ncapas.service.DepartamentoService;
 
 @Controller
 public class SignController {
-	
+
 	@Autowired
 	UsuarioRepo usuarioRepo;
-	
+
 	 @Autowired
 	 private DepartamentoService departamentoService;
 
-		
+	static int idusuario = 0;
+
 	@RequestMapping("/crearCuenta")
 	public ModelAndView createCount(@Valid @ModelAttribute Usuario usuario, BindingResult result ) throws ParseException {
 		ModelAndView mav = new ModelAndView();
@@ -36,34 +37,42 @@ public class SignController {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		if(result.hasErrors()) {
 			mav.addObject("departamentos", departamentos);
 			mav.setViewName("crearCuenta");
 		}else {
-			DateFormat fecha = new SimpleDateFormat("dd/mm/yyyy");
-			Date convert = fecha.parse(usuario.getFfnacimiento());
-			Date actual = new Date();
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("YYYY");
-			Integer anio = Integer.parseInt(sdf.format(convert));
-			Integer acanio = Integer.parseInt(sdf.format(actual));
-			
-			usuario.setIedad(acanio-anio);
-			
-			if(usuario.getBadmin()) {
-				usuario.setBactivo(true);
-				usuario.setBestado(true);
-				usuarioRepo.save(usuario);
-				mav.setViewName("adminView");
+
+			if(usuarioRepo.findBySusuario(usuario.getSusuario()).size()!=0) {
+				mav.addObject("save", 1);
+				mav.addObject("departamentos", departamentos);
+				mav.setViewName("crearCuenta");
+
 			}else {
-				usuario.setBactivo(false);
-				usuario.setBestado(false);
-				usuarioRepo.save(usuario);
-				mav.setViewName("activarCuenta");
+				DateFormat fecha = new SimpleDateFormat("dd/mm/yyyy");
+				Date convert = fecha.parse(usuario.getFfnacimiento());
+				Date actual = new Date();
+
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY");
+				Integer anio = Integer.parseInt(sdf.format(convert));
+				Integer acanio = Integer.parseInt(sdf.format(actual));
+
+				usuario.setIedad(acanio-anio);
+
+				if(usuario.getBadmin()) {
+					usuario.setBactivo(true);
+					usuario.setBestado(true);
+					usuarioRepo.save(usuario);
+					mav.setViewName("adminView");
+				}else {
+					usuario.setBactivo(false);
+					usuario.setBestado(false);
+					usuarioRepo.save(usuario);
+					mav.setViewName("activarCuenta");
+				}
 			}
 		}
-		
+
 		return mav;
 	}
 }

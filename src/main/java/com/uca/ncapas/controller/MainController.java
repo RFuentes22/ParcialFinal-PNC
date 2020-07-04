@@ -6,12 +6,10 @@ import com.uca.ncapas.domain.administracion.Departamento;
 import com.uca.ncapas.domain.administracion.Materia;
 import com.uca.ncapas.domain.administracion.Municipio;
 import com.uca.ncapas.domain.administracion.Usuario;
-import com.uca.ncapas.service.DepartamentoService;
-import com.uca.ncapas.service.MateriaService;
-import com.uca.ncapas.service.EscuelaService;
-import com.uca.ncapas.service.MunicipioService;
+import com.uca.ncapas.domain.proceso_negocio.Estudiante;
+import com.uca.ncapas.service.*;
+
 import java.util.List;
-import com.uca.ncapas.service.UsuarioService;
 
 import javassist.expr.NewArray;
 
@@ -39,11 +37,14 @@ public class MainController {
 
     @Autowired
     private UsuarioService usuarioService;
-    
+
+    @Autowired
+    private EstudianteService estudianteService;
+
     @Autowired
     MateriaService materiaService;
 
-    Usuario usuario = null;
+    static Usuario usuario = null;
     public Boolean flagEstadoUser = false;
 
     @RequestMapping("/login")
@@ -81,6 +82,7 @@ public class MainController {
                     flagEstadoUser = true;
                     mav.setViewName("coordinatorView");
                     CoordinatorController.idusuario = usuario.getCusuario();
+                    SignController.idusuario = usuario.getCusuario();
                     System.out.println("Succes login Coordinator");
                 } else {
                     mav.addObject("activo", 0);
@@ -102,6 +104,7 @@ public class MainController {
             flagEstadoUser = false;
             AdminController.idusuario = 0;
             CoordinatorController.idusuario = 0;
+            SignController.idusuario = 0;
             System.out.println("Succes Close");
         }
         mav.setViewName("index");
@@ -117,9 +120,28 @@ public class MainController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        mav.addObject("save", 0);
         mav.addObject("usuario", new Usuario());
         mav.addObject("departamentos", departamentos);
         mav.setViewName("crearCuenta");
+        return mav;
+    }
+
+    @RequestMapping("/usuario")
+    public ModelAndView CrearUsuario(Usuario usuario) {
+        ModelAndView mav = new ModelAndView();
+
+        List<Departamento> departamentos = null;
+        try {
+            departamentos = departamentoService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mav.addObject("usuario", new Usuario());
+        mav.addObject("departamentos", departamentos);
+        mav.setViewName("catalogos/crearUsuario");
+
+
         return mav;
     }
 
@@ -134,9 +156,6 @@ public class MainController {
     @ResponseBody
     public List<EscuelaDTO> getSchool(@RequestParam(value = "muni", required = true) String muni) {
         System.out.println("valor pasado como pasametro: " + muni);
-       // return muni != null ? escuelaService.findByMun(Integer.valueOf(muni)) : null;
-        //return muni != null ? escuelaService.filterNombre(muni) : null;
-        System.out.println(escuelaService.findschoolByMun(muni).toString());
         return muni != null ? escuelaService.findschoolByMun(muni) : null;
     }
 
@@ -146,7 +165,7 @@ public class MainController {
         mav.setViewName("activarCuenta");
         return mav;
     }
-    
+
     //**************************CATALOGOS*********************************//
 
     @RequestMapping("/catalogoEscuela")
@@ -161,10 +180,10 @@ public class MainController {
         ModelAndView mav = new ModelAndView();
         List<Materia> materias = null;
         try {
-			materias = materiaService.findAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+            materias = materiaService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mav.addObject("materias", materias);
         mav.addObject("save", 0);
         mav.setViewName("catalogos/catalogoMateria");
@@ -198,21 +217,6 @@ public class MainController {
         ModelAndView mav = new ModelAndView();
         mav.addObject("materia", new Materia());
         mav.setViewName("catalogos/crearMateria");
-        return mav;
-    }
-
-    @RequestMapping("/usuario")
-    public ModelAndView CrearUsuario(Usuario usuario ) {
-        ModelAndView mav = new ModelAndView();
-        List<Departamento> departamentos = null;
-        try {
-            departamentos = departamentoService.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        mav.addObject("usuario",new Usuario());
-        mav.addObject("departamentos",departamentos);
-        mav.setViewName("catalogos/crearUsuario");
         return mav;
     }
 

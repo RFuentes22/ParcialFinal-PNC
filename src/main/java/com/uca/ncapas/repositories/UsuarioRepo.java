@@ -17,5 +17,7 @@ public interface UsuarioRepo extends JpaRepository<Usuario, Integer> {
     @Query(nativeQuery = true, value = "select * from administracion.usuario")
     List<Usuario> mostrarTodosUsuarios() throws DataAccessException;
 
+    public List<Usuario> findBySusuario(String susuario);
+    
 }
 

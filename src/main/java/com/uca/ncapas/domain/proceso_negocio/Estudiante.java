@@ -45,25 +45,25 @@ public class Estudiante {
     private String sdireccion;
 
     @Column(name = "departamento")
-    //@NotEmpty(message = "El Departamento del estudiante no puede quedar vacio")
+    @NotNull(message = "El Departamento del estudiante no puede quedar vacio")
     private Integer cdepartamento;
 
     @Column(name = "municipio")
-    //@NotEmpty(message = "El Municipio del estudiante no puede quedar vacio")
+    @NotNull(message = "El Municipio del estudiante no puede quedar vacio")
     private Integer cmunicipio;
 
     @Column(name = "telefono")
     @NotNull(message = "El campo Telefono no puede quedar vacio")
-    @Max(value = 10, message = "El campo Telefono debe tener maximo 10 digitos")
+    //@Max(value = 10, message = "El campo Telefono debe tener maximo 10 digitos")
     private Integer itelefono;
 
     @Column(name = "celular")
     @NotNull(message = "El campo Celular no puede quedar vacio")
-    @Max(value = 10, message = "El campo Celular debe tener maximo 10 caracteres")
+    //@Max(value = 10, message = "El campo Celular debe tener maximo 10 caracteres")
     private Integer icelular;
 
     @Column(name = "escuela")
-    //@NotEmpty(message = "Escuela del estudiante no puede quedar vacio")
+    @NotNull(message = "Escuela del estudiante no puede quedar vacio")
     private Integer cescuela;
 
     @Column(name = "nombre_madre")

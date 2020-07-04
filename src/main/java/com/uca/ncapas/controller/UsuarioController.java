@@ -19,7 +19,7 @@ import com.uca.ncapas.service.DepartamentoService;
 import com.uca.ncapas.service.UsuarioService;
 
 @Controller
-public class UsusarioController {
+public class UsuarioController {
 	@Autowired
 	UsuarioRepo usuarioRepo;
 	
