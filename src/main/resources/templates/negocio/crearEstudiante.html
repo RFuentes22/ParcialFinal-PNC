@@ -46,7 +46,7 @@
   <article class="panel__wrapper" >
                 <div class="card-body">
                     <h2 class="title" align="center"><b>Datos del Alumno</b></h2>
-                    <form th:object="${estudiante}" method="POST">
+                    <form th:action="@{/newalumno}" th:object="${estudiante}" method="POST">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -93,6 +93,7 @@
                                                         th:value="${dep.cdepartamento}"
                                                         th:text="${dep.snombre}"></option>
                                             </select>
+                                            <br><span th:errors="*{cdepartamento}" style="color:#FF0000"></span>
 		                                	<div class="select-dropdown"></div>
 		                            	</div>
                         			</div>
@@ -107,7 +108,7 @@
                                                 <option  selected="selected" value="">Seleccionar</option>
 
                                             </select>
-
+                                            <br><span th:errors="*{cmunicipio}" style="color:#FF0000"></span>
 			                                <div class="select-dropdown"></div>
 			                            </div>
                         			</div>
@@ -147,6 +148,7 @@
                                             <option selected="selected" value="">Seleccionar</option>
 
                                         </select>
+                                        <br><span th:errors="*{cescuela}" style="color:#FF0000"></span>
                                         <div class="select-dropdown"></div>
                                     </div>
                                 </div>
@@ -170,15 +172,16 @@
 								Agregar
 							</button>
                         </div>
+                        <div class="row row-space input-group">
+                            <button class="btn-index" th:onclick="|window.location.href='/alumnos'|">
+                                Regresar
+                            </button>
+                            <button class="btn-blue" type="reset">
+                                Limpiar
+                            </button>
+                        </div>
                     </form>
-                    <div class="row row-space input-group">
-                    	<button class="btn-index" th:onclick="|window.location.href='/alumnos'|">
-								Regresar
-						</button>
-						<button class="btn-blue" type="reset">
-								Limpiar
-						</button>
-                    </div>
+
                 </div>
 
   </article>
