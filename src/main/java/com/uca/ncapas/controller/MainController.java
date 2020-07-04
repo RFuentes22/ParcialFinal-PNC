@@ -1,6 +1,5 @@
 package com.uca.ncapas.controller;
 
-import com.uca.ncapas.DTO.EscuelaDTO;
 import com.uca.ncapas.domain.administracion.Centro_escolar;
 import com.uca.ncapas.domain.administracion.Departamento;
 import com.uca.ncapas.domain.administracion.Materia;
@@ -150,13 +149,6 @@ public class MainController {
     public List<Municipio> getModals(@RequestParam(value = "dep", required = true) String dep) {
         System.out.println("valor pasado como pasametro: " + dep);
         return dep != null ? municipioService.findDepartamento(Integer.valueOf(dep)) : null;
-    }
-
-    @RequestMapping(value = "/schools", method = RequestMethod.POST)
-    @ResponseBody
-    public List<EscuelaDTO> getSchool(@RequestParam(value = "muni", required = true) String muni) {
-        System.out.println("valor pasado como pasametro: " + muni);
-        return muni != null ? escuelaService.findschoolByMun(muni) : null;
     }
 
     @RequestMapping("/activarCuenta")
