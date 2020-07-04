@@ -2,6 +2,7 @@ package com.uca.ncapas.service.Implementacion;
 
 import java.util.List;
 
+import com.uca.ncapas.domain.administracion.Municipio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,11 @@ public class EscuelaServiceImpl implements EscuelaService{
 	public List<Centro_escolar> filterNombre(String cadena) throws DataAccessException {
 		return escuelaRepo.findBySnombre(cadena);
 	}
-	
-	
+
+	@Override
+	public List<Centro_escolar> findByMun(Integer code) throws DataAccessException {
+		return escuelaRepo.findByImunicipio(code);
+	}
+
 
 }

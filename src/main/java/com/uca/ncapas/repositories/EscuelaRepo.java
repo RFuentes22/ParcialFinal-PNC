@@ -1,12 +1,14 @@
 package com.uca.ncapas.repositories;
 
-import java.util.List;
-
+import com.uca.ncapas.domain.administracion.Centro_escolar;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.uca.ncapas.domain.administracion.Centro_escolar;
+import java.util.List;
 
 public interface EscuelaRepo extends JpaRepository<Centro_escolar, Integer>{
 	
 	public List<Centro_escolar> findBySnombre(String snombre);
+
+	List<Centro_escolar> findByImunicipio(Integer codMun);
+
 }

@@ -4,11 +4,10 @@ package com.uca.ncapas.domain.proceso_negocio;
 import com.uca.ncapas.domain.administracion.Centro_escolar;
 import com.uca.ncapas.domain.administracion.Departamento;
 import com.uca.ncapas.domain.administracion.Municipio;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.sql.Date;
 
 @Entity
@@ -22,58 +21,58 @@ public class Estudiante {
     private Integer cestudiante;
 
     @Column(name = "nombres")
-    @NotNull(message = "El Nombre del estudiante no puede quedar vacio")
+    @NotEmpty(message = "El Nombre del estudiante no puede quedar vacio")
     @Size(max = 100, message = "El Nombre del estudiante debe tener maximo 100 caracteres")
     private String snombres;
 
     @Column(name = "apellidos")
-    @NotNull(message = "El Apellido del estudiante no puede quedar vacio")
+    @NotEmpty(message = "El Apellido del estudiante no puede quedar vacio")
     @Size(max = 100, message = "El Apellido del estudiante debe tener maximo 100 caracteres")
     private String sapellidos;
 
     @Column(name = "carnet")
-    @NotNull(message = "El Carnet del estudiante no puede quedar vacio")
-    @Size(max = 9, message = "El Carnet del estudiante debe tener maximo 9 caracteres")
-    private Integer ccarnet;
+    @NotEmpty(message = "El Carnet del estudiante no puede quedar vacio")
+    @Size(min = 9,max = 9,message = "El Carnet del estudiante debe tener 9 caracteres")
+    private String ccarnet;
 
     @Column(name = "fnacimiento")
     @NotEmpty(message = "La Fecha de nacimiento del estudiante no puede quedar vacio")
-    private Date ffnacimiento;
+    private String ffnacimiento;
 
     @Column(name = "direccion")
-    @NotNull(message = "La Direccion del estudiante no puede quedar vacio")
+    @NotEmpty(message = "La Direccion del estudiante no puede quedar vacio")
     @Size(max = 150, message = "La Direccion del estudiante debe tener maximo 150 caracteres")
     private String sdireccion;
 
     @Column(name = "departamento")
-    @NotEmpty(message = "El Departamento del estudiante no puede quedar vacio")
+    //@NotEmpty(message = "El Departamento del estudiante no puede quedar vacio")
     private Integer cdepartamento;
 
     @Column(name = "municipio")
-    @NotEmpty(message = "El Municipio del estudiante no puede quedar vacio")
+    //@NotEmpty(message = "El Municipio del estudiante no puede quedar vacio")
     private Integer cmunicipio;
 
     @Column(name = "telefono")
     @NotNull(message = "El campo Telefono no puede quedar vacio")
-    @Size(max = 10, message = "El campo Telefono debe tener maximo 10 caracteres")
+    @Max(value = 10, message = "El campo Telefono debe tener maximo 10 digitos")
     private Integer itelefono;
 
     @Column(name = "celular")
     @NotNull(message = "El campo Celular no puede quedar vacio")
-    @Size(max = 10, message = "El campo Celular debe tener maximo 10 caracteres")
+    @Max(value = 10, message = "El campo Celular debe tener maximo 10 caracteres")
     private Integer icelular;
 
     @Column(name = "escuela")
-    @NotEmpty(message = "Escuela del estudiante no puede quedar vacio")
+    //@NotEmpty(message = "Escuela del estudiante no puede quedar vacio")
     private Integer cescuela;
 
     @Column(name = "nombre_madre")
-    @NotNull(message = "El Nombre de la Madre del estudiante no puede quedar vacio")
+    @NotEmpty(message = "El Nombre de la Madre del estudiante no puede quedar vacio")
     @Size(max = 150, message = "El Nombre de la Madre del estudiante debe tener maximo 150 caracteres")
     private String snombre_madre;
 
     @Column(name = "nombre_padre")
-    @NotNull(message = "El Nombre del Padre del estudiante no puede quedar vacio")
+    @NotEmpty(message = "El Nombre del Padre del estudiante no puede quedar vacio")
     @Size(max = 150, message = "El Nombre del Padre del estudiante debe tener maximo 150 caracteres")
     private String snombre_padre;
 
@@ -137,19 +136,19 @@ public class Estudiante {
         this.sapellidos = sapellidos;
     }
 
-    public Integer getCcarnet() {
+    public String getCcarnet() {
         return ccarnet;
     }
 
-    public void setCcarnet(Integer ccarnet) {
+    public void setCcarnet(String ccarnet) {
         this.ccarnet = ccarnet;
     }
 
-    public Date getFfnacimiento() {
+    public String getFfnacimiento() {
         return ffnacimiento;
     }
 
-    public void setFfnacimiento(Date ffnacimiento) {
+    public void setFfnacimiento(String ffnacimiento) {
         this.ffnacimiento = ffnacimiento;
     }
 
