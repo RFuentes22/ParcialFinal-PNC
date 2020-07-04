@@ -238,8 +238,8 @@
                     $("#sch option:not(:disabled)").remove();
                     //$('#mun option[]').remove();
                     $.each(response, function(crearEstudiante, option) {
-                        console.log('<option value="'+option.idEscuela+'" text="'+option.nombre+'"></option>')
-                        $("#sch").append('<option value="'+option.idEscuela+'">'+option.nombre+'</option>')
+                        console.log('<option value="'+option.cescuela+'" text="'+option.snombre+'"></option>')
+                        $("#sch").append('<option value="'+option.cescuela+'">'+option.snombre+'</option>')
 
                     });
                 }

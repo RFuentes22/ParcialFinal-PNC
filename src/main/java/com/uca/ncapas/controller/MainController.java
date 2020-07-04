@@ -1,27 +1,12 @@
 package com.uca.ncapas.controller;
 
-import com.uca.ncapas.DTO.EscuelaDTO;
-import com.uca.ncapas.domain.administracion.Centro_escolar;
-import com.uca.ncapas.domain.administracion.Departamento;
-import com.uca.ncapas.domain.administracion.Materia;
-import com.uca.ncapas.domain.administracion.Municipio;
-import com.uca.ncapas.domain.administracion.Usuario;
-import com.uca.ncapas.domain.proceso_negocio.Estudiante;
+import com.uca.ncapas.domain.administracion.*;
 import com.uca.ncapas.service.*;
-
-import java.util.List;
-
-import javassist.expr.NewArray;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.w3c.dom.ls.LSInput;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -153,9 +138,9 @@ public class MainController {
 
     @RequestMapping(value = "/schools", method = RequestMethod.POST)
     @ResponseBody
-    public List<EscuelaDTO> getSchool(@RequestParam(value = "muni", required = true) String muni) {
-        System.out.println("valor pasado como pasametro: " + muni);
-        return muni != null ? escuelaService.findschoolByMun(muni) : null;
+    public List<Centro_escolar> getSchool(@RequestParam(value = "muni", required = true) String muni) {
+        System.out.println("valor pasado como pasametro muni: " + muni);
+        return muni != null ? escuelaService.findByMun(Integer.valueOf(muni)) : null;
     }
 
     @RequestMapping("/activarCuenta")
