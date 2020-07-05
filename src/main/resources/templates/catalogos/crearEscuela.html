@@ -45,7 +45,7 @@
 <section class="panel b-yellow" id="1" >
   <article class="panel__wrapper" >
                 <div class="card-body">
-                    <h2 class="title" align="center"><b>Nuevo Centro Escolar</b></h2>
+                    <h2 class="title" align="center"><b>Datos del Centro Escolar</b></h2>
                     <form th:action="@{/saveCentro}" method="POST" th:object="${centro_escolar}">
                         
                        <div class="input-group">
@@ -109,6 +109,7 @@
                         
                     </form>
                     <p th:if="${exito == 1}" class="mb-0">Centro Escolar guardado con &eacute;xito</p><br/>
+                    
                 </div>
     
   </article>
