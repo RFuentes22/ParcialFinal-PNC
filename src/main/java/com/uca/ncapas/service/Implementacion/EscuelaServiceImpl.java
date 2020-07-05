@@ -5,6 +5,8 @@ import com.uca.ncapas.repositories.EscuelaRepo;
 import com.uca.ncapas.service.EscuelaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -38,6 +40,16 @@ public class EscuelaServiceImpl implements EscuelaService{
 	@Override
 	public List<Centro_escolar> findByMun(Integer code) throws DataAccessException {
 		return escuelaRepo.findByImunicipio(code);
+	}
+
+	@Override
+	public Page<Centro_escolar> findAll(Pageable page) throws DataAccessException {
+		return escuelaRepo.findAll(page);
+	}
+
+	@Override
+	public Long countAll() {
+		return escuelaRepo.count();
 	}
 
 
