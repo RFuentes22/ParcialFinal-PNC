@@ -46,19 +46,21 @@
   <article class="panel__wrapper" >
                 <div class="card-body">
                     <h2 class="title" align="center"><b>Datos de la Materia Cursada</b></h2>
-                    <form method="POST">
-                    	
+                    <p align="center">Nombre del Alumno</p>
+              
+                    <form th:action="@{/addMateria}" method="POST" th:object="${nota}">	
                     	<div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <div class="input-group">
                             			<label class="label"><b>Materia</b></label>
                             			<div class="rs-select2 js-select-simple select--no-search">
-		                                	<select name="departamento">
-		                                    	<option disabled="disabled" selected="selected">Seleccionar</option>
-		                                    	<option>Subject 1</option>
-		                                    	<option>Subject 2</option>
-		                                    	<option>Subject 3</option>
+		                                	<select th:field="*{cmateria}">
+		                                    	<option selected="selected" value="">Seleccionar</option>
+		                                    	<option th:each="subj : ${materias}"
+								                		th:value="${subj.cmateria}"
+								                		th:text="${subj.snombre}">
+								                </option>
 		                                	</select>
 		                                	<div class="select-dropdown"></div>
 		                            	</div>
@@ -68,7 +70,7 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Año</b></label>
-                                    <input class="input--style-4" type="text" name="year">
+                                    <input class="input--style-4" type="number" th:field="*{ianio}">
                                 </div>
                             </div>
                         </div>	
@@ -78,11 +80,11 @@
                                     <div class="input-group">
                             			<label class="label"><b>Ciclo</b></label>
                             			<div class="rs-select2 js-select-simple select--no-search">
-		                                	<select name="departamento">
-		                                    	<option disabled="disabled" selected="selected">Seleccionar</option>
-		                                    	<option>01</option>
-		                                    	<option>02</option>
-		                                    	<option>03</option>
+		                                	<select th:field="*{iciclo}">
+		                                    	<option selected="selected" value="">Seleccionar</option>
+		                                    	<option value="01">01</option>
+		                                    	<option value="02">02</option>
+		                                    	<option value="03">03</option>
 		                                	</select>
 		                                	<div class="select-dropdown"></div>
 		                            	</div>
@@ -92,7 +94,7 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Nota</b></label>
-                                    <input class="input--style-4" type="text" name="nota">
+                                    <input class="input--style-4" type="number" th:field="*{inota}">
                                 </div>
                             </div>
                         </div>		
@@ -103,6 +105,7 @@
 							</button>
                         </div>
                     </form>
+                    <p align="center" th:if="${exito == 1}" class="mb-0">Materia agregada con &eacute;xito</p><br/>
                 </div>
     
   </article>
