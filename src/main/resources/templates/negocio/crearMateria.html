@@ -61,8 +61,9 @@
 								                		th:value="${subj.cmateria}"
 								                		th:text="${subj.snombre}">
 								                </option>
-		                                	</select>
-		                                	<div class="select-dropdown"></div>
+		                                	</select>		                                	
+		                                	<br><span th:errors="*{cmateria}" style="color:#FFFFFF"></span>
+		                                	<div class="select-dropdown"></div>		                                	
 		                            	</div>
                         			</div>
                                 </div>
@@ -70,7 +71,9 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Año</b></label>
-                                    <input class="input--style-4" type="number" th:field="*{ianio}">
+                                    <input class="input--style-4" type="text" th:field="*{ianio}" 
+                                    pattern="([2]{1})+([0]{1})+([0-2]{1})+([5-9])" title="El añño debe ser mayor o igual a 2005">
+                                    <br><span th:errors="*{ianio}" style="color:#FFFFFF"></span>
                                 </div>
                             </div>
                         </div>	
@@ -86,7 +89,8 @@
 		                                    	<option value="02">02</option>
 		                                    	<option value="03">03</option>
 		                                	</select>
-		                                	<div class="select-dropdown"></div>
+		                                	<br><span th:errors="*{iciclo}" style="color:#FFFFFF"></span>
+		                                	<div class="select-dropdown"></div>		                                	
 		                            	</div>
                         			</div>
                                 </div>
@@ -94,7 +98,8 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Nota</b></label>
-                                    <input class="input--style-4" type="number" th:field="*{inota}">
+                                    <input class="input--style-4" type="number" th:field="*{inota}" step="0.1" min="0" max="10">
+                                    <br><span th:errors="*{inota}" style="color:#FFFFFF"></span>
                                 </div>
                             </div>
                         </div>		
