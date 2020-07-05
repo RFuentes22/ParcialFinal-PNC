@@ -45,7 +45,7 @@
 <section class="panel b-red" id="1" >
   <article class="panel__wrapper" >
          <div class="card-body">
-             <h2 class="title" align="center"><b>Nueva Materia</b></h2>
+             <h2 class="title" align="center"><b>Datos de la Materia</b></h2>
              <form th:action="@{/saveMateria}" th:object="${materia}"  method="POST">
                  <div class="input-group">
                  	  <input class="input--style-4" type="text" th:field="*{cmateria}" hidden="true">
@@ -55,7 +55,7 @@
                  </div>       
                  <div class="input-group" align="center">
                  	<button class="btn-new" type="submit">
-						Agregar
+						Guardar
 					</button>
                  </div>
              </form>
