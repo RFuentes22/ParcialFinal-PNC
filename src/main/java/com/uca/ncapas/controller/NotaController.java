@@ -42,6 +42,8 @@ public class NotaController {
 			mav.addObject("materias",materias);
 			mav.setViewName("negocio/crearMateria");
 		}else {
+			Integer annio = Integer.valueOf(nota.getIanio());
+			nota.setIanio(annio);
 			notaRepo.save(nota);
 			mav.addObject("nota", new Nota());
 			mav.addObject("materias",materias);
