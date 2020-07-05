@@ -51,6 +51,7 @@
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
+                                	<input class="input--style-4" type="text" name="name" th:field="*{cusuario}" hidden="true">
                                     <label class="label"><b>Nombre</b></label>
                                     <input class="input--style-4" type="text" name="name" th:field="*{nameuser}">
                                     <br><span th:errors="*{nameuser}" style="color:#FF0000"></span>
@@ -103,6 +104,9 @@
                             			<div class="rs-select2 js-select-simple select--no-search">
 			                                <select th:field="*{imunicipio}" id="muni">
 			                                    <option selected value="">Seleccionar</option>
+			                                    <option th:each="mun : ${municipios}"
+								                		th:value="${mun.cmunicipio}"
+								                		th:text="${mun.snombre}">
 			                                </select>
 			                                <br><span th:errors="*{imunicipio}" style="color:#FF0000"></span>
 			                                <div class="select-dropdown"></div>
@@ -128,7 +132,7 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Contraseña</b></label>
-                                    <input class="input--style-4" type="password" name="password" th:field="*{scontrasena}">
+                                    <input class="input--style-4" type="text" name="password" th:field="*{scontrasena}">
                                     <br><span th:errors="*{scontrasena}" style="color:#FF0000"></span>
                                 </div>
                             </div>
