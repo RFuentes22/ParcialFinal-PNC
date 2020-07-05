@@ -9,20 +9,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uca.ncapas.domain.administracion.Centro_escolar;
 import com.uca.ncapas.domain.administracion.Departamento;
+import com.uca.ncapas.domain.administracion.Materia;
+import com.uca.ncapas.domain.administracion.Municipio;
 import com.uca.ncapas.repositories.EscuelaRepo;
 import com.uca.ncapas.service.DepartamentoService;
+import com.uca.ncapas.service.EscuelaService;
+import com.uca.ncapas.service.MunicipioService;
 
 @Controller
 public class EscuelaController {
 	@Autowired
-	EscuelaRepo escuelaRepo;
+	EscuelaService escuelaService;
 	
 	 @Autowired
 	 private DepartamentoService departamentoService;
+	 
+	 @Autowired
+	 MunicipioService municipioService;
 		
 	@RequestMapping("/saveCentro")
 	public ModelAndView crearCentro(@Valid @ModelAttribute Centro_escolar centro_escolar, BindingResult result ) {
@@ -39,7 +47,7 @@ public class EscuelaController {
 			mav.setViewName("catalogos/crearEscuela");
 			System.out.println("if");
 		}else {
-			escuelaRepo.save(centro_escolar);
+			escuelaService.save(centro_escolar);
 			mav.addObject("centro_escolar",new Centro_escolar());
 			mav.addObject("departamentos",departamentos);
 			mav.addObject("exito", 1);
@@ -49,4 +57,23 @@ public class EscuelaController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/editarEscuela")
+    public ModelAndView CrearMateria(@RequestParam Integer id) {
+        ModelAndView mav = new ModelAndView();
+        Centro_escolar c = escuelaService.findOne(id);
+        List<Departamento> departamentos = null;
+        List<Municipio> municipios = null;
+        try {
+            departamentos = departamentoService.findAll();
+            municipios = municipioService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mav.addObject("centro_escolar", c);
+        mav.addObject("departamentos", departamentos);
+        mav.addObject("municipios", municipios);
+        mav.setViewName("catalogos/crearEscuela");
+        return mav;
+    }
 }

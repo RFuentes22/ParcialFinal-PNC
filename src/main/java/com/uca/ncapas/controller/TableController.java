@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.uca.ncapas.DTO.TableDTO;
+import com.uca.ncapas.domain.administracion.Centro_escolar;
 import com.uca.ncapas.domain.administracion.Materia;
+import com.uca.ncapas.service.EscuelaService;
 import com.uca.ncapas.service.MateriaService;
 
 @Controller
@@ -23,12 +25,13 @@ public class TableController {
 	@Autowired
 	MateriaService materiaService;
 	
+	@Autowired
+	EscuelaService escuelaService;
+	
 	@RequestMapping("/cargarMaterias")
     public @ResponseBody TableDTO cargarMaterias(@RequestParam Integer draw,
 			@RequestParam Integer start, @RequestParam Integer length, 
 			@RequestParam(value="search[value]", required = false) String search) {
-		
-		System.out.println("en cargar materias");
 		
 		Page<Materia> materias = materiaService.findAll(PageRequest.of(start/length, length, Sort.by(Direction.ASC,"cmateria")));
 		
@@ -36,6 +39,29 @@ public class TableController {
 		
 		for(Materia u : materias) {
 			data.add(new String[] {u.getCmateria().toString(),u.getCmateria().toString(),u.getSnombre()});
+		}
+		
+		TableDTO dto = new TableDTO();
+		dto.setData(data);
+		dto.setDraw(draw);
+		dto.setRecordsFiltered(materiaService.countAll().intValue());
+		dto.setRecordsTotal(materiaService.countAll().intValue());	
+		
+		return dto;
+    }
+	
+	@RequestMapping("/cargarEscuelas")
+    public @ResponseBody TableDTO cargarEscuelas(@RequestParam Integer draw,
+			@RequestParam Integer start, @RequestParam Integer length, 
+			@RequestParam(value="search[value]", required = false) String search) {
+		
+		Page<Centro_escolar> escuelas = escuelaService.findAll(PageRequest.of(start/length, length, Sort.by(Direction.ASC,"cescuela")));
+		
+		List<String[]> data = new ArrayList<>();
+		
+		for(Centro_escolar u : escuelas) {
+			data.add(new String[] {u.getCescuela().toString(),u.getCescuela().toString(),u.getSnombre(),u.getSdireccion(),
+					u.getDepartamento().getSnombre(), u.getMunicipio().getSnombre()});
 		}
 		
 		TableDTO dto = new TableDTO();

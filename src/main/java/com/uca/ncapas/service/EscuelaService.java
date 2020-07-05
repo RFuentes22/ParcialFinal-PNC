@@ -2,6 +2,9 @@ package com.uca.ncapas.service;
 
 import com.uca.ncapas.domain.administracion.Centro_escolar;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 public interface EscuelaService {
@@ -15,5 +18,9 @@ public interface EscuelaService {
 	public List<Centro_escolar> filterNombre(String cadena) throws DataAccessException;
 
 	List<Centro_escolar> findByMun(Integer code) throws DataAccessException;
+	
+	public Page<Centro_escolar> findAll(Pageable page) throws DataAccessException;
+	
+	public Long countAll();
 
 }

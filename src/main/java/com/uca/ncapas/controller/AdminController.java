@@ -3,9 +3,12 @@ package com.uca.ncapas.controller;
 import com.uca.ncapas.domain.administracion.Centro_escolar;
 import com.uca.ncapas.domain.administracion.Departamento;
 import com.uca.ncapas.domain.administracion.Materia;
+import com.uca.ncapas.domain.administracion.Municipio;
 import com.uca.ncapas.domain.administracion.Usuario;
 import com.uca.ncapas.service.DepartamentoService;
+import com.uca.ncapas.service.EscuelaService;
 import com.uca.ncapas.service.MateriaService;
+import com.uca.ncapas.service.MunicipioService;
 import com.uca.ncapas.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,12 @@ public class AdminController {
 
     @Autowired
     MateriaService materiaService;
+    
+    @Autowired
+    MunicipioService municipioService;
+    
+    @Autowired
+    EscuelaService escuelaService;
 
     @Autowired
     private DepartamentoService departamentoService;
@@ -109,13 +118,16 @@ public class AdminController {
         ModelAndView mav = new ModelAndView();
         if (validloginAdmin()) {
             List<Departamento> departamentos = null;
+            List<Municipio> municipios = null;
             try {
                 departamentos = departamentoService.findAll();
+                municipios = municipioService.findAll();
             } catch (Exception e) {
                 e.printStackTrace();
             }
             mav.addObject("centro_escolar",new Centro_escolar());
             mav.addObject("departamentos",departamentos);
+            mav.addObject("municipios", municipios);
             mav.setViewName("catalogos/crearEscuela");
         } else mav.setViewName("index");
         return mav;
