@@ -9,8 +9,9 @@ import javax.validation.constraints.Size;
 public class Materia {
 
     @Id
-    @GeneratedValue(generator="materia_c_materia_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "materia_c_materia_seq", sequenceName = "administracion.materia_c_materia_seq")
+    //@GeneratedValue(generator="materia_c_materia_seq", strategy = GenerationType.AUTO)
+    //@SequenceGenerator(name = "materia_c_materia_seq", sequenceName = "administracion.materia_c_materia_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "c_materia")
     private Integer cmateria;
 
