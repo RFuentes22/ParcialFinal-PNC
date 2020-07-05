@@ -38,7 +38,7 @@
       <a href="#1" class="nav__link c-green scrolly"><i class="fa fa-users"></i></a>
     </li>
     <li class="nav__item">
-      <a th:onclick="|window.location.href='/adminview'|" class="nav__link c-blue scrolly"><i class="fa fa-arrow-left"></i></a>
+      <a th:onclick="|window.location.href='/catalogoUsuario'|" class="nav__link c-blue scrolly"><i class="fa fa-arrow-left"></i></a>
     </li>
   </ul>
 </nav>
@@ -46,7 +46,7 @@
 <section class="panel b-green" id="1" >
   <article class="panel__wrapper" >
                 <div class="card-body">
-                    <h2 class="title" align="center"><b>Nuevo Usuario</b></h2>
+                    <h2 class="title" align="center"><b>Datos del Usuario</b></h2>
                     <form th:action="@{/saveUser}" method="POST" th:object="${usuario}">
                         <div class="row row-space">
                             <div class="col-2">
@@ -159,13 +159,11 @@
                         
                         <div class="input-group" align="center">
                         	<button class="btn-new">
-								Agregar
+								Guardar
 							</button>
                         </div>  
                     </form>
-                    <p align="center" th:if="${exito == 1}" class="mb-0">Usuario guardado con &eacute;xito</p><br/>
                 </div>
-    
   </article>
 </section>
 
