@@ -12,8 +12,9 @@ import javax.validation.constraints.NotEmpty;
 public class Nota {
 
     @Id
-    @GeneratedValue(generator="nota_c_nota_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "nota_c_nota_seq", sequenceName = "proceso_negocio.nota_c_nota_seq")
+    //@GeneratedValue(generator="nota_c_nota_seq", strategy = GenerationType.AUTO)
+    //@SequenceGenerator(name = "nota_c_nota_seq", sequenceName = "proceso_negocio.nota_c_nota_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "c_nota")
     private Integer idnota;
 
