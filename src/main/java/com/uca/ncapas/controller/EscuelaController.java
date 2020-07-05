@@ -46,14 +46,10 @@ public class EscuelaController {
 		if(result.hasErrors()) {
 			mav.addObject("departamentos", departamentos);
 			mav.setViewName("catalogos/crearEscuela");
-			System.out.println("if");
 		}else {
 			escuelaService.save(centro_escolar);
-			mav.addObject("centro_escolar",new Centro_escolar());
-			mav.addObject("departamentos",departamentos);
-			mav.addObject("exito", 1);
-			mav.setViewName("catalogos/crearEscuela");
-			System.out.println("else");
+			mav.addObject("save", 1);
+			mav.setViewName("catalogos/catalogoEscuela");
 		}
 		} else mav.setViewName("index");
 		
