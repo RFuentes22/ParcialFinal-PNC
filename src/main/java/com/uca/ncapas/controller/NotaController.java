@@ -34,7 +34,6 @@ public class NotaController {
 		List<Materia> materias = null;
 		try {
 			materias = materiaService.findAll();
-			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
