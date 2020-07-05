@@ -4,30 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
   	<title>Catalogo Usuarios</title>
-  	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  	  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/main.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+  
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 
+	<script type="text/javascript">
+		$(document).ready(function() {
+	    	setTimeout(function() {
+	        	$("#saved").fadeOut();
+	    	},1000);
+		});
+	</script>
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<nav class="nav">
-  <div class="burger">
-    <div class="burger__patty"></div>
-  </div>
-
-  <ul class="nav__list">
-    <li class="nav__item">
-      <a href="#1" class="nav__link c-green scrolly"><i class="fa fa-users"></i></a>
-    </li>
-    <li class="nav__item">
-      <a th:onclick="|window.location.href='/adminview'|" class="nav__link c-blue scrolly"><i class="fa fa-arrow-left"></i></a>
-    </li>
-  </ul>
-</nav>
-
 
 <section class="panel b-green" id="1" >
   <article class="panel__wrapper" >
@@ -38,6 +38,7 @@
       		<button class="btn-new" th:onclick="|window.location.href='/usuario'|">
 				Nuevo Usuario
 			</button>
+			<br><label th:if="${save == 2}" class="panel__headline" id="saved">USUARIO GUARDADO CON EXITO</label>
       	</p>
 		
 		<div class="panel__block"></div>
@@ -71,13 +72,18 @@
 
 
 
-<a href="http://ettrics.com/code/vertical-layout-navigation/" class="logo" target="_blank">
+<a class="logo" target="_blank">
+	<p align="center">
+		<button class="btn-index" th:onclick="|window.location.href='/adminview'|">
+			Regresar
+		</button>
+    </p>
  	<form th:action="@{/cerrarsesion}" method="post">
         <input class="btn-logout" type="submit" value="Cerrar Sesion">
     </form> 
 </a>
 <!-- partial -->
-  	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="js/script.js"></script>
+  	</script><script  src="js/script.js"></script>
 
 </body>
 </html>
