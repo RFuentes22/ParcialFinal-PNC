@@ -62,10 +62,8 @@ public class UsuarioController {
 				usuario.setIedad(acanio-anio);
 				usuario.setBestado(false);
 				usuarioRepo.save(usuario);
-				mav.addObject("usuario", new Usuario());
-				mav.addObject("departamentos",departamentos);
-				mav.addObject("exito", 1);
-				mav.setViewName("catalogos/crearUsuario");
+				mav.addObject("save", 2);
+				mav.setViewName("catalogos/catalogoUsuario");
 			}
 		}
 		} else mav.setViewName("index");
