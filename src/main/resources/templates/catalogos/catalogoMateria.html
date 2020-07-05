@@ -55,20 +55,6 @@
 
 <body>
 <!-- partial:index.partial.html -->
-<nav class="nav">
-  <div class="burger">
-    <div class="burger__patty"></div>
-  </div>
-
-  <ul class="nav__list">
-    <li class="nav__item">
-      <a href="#1" class="nav__link c-red scrolly"><i class="fa fa-book"></i></a>
-    </li>
-    <li class="nav__item">
-      <a th:onclick="|window.location.href='/adminview'|" class="nav__link c-blue scrolly"><i class="fa fa-arrow-left"></i></a>
-    </li>
-  </ul>
-</nav>
 
 <section class="panel b-red" id="1" >
   <article class="panel__wrapper" >
@@ -89,28 +75,38 @@
     
   </article>
 </section>
-<section class="panel b-red" id="2" >
-	<div class="padding-table">
-		<table  class="table table-bordered" id="tablaMaterias" width="100%" cellspacing="0">
-			<thead>
-				<tr>
-		            <th style="width: 80px">Acci&oacute;n</th>
-					<th>Codigo</th>
-					<th>Nombre</th>
-				</tr>			
-			</thead>
+<section class="panel b-red" id="2">
+	<article class="panel__wrapper" >
+		<div class="padding-table">
+			<table  class="table table-bordered" id="tablaMaterias" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+			            <th style="width: 80px">Acci&oacute;n</th>
+						<th>Codigo</th>
+						<th>Nombre</th>
+					</tr>			
+				</thead>
+			
+			</table>
+		</div>
+	</article>
 		
-		</table>
-	</div>
-	
 </section>
 
 
 
-<a href="http://ettrics.com/code/vertical-layout-navigation/" class="logo" target="_blank">
+<a class="logo" target="_blank">
+	
+	<p align="center">
+		<button class="btn-index" th:onclick="|window.location.href='/adminview'|">
+			Regresar
+		</button>
+    </p>
  	<form th:action="@{/cerrarsesion}" method="post">
         <input class="btn-logout" type="submit" value="Cerrar Sesion">
-    </form> 
+    </form>
+	
+	 
 </a>
 
 	<!-- partial -->
