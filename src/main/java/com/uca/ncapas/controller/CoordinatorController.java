@@ -9,6 +9,7 @@ import com.uca.ncapas.domain.proceso_negocio.Nota;
 import com.uca.ncapas.service.DepartamentoService;
 import com.uca.ncapas.service.EscuelaService;
 import com.uca.ncapas.service.EstudianteService;
+import com.uca.ncapas.service.MateriaService;
 import com.uca.ncapas.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,9 @@ public class CoordinatorController {
 
     @Autowired
     private DepartamentoService departamentoService;
+    
+    @Autowired
+    private MateriaService materiaService;
 
     static int idusuario = 0;
     Usuario usuario = null;
@@ -116,6 +120,12 @@ public class CoordinatorController {
     @RequestMapping("/nuevamateriacursada")
     public ModelAndView NuevaMateria() {
         ModelAndView mav = new ModelAndView();
+        List<Materia> materias = null;
+		try {
+			materias = materiaService.findAll();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
         mav.addObject("nota", new Nota());
         mav.setViewName(validloginCoord() ? "negocio/crearMateria" : "index");
         return mav;
