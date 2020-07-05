@@ -36,6 +36,7 @@ public class EscuelaController {
 	public ModelAndView crearCentro(@Valid @ModelAttribute Centro_escolar centro_escolar, BindingResult result ) {
 		ModelAndView mav = new ModelAndView();
 		List<Departamento> departamentos = null;
+		if (AdminController.idusuario != 0) {
 		try {
 			departamentos = departamentoService.findAll();
 		}catch (Exception e) {
@@ -54,6 +55,7 @@ public class EscuelaController {
 			mav.setViewName("catalogos/crearEscuela");
 			System.out.println("else");
 		}
+		} else mav.setViewName("index");
 		
 		return mav;
 	}
@@ -64,6 +66,7 @@ public class EscuelaController {
         Centro_escolar c = escuelaService.findOne(id);
         List<Departamento> departamentos = null;
         List<Municipio> municipios = null;
+		if (AdminController.idusuario != 0) {
         try {
             departamentos = departamentoService.findAll();
             municipios = municipioService.findAll();
@@ -74,6 +77,7 @@ public class EscuelaController {
         mav.addObject("departamentos", departamentos);
         mav.addObject("municipios", municipios);
         mav.setViewName("catalogos/crearEscuela");
+	} else mav.setViewName("index");
         return mav;
     }
 }

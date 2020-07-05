@@ -33,7 +33,7 @@ public class UsuarioController {
 	public ModelAndView createCount(@Valid @ModelAttribute Usuario usuario, BindingResult result ) throws ParseException {
 		ModelAndView mav = new ModelAndView();
 		List<Departamento> departamentos = null;
-		
+		if (AdminController.idusuario != 0) {
 		try {
 			departamentos = departamentoService.findAll();
 		}catch (Exception e) {
@@ -68,7 +68,7 @@ public class UsuarioController {
 				mav.setViewName("catalogos/crearUsuario");
 			}
 		}
-		
+		} else mav.setViewName("index");
 		return mav;
 	}
 }
