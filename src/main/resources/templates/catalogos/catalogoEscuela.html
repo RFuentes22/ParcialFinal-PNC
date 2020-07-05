@@ -19,8 +19,13 @@
   
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 	
-	
-	
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    setTimeout(function() {
+		        $("#aviso").fadeOut();
+		    },1000);
+		});
+	</script>
 
 </head>
 <script type="text/javascript">
@@ -48,23 +53,6 @@
 	</script>
 
 <body>
-<!-- partial:index.partial.html -->
-<nav class="nav">
-  <div class="burger">
-    <div class="burger__patty"></div>
-  </div>
-
-  <ul class="nav__list">
-    <li class="nav__item">
-      <a href="#1" class="nav__link c-yellow scrolly"><i class="fa fa-home"></i></a>
-    </li>
-    <li class="nav__item">
-      <a th:onclick="|window.location.href='/adminview'|" class="nav__link c-blue scrolly"><i class="fa fa-arrow-left"></i></a>
-    </li>
-  </ul>
-</nav>
-
-
 <section class="panel b-yellow" id="1" >
   <article class="panel__wrapper" >
     <div class="panel__content" align="center">
@@ -74,6 +62,7 @@
       		<button class="btn-new" th:onclick="|window.location.href='/escuela'|">
 				Nuevo Centro Escolar
 			</button>
+			<br><label th:if="${save == 1}" class="panel__headline" id="aviso">CENTRO GUARDADO CON EXITO</label>
       	</p>
 		
 		<div class="panel__block"></div>
@@ -102,9 +91,12 @@
 	
 </section>
 
-
-
-<a href="http://ettrics.com/code/vertical-layout-navigation/" class="logo" target="_blank">
+<a class="logo" target="_blank">
+	<p align="center">
+		<button class="btn-index" th:onclick="|window.location.href='/adminview'|">
+			Regresar
+		</button>
+    </p>
  	<form th:action="@{/cerrarsesion}" method="post">
         <input class="btn-logout" type="submit" value="Cerrar Sesion">
     </form>
