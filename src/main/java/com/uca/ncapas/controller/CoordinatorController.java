@@ -39,7 +39,7 @@ public class CoordinatorController {
 
     @Autowired
     private DepartamentoService departamentoService;
-    
+
     @Autowired
     private MateriaService materiaService;
 
@@ -77,7 +77,7 @@ public class CoordinatorController {
                 SimpleDateFormat sdf = new SimpleDateFormat("YYYY");
                 Integer anio = Integer.parseInt(sdf.format(convert));
                 Integer acanio = Integer.parseInt(sdf.format(actual));
-                estudiante.setIedad(acanio-anio);
+                estudiante.setIedad(acanio - anio);
                 estudianteService.save(estudiante);
                 mav.setViewName("negocio/expedienteAlumnos");
             }
@@ -108,9 +108,9 @@ public class CoordinatorController {
     public ModelAndView filterNombApll(@Valid @ModelAttribute("idfilter") String id) {
         ModelAndView mav = new ModelAndView();
         if (validloginCoord()) {
-            if (id.equals("1")){
+            if (id.equals("1")) {
 
-            }else{
+            } else {
 
             }
             mav.setViewName("negocio/listaAlumnos");
@@ -138,14 +138,16 @@ public class CoordinatorController {
     public ModelAndView NuevaMateria() {
         ModelAndView mav = new ModelAndView();
         List<Materia> materias = null;
-		try {
-			materias = materiaService.findAll();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		mav.addObject("materias",materias);
-        mav.addObject("nota", new Nota());
-        mav.setViewName(validloginCoord() ? "negocio/crearMateria" : "index");
+        if (validloginCoord()) {
+            mav.setViewName("negocio/crearMateria");
+            try {
+                materias = materiaService.findAll();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mav.addObject("materias", materias);
+            mav.addObject("nota", new Nota());
+        } else mav.setViewName("index");
         return mav;
     }
 
