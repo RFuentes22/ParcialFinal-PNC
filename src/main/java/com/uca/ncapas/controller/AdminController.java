@@ -54,13 +54,16 @@ public class AdminController {
 
         if (validloginAdmin()) {
         List<Departamento> departamentos = null;
+        List<Municipio> municipios = null;
         try {
             departamentos = departamentoService.findAll();
+            municipios = municipioService.findAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
         mav.addObject("usuario", new Usuario());
         mav.addObject("departamentos", departamentos);
+        mav.addObject("municipios", municipios);
         mav.setViewName("catalogos/crearUsuario");
         }else mav.setViewName("index");
 

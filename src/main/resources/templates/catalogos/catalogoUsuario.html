@@ -27,6 +27,30 @@
 		});
 	</script>
 </head>
+<script type="text/javascript">
+		$(document).ready(function(){
+			var table = $('#tablaUsuarios').DataTable( {
+		        "processing": true,
+		        "serverSide": true,
+		        "ajax": "./cargarUsuarios",
+		        "language": {
+		            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+		        },
+		        "pageLength": 5,
+		        "columnDefs": [ {
+		            "targets": 0,
+		            "data": null,
+		            "defaultContent": "<button  title='Editar materia'><i class='fa fa-pencil'></i></button>"
+		        }]
+		    });
+			
+			$('#tablaUsuarios tbody').on( 'click', 'button', function () {
+		        var data = table.row( $(this).parents('tr') ).data();
+		        	location.href = './editarUsuario?id=' + data[0];
+		    } );
+		});
+	</script>
+
 <body>
 
 <section class="panel b-green" id="1" >
@@ -50,22 +74,21 @@
 </section>
 <section class="panel b-green" id="2" >
 	<div class="padding-table">
-		<table>
+		<table  class="table table-bordered" id="tablaUsuarios" width="100%" cellspacing="0">
 		<thead>
-			<th>Accion</th>
-			<th>Codigo</th>
-			<th>Nombre Usuario</th>
-			<th>Administrador</th>
-			<th>Fecha Nacimiento</th>
-			<th>Direccion</th>
-			<th>Departamento</th>
-			<th>Municipio</th>
-			<th>Estado</th>
+			<tr>
+				<th style="width: 80px">Acci&oacute;n</th>
+				<th>Codigo</th>
+				<th>Nombre Usuario</th>
+				<th>Rol</th>
+				<th>Fecha Nacimiento</th>
+				<th>Direccion</th>
+				<th>Departamento</th>
+				<th>Municipio</th>
+				<th>Estado</th>
+			</tr>
 	</thead>
-		<th:block >
-
-		</th:block>
-	</table>
+		</table>
 	</div>
 	
 </section>

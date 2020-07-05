@@ -5,6 +5,8 @@ import com.uca.ncapas.repositories.UsuarioRepo;
 import com.uca.ncapas.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -40,6 +42,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public List<Usuario> findByUser(String user) throws DataAccessException {
 		return usuarioRepo.findBySusuario(user);
+	}
+
+	@Override
+	public Page<Usuario> findAll(Pageable page) throws DataAccessException {
+		return usuarioRepo.findAll(page);
+	}
+
+	@Override
+	public Long countAll() {
+		return usuarioRepo.count();
 	}
 
 

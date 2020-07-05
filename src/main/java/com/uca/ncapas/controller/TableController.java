@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.uca.ncapas.DTO.TableDTO;
 import com.uca.ncapas.domain.administracion.Centro_escolar;
 import com.uca.ncapas.domain.administracion.Materia;
+import com.uca.ncapas.domain.administracion.Usuario;
 import com.uca.ncapas.service.EscuelaService;
 import com.uca.ncapas.service.MateriaService;
+import com.uca.ncapas.service.UsuarioService;
 
 @Controller
 public class TableController {
@@ -27,6 +29,9 @@ public class TableController {
 	
 	@Autowired
 	EscuelaService escuelaService;
+	
+	@Autowired
+	UsuarioService usuarioService;
 	
 	@RequestMapping("/cargarMaterias")
     public @ResponseBody TableDTO cargarMaterias(@RequestParam Integer draw,
@@ -62,6 +67,30 @@ public class TableController {
 		for(Centro_escolar u : escuelas) {
 			data.add(new String[] {u.getCescuela().toString(),u.getCescuela().toString(),u.getSnombre(),u.getSdireccion(),
 					u.getDepartamento().getSnombre(), u.getMunicipio().getSnombre()});
+		}
+		
+		TableDTO dto = new TableDTO();
+		dto.setData(data);
+		dto.setDraw(draw);
+		dto.setRecordsFiltered(materiaService.countAll().intValue());
+		dto.setRecordsTotal(materiaService.countAll().intValue());	
+		
+		return dto;
+    }
+	
+	@RequestMapping("/cargarUsuarios")
+    public @ResponseBody TableDTO cargarUsuarios(@RequestParam Integer draw,
+			@RequestParam Integer start, @RequestParam Integer length, 
+			@RequestParam(value="search[value]", required = false) String search) {
+		
+		Page<Usuario> usuarios = usuarioService.findAll(PageRequest.of(start/length, length, Sort.by(Direction.ASC,"cusuario")));
+		
+		List<String[]> data = new ArrayList<>();
+		
+		for(Usuario u : usuarios) {
+			data.add(new String[] {u.getCusuario().toString(), u.getCusuario().toString(), u.getSusuario(),
+					u.getBadmin()== true?"Administrador":"Coordinador",u.getFfnacimiento(), u.getSdireccion(),
+							u.getDepartamento().getSnombre(),u.getMunicipio().getSnombre(),u.getBactivo()==true?"Activo":"Inactivo"});
 		}
 		
 		TableDTO dto = new TableDTO();
