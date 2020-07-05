@@ -90,11 +90,28 @@ public class CoordinatorController {
     }
 
 
-
     @RequestMapping("/lista")
     public ModelAndView ListaAlumnos() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName(validloginCoord() ? "negocio/listaAlumnos" : "index");
+        if (validloginCoord()) {
+            mav.setViewName("negocio/listaAlumnos");
+        } else mav.setViewName("index");
+        return mav;
+    }
+
+    @RequestMapping("/filter")
+    public ModelAndView filterNombApll(@Valid @ModelAttribute("idfilter") String id) {
+        ModelAndView mav = new ModelAndView();
+        if (validloginCoord()) {
+            if (id.equals("1")){
+
+            }else{
+
+            }
+            mav.setViewName("negocio/listaAlumnos");
+        } else mav.setViewName("index");
+
+
         return mav;
     }
 

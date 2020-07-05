@@ -58,6 +58,13 @@ public class AdminController {
         return mav;
     }
 
+    @RequestMapping("/filtroNombApll")
+    public ModelAndView filtroNombApll() {
+        ModelAndView mav = new ModelAndView();
+
+        return mav;
+    }
+
     @RequestMapping("/catalogoEscuela")
     public ModelAndView CatalogoEscuela() {
         ModelAndView mav = new ModelAndView();

@@ -47,16 +47,15 @@
     <div class="panel__content" align="center">
       	<h1 class="panel__headline"><i class="fa fa-users"></i></i>Alumnos</h1>
       	<div class="panel__block"></div>
-      	<form>
+      	<form th:action="@{/filter}"  method="POST">
       		<div class="input-group">
    			<label class="label"><b>Buscar Alumno Por</b></label>
      		<div class="rs-select2 js-select-simple select--no-search">
-            	<select name="departamento">
-                	<option disabled="disabled" selected="selected">Seleccionar criterio</option>
-                	<option>Subject 1</option>
-                	<option>Subject 2</option>
-                	<option>Subject 3</option>
-            	</select>
+            	<select name="criterio">
+                	<option disabled="disabled" selected="selected">Seleccionar criterio [Nombres,Apellidos]</option>
+                	<option value="1">Nombres</option>
+                	<option value="2">Apelidos</option>
+                </select>
             	<div class="select-dropdown"></div>
         	</div>
   		</div>
