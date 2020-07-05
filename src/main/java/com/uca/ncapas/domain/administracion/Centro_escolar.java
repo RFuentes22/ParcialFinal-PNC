@@ -13,8 +13,9 @@ import javax.validation.constraints.Size;
 public class Centro_escolar {
 
     @Id
-    @GeneratedValue(generator="centro_escolar_c_escuela_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "centro_escolar_c_escuela_seq", sequenceName = "administracion.centro_escolar_c_escuela_seq")
+    //@GeneratedValue(generator="centro_escolar_c_escuela_seq", strategy = GenerationType.AUTO)
+    //@SequenceGenerator(name = "centro_escolar_c_escuela_seq", sequenceName = "administracion.centro_escolar_c_escuela_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "c_escuela")
     private Integer cescuela;
 
