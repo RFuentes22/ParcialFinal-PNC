@@ -6,9 +6,14 @@ import com.uca.ncapas.domain.administracion.Municipio;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.ISBN;
 
 @Entity
-@Table(schema = "proceso_negocio", name = "notas")
+@Table(schema = "proceso_negocio", name = "nota")
 public class Nota {
 
     @Id
@@ -18,24 +23,23 @@ public class Nota {
     @Column(name = "c_nota")
     private Integer idnota;
 
-    @NotEmpty(message = "El codigo del estudiante no puede quedar vacio")
     @Column(name = "c_estudiante")
     private Integer cestudiante;
 
     @Column(name = "c_materia")
-    @NotEmpty(message = "El codigo de la materia no puede quedar vacio")
+    @NotNull(message = "Debe seleccionar una materia")
     private Integer cmateria;
 
     @Column(name = "anio")
-    @NotEmpty(message = "El campo año no puede quedar vacio")
+    @NotNull(message = "El campo año no puede quedar vacio")
     private Integer ianio;
 
     @Column(name = "ciclo")
-    @NotEmpty(message = "El campo ciclo no puede quedar vacio")
+    @NotNull(message = "Debe seleccionar un ciclo")
     private Integer iciclo;
 
     @Column(name = "nota")
-    @NotEmpty(message = "El campo nota no puede quedar vacio")
+    @NotNull(message = "El campo nota no puede quedar vacio")
     private Float inota;
 
     @ManyToOne(fetch = FetchType.LAZY)
