@@ -47,7 +47,7 @@ public class Usuario {
     private Boolean badmin;
 
     @Column(name = "fnacimiento")
-    @NotNull(message = "La Fecha de nacimiento del usuario no puede quedar vacio")
+    @NotEmpty(message = "La Fecha de nacimiento del usuario no puede quedar vacio")
     private String ffnacimiento;
 
     @Column(name = "edad")
