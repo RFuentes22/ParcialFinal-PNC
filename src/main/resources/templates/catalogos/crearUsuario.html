@@ -122,6 +122,7 @@
                                     <label class="label"><b>Nombre de Usuario</b></label>
                                     <input class="input--style-4" type="text" name="username" th:field="*{susuario}">
                                     <br><span th:errors="*{susuario}" style="color:#FF0000"></span>
+                                    <br><span th:if="${save == 1}" style="color:#FF0000">El nombre de usuario ya existe</span>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -147,11 +148,11 @@
                         <div class="input-group">
                            <label class="label"><b>Estado</b></label> 
                            <label class="radio-container m-r-45">Activo
-                               <input type="radio" checked="checked" th:field="*{bestado}" th:value="${true}">
+                               <input type="radio" checked="checked" th:field="*{bactivo}" th:value="${true}">
                                <span class="checkmark"></span>
                            </label>
                            <label class="radio-container">Inactivo
-                               <input type="radio" checked="checked" th:field="*{bestado}" th:value="${false}">
+                               <input type="radio" checked="checked" th:field="*{bactivo}" th:value="${false}">
                                <span class="checkmark"></span>
                            </label> 
                         </div>
@@ -162,7 +163,7 @@
 							</button>
                         </div>  
                     </form>
-                    <p th:if="${exito == 1}" class="mb-0">Usuario guardado con &eacute;xito</p><br/>
+                    <p align="center" th:if="${exito == 1}" class="mb-0">Usuario guardado con &eacute;xito</p><br/>
                 </div>
     
   </article>

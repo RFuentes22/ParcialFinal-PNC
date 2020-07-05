@@ -24,9 +24,6 @@ public class MainController {
     private UsuarioService usuarioService;
 
     @Autowired
-    private EstudianteService estudianteService;
-
-    @Autowired
     MateriaService materiaService;
 
     static Usuario usuario = null;
@@ -112,24 +109,8 @@ public class MainController {
         return mav;
     }
 
-    @RequestMapping("/usuario")
-    public ModelAndView CrearUsuario(Usuario usuario) {
-        ModelAndView mav = new ModelAndView();
 
-        List<Departamento> departamentos = null;
-        try {
-            departamentos = departamentoService.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        mav.addObject("usuario", new Usuario());
-        mav.addObject("departamentos", departamentos);
-        mav.setViewName("catalogos/crearUsuario");
-
-
-        return mav;
-    }
-
+    //Consultas
     @RequestMapping(value = "/municipio", method = RequestMethod.POST)
     @ResponseBody
     public List<Municipio> getModals(@RequestParam(value = "dep", required = true) String dep) {
@@ -144,102 +125,9 @@ public class MainController {
         return muni != null ? escuelaService.findByMun(Integer.valueOf(muni)) : null;
     }
 
-    @RequestMapping("/activarCuenta")
-    public ModelAndView ActivarCuenta() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("activarCuenta");
-        return mav;
-    }
-
-    //**************************CATALOGOS*********************************//
-
-    @RequestMapping("/catalogoEscuela")
-    public ModelAndView CatalogoEscuela() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("catalogos/catalogoEscuela");
-        return mav;
-    }
-
-    @RequestMapping("/catalogoMateria")
-    public ModelAndView CatalogoMateria() {
-        ModelAndView mav = new ModelAndView();
-        List<Materia> materias = null;
-        try {
-            materias = materiaService.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        mav.addObject("materias", materias);
-        mav.addObject("save", 0);
-        mav.setViewName("catalogos/catalogoMateria");
-        return mav;
-    }
-
-    @RequestMapping("/catalogoUsuario")
-    public ModelAndView CatalogoUsuario() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("catalogos/catalogoUsuario");
-        return mav;
-    }
-
-    @RequestMapping("/escuela")
-    public ModelAndView CrearEscuela() {
-        ModelAndView mav = new ModelAndView();
-        List<Departamento> departamentos = null;
-        try {
-            departamentos = departamentoService.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        mav.addObject("centro_escolar",new Centro_escolar());
-        mav.addObject("departamentos",departamentos);
-        mav.setViewName("catalogos/crearEscuela");
-        return mav;
-    }
-
-    @RequestMapping("/materia")
-    public ModelAndView CrearMateria() {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("materia", new Materia());
-        mav.setViewName("catalogos/crearMateria");
-        return mav;
-    }
 
 
-    //**************************PROCESOS DE NEGOCIO*********************************//
 
-    @RequestMapping("/alumnos")
-    public ModelAndView ExpedienteAlumnos() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("negocio/expedienteAlumnos");
-        return mav;
-    }
 
-    @RequestMapping("/lista")
-    public ModelAndView ListaAlumnos() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("negocio/listaAlumnos");
-        return mav;
-    }
 
-    @RequestMapping("/editarexpediente")
-    public ModelAndView EditarAlumno() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("negocio/editarEstudiante");
-        return mav;
-    }
-
-    @RequestMapping("/materiascursadas")
-    public ModelAndView MateriasCursadas() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("negocio/listaMateria");
-        return mav;
-    }
-
-    @RequestMapping("/nuevamateriacursada")
-    public ModelAndView NuevaMateria() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("negocio/crearMateria");
-        return mav;
-    }
 }
