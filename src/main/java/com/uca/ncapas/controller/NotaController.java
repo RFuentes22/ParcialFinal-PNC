@@ -26,7 +26,7 @@ public class NotaController {
 	@Autowired
 	NotaRepo notaRepo;
 	@Autowired
-	MateriaRepo materiaService;
+	private MateriaService materiaService;
 	
 	@RequestMapping("/addMateria")
 	public ModelAndView AddMateria(@Valid @ModelAttribute Nota nota, BindingResult r) throws ParseException, DataAccessException{
@@ -44,7 +44,7 @@ public class NotaController {
 			mav.setViewName("negocio/crearMateria");
 		}else {
 			notaRepo.save(nota);
-			mav.addObject("usuario", new Usuario());
+			mav.addObject("nota", new Nota());
 			mav.addObject("materias",materias);
 			mav.addObject("exito", 1);
 			mav.setViewName("negocio/crearMateria");
