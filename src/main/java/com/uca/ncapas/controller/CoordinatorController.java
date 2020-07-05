@@ -143,6 +143,7 @@ public class CoordinatorController {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		mav.addObject("materias",materias);
         mav.addObject("nota", new Nota());
         mav.setViewName(validloginCoord() ? "negocio/crearMateria" : "index");
         return mav;
