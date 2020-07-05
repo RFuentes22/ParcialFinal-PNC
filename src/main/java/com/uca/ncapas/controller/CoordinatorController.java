@@ -5,6 +5,7 @@ import com.uca.ncapas.domain.administracion.Departamento;
 import com.uca.ncapas.domain.administracion.Materia;
 import com.uca.ncapas.domain.administracion.Usuario;
 import com.uca.ncapas.domain.proceso_negocio.Estudiante;
+import com.uca.ncapas.domain.proceso_negocio.Nota;
 import com.uca.ncapas.service.DepartamentoService;
 import com.uca.ncapas.service.EscuelaService;
 import com.uca.ncapas.service.EstudianteService;
@@ -115,6 +116,7 @@ public class CoordinatorController {
     @RequestMapping("/nuevamateriacursada")
     public ModelAndView NuevaMateria() {
         ModelAndView mav = new ModelAndView();
+        mav.addObject("nota", new Nota());
         mav.setViewName(validloginCoord() ? "negocio/crearMateria" : "index");
         return mav;
     }
