@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.util.List;
 
 @Controller
@@ -50,26 +51,31 @@ public class MainController {
             System.out.println("Fallo login");
             mav.setViewName("index");
         } else {
-            if (usuario.getBadmin()) {
-                usuario.setBestado(true);
-                usuarioService.save(usuario);
-                flagEstadoUser = true;
-                mav.setViewName("adminView");
-                AdminController.idusuario = usuario.getCusuario();
-                System.out.println("Succes login Admin");
-            } else {
-                if (usuario.getBactivo()) {
+            if (!flagEstadoUser) {
+                if (usuario.getBadmin()) {
                     usuario.setBestado(true);
                     usuarioService.save(usuario);
                     flagEstadoUser = true;
-                    mav.setViewName("coordinatorView");
-                    CoordinatorController.idusuario = usuario.getCusuario();
-                    SignController.idusuario = usuario.getCusuario();
-                    System.out.println("Succes login Coordinator");
+                    mav.setViewName("adminView");
+                    AdminController.idusuario = usuario.getCusuario();
+                    System.out.println("Succes login Admin");
                 } else {
-                    mav.addObject("activo", 0);
-                    mav.setViewName("index");
+                    if (usuario.getBactivo()) {
+                        usuario.setBestado(true);
+                        usuarioService.save(usuario);
+                        flagEstadoUser = true;
+                        mav.setViewName("coordinatorView");
+                        CoordinatorController.idusuario = usuario.getCusuario();
+                        SignController.idusuario = usuario.getCusuario();
+                        System.out.println("Succes login Coordinator");
+                    } else {
+                        mav.addObject("activo", 0);
+                        mav.setViewName("index");
+                    }
                 }
+            } else {
+                mav.addObject("estado", 1);
+                mav.setViewName("index");
             }
 
         }
@@ -124,10 +130,6 @@ public class MainController {
         System.out.println("valor pasado como pasametro muni: " + muni);
         return muni != null ? escuelaService.findByMun(Integer.valueOf(muni)) : null;
     }
-
-
-
-
 
 
 }

@@ -125,8 +125,7 @@ public class AdminController {
     }
 
     public Boolean validloginAdmin() {
-        if (idusuario == 0) return false;
-        usuario = usuarioService.findOne(idusuario);
-        return !usuario.getBestado().equals(false);
+        return idusuario != 0;
+
     }
 }
