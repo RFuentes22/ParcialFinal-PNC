@@ -37,7 +37,7 @@
       <a href="#1" class="nav__link c-yellow scrolly"><i class="fa fa-home"></i></a>
     </li>
     <li class="nav__item">
-      <a th:onclick="|window.location.href='/adminview'|" class="nav__link c-blue scrolly"><i class="fa fa-arrow-left"></i></a>
+      <a th:onclick="|window.location.href='/catalogoEscuela'|" class="nav__link c-blue scrolly"><i class="fa fa-arrow-left"></i></a>
     </li>
   </ul>
 </nav>
@@ -103,13 +103,11 @@
                    		                    
                         <div class="input-group" align="center">
                         	<button class="btn-new">
-								Agregar
+								Guardar
 							</button>
                         </div>
                         
-                    </form>
-                    <p th:if="${exito == 1}" class="mb-0">Centro Escolar guardado con &eacute;xito</p><br/>
-                    
+                    </form>  
                 </div>
     
   </article>
