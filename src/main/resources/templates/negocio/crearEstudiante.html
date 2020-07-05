@@ -64,21 +64,23 @@
                             </div>
                         </div>
                         <div class="row row-space">
-
-                            	<div class="input-group">
+								<div class="col-2">
+									<div class="input-group">
                                     <label class="label"><b>Carnet de Minoridad</b></label>
                                     <input class="input--style-4" type="text" name="carnet" th:field="*{ccarnet}">
                                     <span th:errors="*{ccarnet}"style="color: #FF0000"></span>
-                                </div>
-                                <div class="input-group">
+                                	</div>
+								</div>
+                            	<div class="col-2">
+                            		<div class="input-group">
                                     <label class="label"><b>Fecha de Nacimiento</b></label>
                                     <div class="input-group-icon">
                                         <input class="input--style-4 js-datepicker" type="text" name="birthday" th:field="*{ffnacimiento}">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
                                     <span th:errors="*{ffnacimiento}"style="color: #FF0000"></span>
-                                </div>
-
+                                	</div>	
+                            	</div>               
                         </div>
 
                         <div class="row row-space">
@@ -139,7 +141,7 @@
                         </div>
                    		</div>
 
-                        <div class="col-2">
+                        
                             <div class="input-group">
                                 <div class="input-group">
                                     <label class="label"><b>Institucion de procedencia</b></label>
@@ -153,7 +155,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        
 
                			<div class="row row-space input-group">
                            	<label class="label"><b>Nombre del Padre</b></label>
@@ -171,14 +173,13 @@
                         	<button class="btn-new">
 								Agregar
 							</button>
-                        </div>
-                        <div class="row row-space input-group" align="right">
-                            <button class="btn-blue" type="reset">
+							<button class="btn-blue" type="reset">
                                 Limpiar
                             </button>
                         </div>
+                        
                     </form>
-                    <div class="row row-space input-group" align="left">
+                    <div class="input-group" align="center">
                         <button class="btn-index" th:onclick="|window.location.href='/alumnos'|">
                             Regresar
                         </button>
