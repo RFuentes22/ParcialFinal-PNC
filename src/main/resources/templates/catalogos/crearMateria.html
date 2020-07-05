@@ -48,6 +48,7 @@
              <h2 class="title" align="center"><b>Nueva Materia</b></h2>
              <form th:action="@{/saveMateria}" th:object="${materia}"  method="POST">
                  <div class="input-group">
+                 	  <input class="input--style-4" type="text" th:field="*{cmateria}" hidden="true">
                       <label class="label"><b>Nombre de la Materia</b></label>
                       <input class="input--style-4" type="text" th:field="*{snombre}">
                       <br><span th:errors="*{snombre}" style="color:#FF0000"></span>

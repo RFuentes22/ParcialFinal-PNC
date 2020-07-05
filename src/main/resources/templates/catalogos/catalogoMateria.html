@@ -10,8 +10,16 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/main.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
 	
-	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+  
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+	
+
+			
 	<script type="text/javascript">
 	$(document).ready(function() {
 	    setTimeout(function() {
@@ -19,8 +27,32 @@
 	    },1000);
 	});
 	</script>
-	
+			
 </head>
+<script type="text/javascript">
+		$(document).ready(function(){
+			var table = $('#tablaMaterias').DataTable( {
+		        "processing": true,
+		        "serverSide": true,
+		        "ajax": "./cargarMaterias",
+		        "language": {
+		            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+		        },
+		        "pageLength": 5,
+		        "columnDefs": [ {
+		            "targets": 0,
+		            "data": null,
+		            "defaultContent": "<button  title='Editar cliente'>Editar</button>"
+		        }]
+		    });
+			
+			$('#tablaMaterias tbody').on( 'click', 'button', function () {
+		        var data = table.row( $(this).parents('tr') ).data();
+		        	location.href = './editarMateria?id=' + data[0];
+		    } );
+		});
+	</script>
+
 <body>
 <!-- partial:index.partial.html -->
 <nav class="nav">
@@ -59,17 +91,16 @@
 </section>
 <section class="panel b-red" id="2" >
 	<div class="padding-table">
-		<table>
-		<thead>
-			<th>Accion</th>
-			<th>Codigo</th>
-			<th>Nombre</th>
-			
-	</thead>
-		<th:block>
-
-		</th:block>
-	</table>
+		<table  class="table table-bordered" id="tablaMaterias" width="100%" cellspacing="0">
+			<thead>
+				<tr>
+		            <th style="width: 130px">Acci&oacute;n</th>
+					<th>Codigo</th>
+					<th>Nombre</th>
+				</tr>			
+			</thead>
+		
+		</table>
 	</div>
 	
 </section>
@@ -81,8 +112,10 @@
         <input class="btn-logout" type="submit" value="Cerrar Sesion">
     </form> 
 </a>
-<!-- partial -->
-  	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="js/script.js"></script>
+
+	<!-- partial -->
+  	<script  src="js/script.js"></script>
+	
 
 </body>
 </html>

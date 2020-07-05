@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uca.ncapas.domain.administracion.Materia;
@@ -32,4 +33,13 @@ public class MateriaController {
 		
 		return mav;
 	}
+	
+	 @RequestMapping("/editarMateria")
+	    public ModelAndView CrearMateria(@RequestParam Integer id) {
+	        ModelAndView mav = new ModelAndView();
+	        Materia m = materiaService.findOne(id);
+	        mav.addObject("materia", m);
+            mav.setViewName("catalogos/crearMateria");
+	        return mav;
+	    }
 }
