@@ -34,7 +34,7 @@ public class MainController {
     public ModelAndView Login() {
         ModelAndView mav = new ModelAndView();
         if (flagEstadoUser) {
-            mav.addObject("estado", 1);
+            mav.addObject("estado", 0);
         }
         mav.setViewName("index");
 
