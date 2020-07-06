@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.uca.ncapas.domain.proceso_negocio.Estudiante;
@@ -38,6 +40,16 @@ public class EstudianteServiceImpl implements EstudianteService{
 	@Override
 	public List<Estudiante> findApellidos(String cadena) throws DataAccessException {
 		return estudianteRepo.findBySapellidos(cadena);
+	}
+
+	@Override
+	public Page<Estudiante> findAll(Pageable page) throws DataAccessException {
+		return estudianteRepo.findAll(page);
+	}
+
+	@Override
+	public Long countAll() {
+		return estudianteRepo.count();
 	}
 
 }
