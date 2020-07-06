@@ -22,7 +22,7 @@ public class MateriaController {
     @RequestMapping("/saveMateria")
     public ModelAndView saveMateria(@Valid @ModelAttribute Materia materia, BindingResult result) {
         ModelAndView mav = new ModelAndView();
-        if (AdminController.idusuario != 0) {
+        if (AdminController.validloginAdmin()) {
             if (result.hasErrors()) {
                 mav.setViewName("catalogos/crearMateria");
             } else {
@@ -37,7 +37,7 @@ public class MateriaController {
     @RequestMapping("/editarMateria")
     public ModelAndView CrearMateria(@RequestParam Integer id) {
         ModelAndView mav = new ModelAndView();
-        if (AdminController.idusuario != 0) {
+        if (AdminController.validloginAdmin()) {
             Materia m = materiaService.findOne(id);
             mav.addObject("materia", m);
             mav.setViewName("catalogos/crearMateria");

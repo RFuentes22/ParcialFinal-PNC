@@ -26,17 +26,17 @@ public class AdminController {
 
     @Autowired
     MateriaService materiaService;
-    
+
     @Autowired
     MunicipioService municipioService;
-    
+
     @Autowired
     EscuelaService escuelaService;
 
     @Autowired
     private DepartamentoService departamentoService;
 
-    static int idusuario = 0;
+    // static int idusuario = 0;
     Usuario usuario = null;
 
     @RequestMapping("/adminview")
@@ -53,19 +53,19 @@ public class AdminController {
         ModelAndView mav = new ModelAndView();
 
         if (validloginAdmin()) {
-        List<Departamento> departamentos = null;
-        List<Municipio> municipios = null;
-        try {
-            departamentos = departamentoService.findAll();
-            municipios = municipioService.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        mav.addObject("usuario", new Usuario());
-        mav.addObject("departamentos", departamentos);
-        mav.addObject("municipios", municipios);
-        mav.setViewName("catalogos/crearUsuario");
-        }else mav.setViewName("index");
+            List<Departamento> departamentos = null;
+            List<Municipio> municipios = null;
+            try {
+                departamentos = departamentoService.findAll();
+                municipios = municipioService.findAll();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mav.addObject("usuario", new Usuario());
+            mav.addObject("departamentos", departamentos);
+            mav.addObject("municipios", municipios);
+            mav.setViewName("catalogos/crearUsuario");
+        } else mav.setViewName("index");
 
         return mav;
     }
@@ -98,7 +98,7 @@ public class AdminController {
             mav.addObject("save", 0);
             mav.setViewName("catalogos/catalogoMateria");
 
-        }else mav.setViewName("index");
+        } else mav.setViewName("index");
         return mav;
     }
 
@@ -128,8 +128,8 @@ public class AdminController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            mav.addObject("centro_escolar",new Centro_escolar());
-            mav.addObject("departamentos",departamentos);
+            mav.addObject("centro_escolar", new Centro_escolar());
+            mav.addObject("departamentos", departamentos);
             mav.addObject("municipios", municipios);
             mav.setViewName("catalogos/crearEscuela");
         } else mav.setViewName("index");
@@ -146,8 +146,12 @@ public class AdminController {
         return mav;
     }
 
-    public Boolean validloginAdmin() {
-        return idusuario != 0;
-
+    public static Boolean validloginAdmin() {
+        if (MainController.usuario == null) {
+            System.out.println("Admin no ha ingresado");
+            return false;
+        } else {
+            return MainController.usuario.getBadmin().equals(true) && MainController.usuario.getBestado().equals(true);
+        }
     }
 }

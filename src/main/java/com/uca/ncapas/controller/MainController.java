@@ -28,13 +28,13 @@ public class MainController {
     MateriaService materiaService;
 
     static Usuario usuario = null;
-    public Boolean flagEstadoUser = false;
+    static Boolean flagEstadoUser = false;
 
     @RequestMapping("/login")
     public ModelAndView Login() {
         ModelAndView mav = new ModelAndView();
         if (flagEstadoUser) {
-            mav.addObject("estado", 0);
+            mav.addObject("estado", 1);
         }
         mav.setViewName("index");
 
@@ -44,39 +44,35 @@ public class MainController {
     @PostMapping(value = "/validLogin")
     public ModelAndView validLogin(@RequestParam(value = "user") String user, @RequestParam(value = "password") String pass) {
         ModelAndView mav = new ModelAndView();
-        usuario = usuarioService.findUserByLogin(user, pass);
 
-        if (usuario == null) {
-            mav.addObject("passw", 1);
-            System.out.println("Fallo login");
-            mav.setViewName("index");
-        } else {
-            if (!flagEstadoUser) {
+
+        if (!flagEstadoUser) {
+            usuario = usuarioService.findUserByLogin(user, pass);
+            if (usuario == null) {
+                mav.addObject("passw", 1);
+                System.out.println("Fallo login");
+                mav.setViewName("index");
+            } else {
                 if (usuario.getBadmin()) {
                     usuario.setBestado(true);
                     usuarioService.save(usuario);
                     flagEstadoUser = true;
                     mav.setViewName("adminView");
-                    AdminController.idusuario = usuario.getCusuario();
                     System.out.println("Succes login Admin");
+                } else if (usuario.getBactivo()) {
+                    usuario.setBestado(true);
+                    usuarioService.save(usuario);
+                    flagEstadoUser = true;
+                    mav.setViewName("coordinatorView");
+                    System.out.println("Succes login Coordinator");
                 } else {
-                    if (usuario.getBactivo()) {
-                        usuario.setBestado(true);
-                        usuarioService.save(usuario);
-                        flagEstadoUser = true;
-                        mav.setViewName("coordinatorView");
-                        CoordinatorController.idusuario = usuario.getCusuario();
-                        SignController.idusuario = usuario.getCusuario();
-                        System.out.println("Succes login Coordinator");
-                    } else {
-                        mav.addObject("activo", 0);
-                        mav.setViewName("index");
-                    }
+                    mav.addObject("activo", 0);
+                    mav.setViewName("index");
                 }
-            } else {
-                mav.addObject("estado", 1);
-                mav.setViewName("index");
             }
+        } else {
+            mav.addObject("estado", 1);
+            mav.setViewName("index");
 
         }
 
@@ -89,10 +85,8 @@ public class MainController {
         if (usuario.getBestado()) {
             usuario.setBestado(false);
             usuarioService.save(usuario);
+            usuario = null;
             flagEstadoUser = false;
-            AdminController.idusuario = 0;
-            CoordinatorController.idusuario = 0;
-            SignController.idusuario = 0;
             System.out.println("Succes Close");
         }
         mav.setViewName("index");

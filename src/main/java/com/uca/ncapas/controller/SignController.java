@@ -26,7 +26,7 @@ public class SignController {
 	 @Autowired
 	 private DepartamentoService departamentoService;
 
-	static int idusuario = 0;
+	//static int idusuario = 0;
 
 	@RequestMapping("/crearCuenta")
 	public ModelAndView createCount(@Valid @ModelAttribute Usuario usuario, BindingResult result ) throws ParseException {
