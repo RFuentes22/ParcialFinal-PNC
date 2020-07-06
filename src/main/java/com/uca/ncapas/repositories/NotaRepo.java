@@ -17,4 +17,10 @@ public interface NotaRepo extends JpaRepository<Nota, Integer>{
 	@Query(value = "select count(n.nota) from proceso_negocio.estudiante e, proceso_negocio.nota n where e.c_estudiante = n.c_estudiante and n.nota <6 and n.c_estudiante=:estudiante", nativeQuery = true)
     public Integer materiasReprobadas(@Param("estudiante") Integer estudiante);
 	
+	@Query(value = "select sum(n.nota)/count(n.c_materia)\r\n" + 
+			"from proceso_negocio.estudiante e, proceso_negocio.nota n\r\n" + 
+			"where e.c_estudiante = n.c_estudiante and n.nota >=6 and n.c_estudiante=:estudiante\r\n" + 
+			"", nativeQuery = true)
+    public Float promedio(@Param("estudiante") Integer estudiante);
+	
 }
