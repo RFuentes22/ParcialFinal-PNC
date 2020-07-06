@@ -27,13 +27,17 @@
                 "columnDefs": [ {
                     "targets": 0,
                     "data": null,
-                    "defaultContent": "<button  title='Editar estudiante'><i class='fa fa-pencil'></i></button>"
+                    "defaultContent": "</i></button> <button id='ed'  title='Editar Estudiante'><i class='fa fa-search'></i></button><br><button id='su'  title='Materias Cursadas'><i class='fa fa-pencil'>"
                 }]
             });
 
-            $('#tablaAlumnos tbody').on( 'click', 'button', function () {
+            $('#tablaAlumnos tbody').on( 'click', '#ed', function () {
                 var data = table.row( $(this).parents('tr') ).data();
                 location.href = './editarexpediente?id=' + data[0];
+            } );
+            $('#tablaAlumnos tbody').on( 'click', '#su', function () {
+                var data = table.row( $(this).parents('tr') ).data();
+                location.href = './materiascursadas?id=' + data[0];
             } );
         });
     </script>
