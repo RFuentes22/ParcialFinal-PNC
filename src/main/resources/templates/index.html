@@ -50,20 +50,20 @@
 				<div class="login100-form validate-form p-b-33 p-t-5">
 					
 					<br>
-					<div th:if="${estado == 1}" class="container">
-						<div class="alert alert-danger" id="aviso">
+					<div th:if="${estado == 1}">
+						<div class="alert alert-danger" id="aviso" align="center">
 							<strong>¡Error!</strong> Ya has iniciado sesion, si quieres entrar con <br>
 							otra cuenta debes cerrar sesion.
 						</div>
 					</div>
-					<div th:if="${activo == 0}" class="container">
-						<div class="alert alert-danger" id="aviso">
+					<div th:if="${activo == 0}">
+						<div class="alert alert-danger" id="aviso" align="center">
 							<strong>¡Error!</strong> Tu cuenta no esta activa <br>
 							Consulta al administrador.
 						</div>
 					</div>
-					<div th:if="${passw == 1}" class="container">
-						<div class="alert alert-danger" id="aviso">
+					<div th:if="${passw == 1}">
+						<div class="alert alert-danger" id="aviso" align="center">
 							<strong>¡Error!</strong> Usuario o Contraseña es incorrecto.
 
 						</div>
@@ -93,8 +93,6 @@
 					</button>
 				</div>
 				</div>
-				
-				
 			</div>
 		</div>
 	</div>
