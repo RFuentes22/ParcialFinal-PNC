@@ -47,7 +47,7 @@
     <div class="panel__content" align="center">
       	<h1 class="panel__headline"><i class="fa fa-users"></i></i>Alumnos</h1>
       	<div class="panel__block"></div>
-      	<form th:action="@{/filter}"  method="POST">
+      	<form th:action="@{/lista}"  method="POST">
       		<div class="input-group">
    			<label class="label"><b>Buscar Alumno Por</b></label>
      		<div class="rs-select2 js-select-simple select--no-search">
@@ -61,10 +61,10 @@
   		</div>
            <div class="input-group">
                <label class="label"><b>Valor de Busqueda</b></label>
-               <input class="input--style-4" type="text" name="name">
+               <input class="input--style-4" id="valor1" type="text" name="name">
            </div>
            <div class="input-group">
-           	<button class="btn-index">
+           	<button type="submit" class="btn-index">
 				Buscar
 			</button>
            </div>      
