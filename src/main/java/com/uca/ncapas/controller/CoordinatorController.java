@@ -45,6 +45,9 @@ public class CoordinatorController {
     @Autowired
     NotaRepo notaRepo;
 
+    Integer tipoFilter;
+    String valorFilter;
+
     @RequestMapping("/coordinatorview")
     public ModelAndView CoordinatorView() {
         ModelAndView mav = new ModelAndView();
@@ -95,28 +98,33 @@ public class CoordinatorController {
 
 
     @RequestMapping("/lista")
-    public ModelAndView ListaAlumnos() {
+    public ModelAndView ListaAlumnos(@RequestParam Integer tipo,
+                                     @RequestParam(required = true) String valor) {
         ModelAndView mav = new ModelAndView();
         if (validloginCoord()) {
             mav.setViewName("negocio/listaAlumnos");
+            tipoFilter = tipo;
+            valorFilter = valor;
         } else mav.setViewName("index");
         return mav;
     }
 
     @RequestMapping("/filterStudent")
-    public @ResponseBody TableDTO filterStudent(@RequestParam Integer tipo,@RequestParam Integer draw,
-                                                 @RequestParam Integer start, @RequestParam Integer length,
-                                                 @RequestParam(required = false) String search) {
+    public @ResponseBody TableDTO filterStudent(@RequestParam Integer draw,
+                                                @RequestParam Integer start, @RequestParam Integer length,
+                                                @RequestParam(value="search[value]", required = false) String search) {
 
         Page<Estudiante> estudiantes = null;
         List<String[]> data = new ArrayList<>();
+        System.out.println(tipoFilter.toString());
+        System.out.println(valorFilter.toString());
 
 
-        if (tipo.equals(1)) {
-            estudiantes = estudianteService.findByName(PageRequest.of(start / length, length, Sort.by(Sort.Direction.ASC, "cestudiante")),search);
+        if (tipoFilter.equals(1)) {
+            estudiantes = estudianteService.findByName(PageRequest.of(start / length, length, Sort.by(Sort.Direction.ASC, "cestudiante")),valorFilter);
             System.out.println("Filtrar Nombre");
         }else {
-            estudiantes = estudianteService.findByLastname(PageRequest.of(start / length, length, Sort.by(Sort.Direction.ASC, "cestudiante")),search);
+            estudiantes = estudianteService.findByLastname(PageRequest.of(start / length, length, Sort.by(Sort.Direction.ASC, "cestudiante")),valorFilter);
             System.out.println("Filtrar Apellido");
         }
 
