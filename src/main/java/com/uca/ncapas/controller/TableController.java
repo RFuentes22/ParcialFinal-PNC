@@ -18,6 +18,7 @@ import com.uca.ncapas.domain.administracion.Centro_escolar;
 import com.uca.ncapas.domain.administracion.Materia;
 import com.uca.ncapas.domain.administracion.Usuario;
 import com.uca.ncapas.domain.proceso_negocio.Estudiante;
+import com.uca.ncapas.repositories.NotaRepo;
 import com.uca.ncapas.service.EscuelaService;
 import com.uca.ncapas.service.EstudianteService;
 import com.uca.ncapas.service.MateriaService;
@@ -28,6 +29,9 @@ public class TableController {
 
 	@Autowired
 	MateriaService materiaService;
+	
+	@Autowired
+	NotaRepo notaRepo;
 	
 	@Autowired
 	EstudianteService estudianteService;
@@ -115,9 +119,10 @@ public class TableController {
 		Page<Estudiante> estudiantes = estudianteService.findAll(PageRequest.of(start/length, length, Sort.by(Direction.ASC,"cestudiante")));
 		
 		List<String[]> data = new ArrayList<>();
-		
+		int auxNotasA, auxNotasR;
 		for(Estudiante u : estudiantes) {
-			
+			auxNotasA = notaRepo.materiasAprobadas(u.getCestudiante());
+			auxNotasR = notaRepo.materiasReprobadas(u.getCestudiante());
 			data.add(new String[] {});
 		}
 		

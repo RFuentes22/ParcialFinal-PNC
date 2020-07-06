@@ -32,15 +32,6 @@ public class EstudianteServiceImpl implements EstudianteService{
 		estudianteRepo.save(e);
 	}
 
-	@Override
-	public List<Estudiante> findNombres(String cadena) throws DataAccessException {
-		return estudianteRepo.findBySnombres(cadena);
-	}
-
-	@Override
-	public List<Estudiante> findApellidos(String cadena) throws DataAccessException {
-		return estudianteRepo.findBySapellidos(cadena);
-	}
 
 	@Override
 	public Page<Estudiante> findAll(Pageable page) throws DataAccessException {
@@ -52,4 +43,18 @@ public class EstudianteServiceImpl implements EstudianteService{
 		return estudianteRepo.count();
 	}
 
+
+	@Override
+	public Page<Estudiante> findByName(Pageable page, String name) throws DataAccessException {
+		return estudianteRepo.findBySnombres(page, name);
+	}
+
+	@Override
+	public Page<Estudiante> findByLastname(Pageable page, String last) throws DataAccessException {
+		return estudianteRepo.findBySapellidos(page, last);
+	}
+
+	
+
+	
 }
