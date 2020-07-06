@@ -128,12 +128,15 @@ public class CoordinatorController {
             System.out.println("Filtrar Apellido");
         }
 
-        int auxNotasA, auxNotasR;
+        Integer auxNotasA, auxNotasR;
+        Float promedio;
         for(Estudiante u : estudiantes) {
             auxNotasA = notaRepo.materiasAprobadas(u.getCestudiante());
             auxNotasR = notaRepo.materiasReprobadas(u.getCestudiante());
-            data.add(new String[] {u.getSnombres(),u.getSapellidos(), "0", "0","0"});
-
+            promedio = notaRepo.promedio(u.getCestudiante());
+            
+            data.add(new String[] {u.getCestudiante().toString(),u.getSnombres(),u.getSapellidos(), 
+            		auxNotasA.toString(),auxNotasR.toString(),promedio.toString()});
             System.out.println(data.toString());
         }
 
