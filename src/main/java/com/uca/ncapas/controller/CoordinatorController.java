@@ -3,6 +3,7 @@ package com.uca.ncapas.controller;
 import com.uca.ncapas.DTO.TableDTO;
 import com.uca.ncapas.domain.administracion.Departamento;
 import com.uca.ncapas.domain.administracion.Materia;
+import com.uca.ncapas.domain.administracion.Municipio;
 import com.uca.ncapas.domain.administracion.Usuario;
 import com.uca.ncapas.domain.proceso_negocio.Estudiante;
 import com.uca.ncapas.domain.proceso_negocio.Nota;
@@ -10,6 +11,7 @@ import com.uca.ncapas.repositories.NotaRepo;
 import com.uca.ncapas.service.DepartamentoService;
 import com.uca.ncapas.service.EstudianteService;
 import com.uca.ncapas.service.MateriaService;
+import com.uca.ncapas.service.MunicipioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,6 +43,9 @@ public class CoordinatorController {
 
     @Autowired
     private MateriaService materiaService;
+
+    @Autowired
+    MunicipioService municipioService;
 
     @Autowired
     NotaRepo notaRepo;
@@ -152,11 +157,26 @@ public class CoordinatorController {
 
 
     }
-
     @RequestMapping("/editarexpediente")
-    public ModelAndView EditarAlumno() {
+    public ModelAndView EditarAlumno(@RequestParam Integer id) {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName(validloginCoord() ? "negocio/editarEstudiante" : "index");
+        List<Departamento> departamentos = null;
+        List<Municipio> municipios = null;
+        try {
+            departamentos = departamentoService.findAll();
+            municipios = municipioService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (validloginCoord()) {
+            Estudiante e = estudianteService.findOne(id);
+            mav.addObject("estudiante", e);
+            mav.addObject("departamentos", departamentos);
+            mav.addObject("municipios", municipios);
+            mav.setViewName("negocio/editarEstudiante");
+        }
+        else mav.setViewName("index");
         return mav;
     }
 
