@@ -50,6 +50,7 @@
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
+                                    <input class="input--style-4" type="text" name="name" th:field="*{cestudiante}" hidden="true">
                                     <label class="label"><b>Nombre</b></label>
                                     <input class="input--style-4" type="text" name="name" th:field="*{snombres}">
                                     <span th:errors="*{snombres}"style="color: #FF0000"></span>
@@ -108,7 +109,9 @@
                                         <div class="rs-select2 js-select-simple select--no-search">
                                             <select  th:field="${estudiante.cmunicipio}" id="mun">
                                                 <option  selected="selected" value="">Seleccionar</option>
-
+                                                <option th:each="mun : ${municipios}"
+                                                        th:value="${mun.cmunicipio}"
+                                                        th:text="${mun.snombre}">
                                             </select>
                                             <br><span th:errors="*{cmunicipio}" style="color:#FF0000"></span>
                                             <div class="select-dropdown"></div>
@@ -148,7 +151,9 @@
                                 <div class="rs-select2 js-select-simple select--no-search">
                                     <select th:field="*{cescuela}" id="sch">
                                         <option selected="selected" value="">Seleccionar</option>
-
+                                        <option th:each="escu : ${escuelas}"
+                                                th:value="${escu.cescuela}"
+                                                th:text="${escu.snombre}">
                                     </select>
                                     <br><span th:errors="*{cescuela}" style="color:#FF0000"></span>
                                     <div class="select-dropdown"></div>

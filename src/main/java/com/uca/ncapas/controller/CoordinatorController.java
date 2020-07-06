@@ -1,17 +1,11 @@
 package com.uca.ncapas.controller;
 
 import com.uca.ncapas.DTO.TableDTO;
-import com.uca.ncapas.domain.administracion.Departamento;
-import com.uca.ncapas.domain.administracion.Materia;
-import com.uca.ncapas.domain.administracion.Municipio;
-import com.uca.ncapas.domain.administracion.Usuario;
+import com.uca.ncapas.domain.administracion.*;
 import com.uca.ncapas.domain.proceso_negocio.Estudiante;
 import com.uca.ncapas.domain.proceso_negocio.Nota;
 import com.uca.ncapas.repositories.NotaRepo;
-import com.uca.ncapas.service.DepartamentoService;
-import com.uca.ncapas.service.EstudianteService;
-import com.uca.ncapas.service.MateriaService;
-import com.uca.ncapas.service.MunicipioService;
+import com.uca.ncapas.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -48,6 +42,9 @@ public class CoordinatorController {
     MunicipioService municipioService;
 
     @Autowired
+    EscuelaService escuelaService;
+
+    @Autowired
     NotaRepo notaRepo;
 
     Integer tipoFilter;
@@ -75,7 +72,10 @@ public class CoordinatorController {
             }
             if (result.hasErrors()) {
                 mav.addObject("departamentos", departamentos);
-                mav.setViewName("negocio/crearEstudiante");
+                if (MainController.usuario.getCusuario() == null){
+                    mav.setViewName("negocio/crearEstudiante");
+                }else {mav.setViewName("negocio/editarEstudiante");}
+
             } else {
                 DateFormat fecha = new SimpleDateFormat("dd/mm/yyyy");
                 Date convert = fecha.parse(estudiante.getFfnacimiento());
@@ -167,9 +167,11 @@ public class CoordinatorController {
         ModelAndView mav = new ModelAndView();
         List<Departamento> departamentos = null;
         List<Municipio> municipios = null;
+        List<Centro_escolar> centro_escolars = null;
         try {
             departamentos = departamentoService.findAll();
             municipios = municipioService.findAll();
+            centro_escolars = escuelaService.findAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -179,6 +181,7 @@ public class CoordinatorController {
             mav.addObject("estudiante", e);
             mav.addObject("departamentos", departamentos);
             mav.addObject("municipios", municipios);
+            mav.addObject("escuelas", centro_escolars);
             mav.setViewName("negocio/editarEstudiante");
         }
         else mav.setViewName("index");
