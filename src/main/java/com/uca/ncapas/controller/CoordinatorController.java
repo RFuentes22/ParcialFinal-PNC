@@ -135,12 +135,17 @@ public class CoordinatorController {
             auxNotasR = notaRepo.materiasReprobadas(u.getCestudiante());
             promedio = notaRepo.promedio(u.getCestudiante());
             
+            //validar si algun campo es null
+            String notaA="",notaB="",notaP="";
+            if(auxNotasA==null) {notaA="0";}else{notaA=auxNotasA.toString();};
+            if(auxNotasR==null) {notaB="0";}else{notaB=auxNotasR.toString();};
+            if(promedio==null) {notaP="0";}else{notaP=promedio.toString();};
+            
+            
             data.add(new String[] {u.getCestudiante().toString(),u.getSnombres(),u.getSapellidos(), 
-            		auxNotasA.toString(),auxNotasR.toString(),promedio.toString()});
+            		notaA,notaB,notaP});
             System.out.println(data.toString());
         }
-
-
 
         TableDTO dto = new TableDTO();
         dto.setData(data);
