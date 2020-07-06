@@ -1,23 +1,32 @@
 package com.uca.ncapas.controller;
 
+import com.uca.ncapas.DTO.TableDTO;
 import com.uca.ncapas.domain.administracion.Departamento;
 import com.uca.ncapas.domain.administracion.Materia;
+import com.uca.ncapas.domain.administracion.Usuario;
 import com.uca.ncapas.domain.proceso_negocio.Estudiante;
 import com.uca.ncapas.domain.proceso_negocio.Nota;
+import com.uca.ncapas.repositories.NotaRepo;
 import com.uca.ncapas.service.DepartamentoService;
 import com.uca.ncapas.service.EstudianteService;
 import com.uca.ncapas.service.MateriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +42,11 @@ public class CoordinatorController {
     @Autowired
     private MateriaService materiaService;
 
+    @Autowired
+    NotaRepo notaRepo;
+
+    Integer tipoFilter;
+    String valorFilter;
 
     @RequestMapping("/coordinatorview")
     public ModelAndView CoordinatorView() {
@@ -84,28 +98,59 @@ public class CoordinatorController {
 
 
     @RequestMapping("/lista")
-    public ModelAndView ListaAlumnos() {
+    public ModelAndView ListaAlumnos(@RequestParam Integer tipo,
+                                     @RequestParam(required = true) String valor) {
         ModelAndView mav = new ModelAndView();
         if (validloginCoord()) {
             mav.setViewName("negocio/listaAlumnos");
+            tipoFilter = tipo;
+            valorFilter = valor;
         } else mav.setViewName("index");
         return mav;
     }
 
-    @RequestMapping("/filter")
-    public ModelAndView filterNombApll(@Valid @ModelAttribute("idfilter") String id) {
-        ModelAndView mav = new ModelAndView();
-        if (validloginCoord()) {
-            if (id.equals("1")) {
+    @RequestMapping("/filterStudent")
+    public @ResponseBody TableDTO filterStudent(@RequestParam Integer draw,
+                                                @RequestParam Integer start, @RequestParam Integer length,
+                                                @RequestParam(value="search[value]", required = false) String search) {
 
-            } else {
-
-            }
-            mav.setViewName("negocio/listaAlumnos");
-        } else mav.setViewName("index");
+        Page<Estudiante> estudiantes = null;
+        List<String[]> data = new ArrayList<>();
+        System.out.println(tipoFilter.toString());
+        System.out.println(valorFilter.toString());
 
 
-        return mav;
+        if (tipoFilter.equals(1)) {
+            estudiantes = estudianteService.findByName(PageRequest.of(start / length, length, Sort.by(Sort.Direction.ASC, "cestudiante")),valorFilter);
+            System.out.println("Filtrar Nombre");
+        }else {
+            estudiantes = estudianteService.findByLastname(PageRequest.of(start / length, length, Sort.by(Sort.Direction.ASC, "cestudiante")),valorFilter);
+            System.out.println("Filtrar Apellido");
+        }
+
+        Integer auxNotasA, auxNotasR;
+        Float promedio;
+        for(Estudiante u : estudiantes) {
+            auxNotasA = notaRepo.materiasAprobadas(u.getCestudiante());
+            auxNotasR = notaRepo.materiasReprobadas(u.getCestudiante());
+            promedio = notaRepo.promedio(u.getCestudiante());
+            
+            data.add(new String[] {u.getCestudiante().toString(),u.getSnombres(),u.getSapellidos(), 
+            		auxNotasA.toString(),auxNotasR.toString(),promedio.toString()});
+            System.out.println(data.toString());
+        }
+
+
+
+        TableDTO dto = new TableDTO();
+        dto.setData(data);
+        dto.setDraw(draw);
+        dto.setRecordsFiltered(estudianteService.countAll().intValue());
+        dto.setRecordsTotal(estudianteService.countAll().intValue());
+
+        return dto;
+
+
     }
 
     @RequestMapping("/editarexpediente")

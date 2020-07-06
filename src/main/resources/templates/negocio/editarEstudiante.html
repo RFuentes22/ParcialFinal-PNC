@@ -46,111 +46,138 @@
   <article class="panel__wrapper" >
                 <div class="card-body">
                     <h2 class="title" align="center"><b>Editar Expediente</b></h2>
-                    <form method="POST">
+                    <form th:action="@{/newalumno}" method="POST" th:object="${estudiante}">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Nombre</b></label>
-                                    <input class="input--style-4" type="text" name="name">
+                                    <input class="input--style-4" type="text" name="name" th:field="*{snombres}">
+                                    <span th:errors="*{snombres}"style="color: #FF0000"></span>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Apellido</b></label>
-                                    <input class="input--style-4" type="text" name="lastname">
+                                    <input class="input--style-4" type="text" name="lastname" th:field="*{sapellidos}">
+                                    <span th:errors="*{sapellidos}"style="color: #FF0000"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
-                           
-                            	<div class="input-group">
+                            <div class="col-2">
+                                <div class="input-group">
                                     <label class="label"><b>Carnet de Minoridad</b></label>
-                                    <input class="input--style-4" type="text" name="carnet">
+                                    <input class="input--style-4" type="text" name="carnet" th:field="*{ccarnet}">
+                                    <span th:errors="*{ccarnet}"style="color: #FF0000"></span>
                                 </div>
+                            </div>
+                            <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"><b>Fecha de Nacimiento</b></label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="birthday">
+                                        <input class="input--style-4 js-datepicker" type="text" name="birthday" th:field="*{ffnacimiento}">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
+                                    <span th:errors="*{ffnacimiento}"style="color: #FF0000"></span>
                                 </div>
-                        
+                            </div>
                         </div>
-                        
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <div class="input-group">
-                            			<label class="label"><b>Departamento</b></label>
-                            			<div class="rs-select2 js-select-simple select--no-search">
-		                                	<select name="departamento">
-		                                    	<option disabled="disabled" selected="selected">Seleccionar</option>
-		                                    	<option>Subject 1</option>
-		                                    	<option>Subject 2</option>
-		                                    	<option>Subject 3</option>
-		                                	</select>
-		                                	<div class="select-dropdown"></div>
-		                            	</div>
-                        			</div>
+                                        <label class="label"><b>Departamento</b></label>
+                                        <div class="rs-select2 js-select-simple select--no-search">
+                                            <select th:field="*{cdepartamento}" id="id">
+                                                <option selected="selected" value="">Seleccionar</option>
+                                                <option th:each="dep : ${departamentos}"
+                                                        th:value="${dep.cdepartamento}"
+                                                        th:text="${dep.snombre}"></option>
+                                            </select>
+                                            <br><span th:errors="*{cdepartamento}" style="color:#FF0000"></span>
+                                            <div class="select-dropdown"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <div class="input-group">
-                            			<label class="label"><b>Municipio</b></label>
-                            			<div class="rs-select2 js-select-simple select--no-search">
-			                                <select name="municipio">
-			                                    <option disabled="disabled" selected="selected">Seleccionar</option>
-			                                    <option>Subject 1</option>
-			                                    <option>Subject 2</option>
-			                                    <option>Subject 3</option>
-			                                </select>
-			                                <div class="select-dropdown"></div>
-			                            </div>
-                        			</div>
-                                </div>
-                            </div>
-                        </div> 	
-                   		<div class="row row-space input-group">
-                           	<label class="label"><b>Direccion de residencia</b></label>
-                           	<input class="input--style-4" type="text" name="address">
-                   		</div>
-                   		<div class="input-group">
-                   			<div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label"><b>Telefono fijo</b></label>
-                                    <input class="input--style-4" type="tel" name="tel">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label"><b>Telefono movil</b></label>
-                                    <input class="input--style-4" type="tel" name="movil">
+                                        <label class="label"><b>Municipio</b></label>
+                                        <div class="rs-select2 js-select-simple select--no-search">
+                                            <select  th:field="${estudiante.cmunicipio}" id="mun">
+                                                <option  selected="selected" value="">Seleccionar</option>
+
+                                            </select>
+                                            <br><span th:errors="*{cmunicipio}" style="color:#FF0000"></span>
+                                            <div class="select-dropdown"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                   		</div>
-                    	
-                      	<div class="row row-space input-group">
-                      		<label class="label"><b>Institucion de procedencia</b></label>
-                           	<input class="input--style-4" type="text" name="escuela">
-                      	</div>
-               			<div class="row row-space input-group">
-                           	<label class="label"><b>Nombre del Padre</b></label>
-                           	<input class="input--style-4" type="text" name="name_dad">
-                   		</div>
-                  
-               			<div class="row row-space input-group">
-                       		<label class="label"><b>Nombre de la Madre</b></label>
-                       		<input class="input--style-4" type="text" name="name_mom">
-               			</div> 		
-                        
+                        <div class="row row-space input-group">
+                            <label class="label"><b>Direccion de residencia</b></label>
+                            <input class="input--style-4" type="text" name="address" th:field="*{sdireccion}">
+                            <span th:errors="*{sdireccion}"style="color: #FF0000"></span><br>
+                        </div>
+                        <div class="input-group">
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label"><b>Telefono fijo</b></label>
+                                        <input class="input--style-4" type="number" name="tel" th:field="*{itelefono}">
+                                        <span th:errors="*{itelefono}"style="color: #FF0000"></span><br>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label"><b>Telefono movil</b></label>
+                                        <input class="input--style-4" type="number" name="movil" th:field="*{icelular}">
+                                        <span th:errors="*{icelular}"style="color: #FF0000"></span><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="input-group">
+                            <div class="input-group">
+                                <label class="label"><b>Institucion de procedencia</b></label>
+                                <div class="rs-select2 js-select-simple select--no-search">
+                                    <select th:field="*{cescuela}" id="sch">
+                                        <option selected="selected" value="">Seleccionar</option>
+
+                                    </select>
+                                    <br><span th:errors="*{cescuela}" style="color:#FF0000"></span>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row row-space input-group">
+                            <label class="label"><b>Nombre del Padre</b></label>
+                            <input class="input--style-4" type="text" name="name_dad" th:field="*{snombre_padre}">
+                            <span th:errors="*{snombre_padre}"style="color: #FF0000"></span><br>
+                        </div>
+
+                        <div class="row row-space input-group">
+                            <label class="label"><b>Nombre de la Madre</b></label>
+                            <input class="input--style-4" type="text" name="name_mom" th:field="*{snombre_madre}">
+                            <span th:errors="*{snombre_madre}"style="color: #FF0000"></span><br>
+                        </div>
+
                         <div class="input-group" align="center">
-                        	<button class="btn-new">
-								Actualizar
-							</button>
+                            <button class="btn-new">
+                                Editar estudiante
+                            </button>
+                            <button class="btn-blue" type="reset">
+                                Limpiar
+                            </button>
                         </div>
+
                     </form>
                     <div class="input-group" align="center">
                     	<button class="btn-index" th:onclick="|window.location.href='/alumnos'|">
@@ -179,5 +206,49 @@
 
     <!-- Main JS-->
     <script src="js/global.js"></script>
+
+
+<script>
+    $("#id").on("change", function (e) {
+        $.ajax({
+            url: "../municipio",
+            method: "POST",
+            data: {dep: $(this).val() },
+            dataType: "json",
+            success: function (response) {
+                if (response) {
+                    $("#mun option:not(:disabled)").remove();
+                    //$('#mun option[]').remove();
+                    $.each(response, function(crearEstudiante, option) {
+                        console.log('<option value="'+option.cmunicipio+'" text="'+option.snombre+'"></option>')
+                        $("#mun").append('<option value="'+option.cmunicipio+'">'+option.snombre+'</option>')
+
+                    });
+                }
+            }
+        });
+    });
+</script>
+<script>
+    $("#mun").on("change", function (e) {
+        $.ajax({
+            url: "../schools",
+            method: "POST",
+            data: {muni:$(this).val() },
+            dataType: "json",
+            success: function (response) {
+                if (response) {
+                    $("#sch option:not(:disabled)").remove();
+                    //$('#mun option[]').remove();
+                    $.each(response, function(crearEstudiante, option) {
+                        console.log('<option value="'+option.cescuela +'" text="'+option.snombre+'"></option>')
+                        $("#sch").append('<option value="'+option.cescuela +'">'+option.snombre +'</option>')
+
+                    });
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>
