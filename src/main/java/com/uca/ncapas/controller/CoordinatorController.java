@@ -1,16 +1,12 @@
 package com.uca.ncapas.controller;
 
-import com.uca.ncapas.domain.administracion.Centro_escolar;
 import com.uca.ncapas.domain.administracion.Departamento;
 import com.uca.ncapas.domain.administracion.Materia;
-import com.uca.ncapas.domain.administracion.Usuario;
 import com.uca.ncapas.domain.proceso_negocio.Estudiante;
 import com.uca.ncapas.domain.proceso_negocio.Nota;
 import com.uca.ncapas.service.DepartamentoService;
-import com.uca.ncapas.service.EscuelaService;
 import com.uca.ncapas.service.EstudianteService;
 import com.uca.ncapas.service.MateriaService;
-import com.uca.ncapas.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -29,13 +25,7 @@ import java.util.List;
 public class CoordinatorController {
 
     @Autowired
-    private UsuarioService usuarioService;
-
-    @Autowired
     private EstudianteService estudianteService;
-
-    @Autowired
-    private EscuelaService escuelaService;
 
     @Autowired
     private DepartamentoService departamentoService;
@@ -43,8 +33,6 @@ public class CoordinatorController {
     @Autowired
     private MateriaService materiaService;
 
-    static int idusuario = 0;
-    Usuario usuario = null;
 
     @RequestMapping("/coordinatorview")
     public ModelAndView CoordinatorView() {
@@ -175,9 +163,13 @@ public class CoordinatorController {
 
     }
 
-    public Boolean validloginCoord() {
-        if (idusuario == 0) return false;
-        usuario = usuarioService.findOne(idusuario);
-        return !usuario.getBestado().equals(false);
+    public static Boolean validloginCoord() {
+        if (MainController.usuario == null) {
+            System.out.println("Coord no ha ingresado");
+            return false;
+        } else {
+            return MainController.usuario.getBadmin().equals(false) && MainController.usuario.getBestado().equals(true);
+        }
     }
+
 }

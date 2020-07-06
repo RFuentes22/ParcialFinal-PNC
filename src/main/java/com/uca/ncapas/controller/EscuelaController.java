@@ -36,7 +36,7 @@ public class EscuelaController {
 	public ModelAndView crearCentro(@Valid @ModelAttribute Centro_escolar centro_escolar, BindingResult result ) {
 		ModelAndView mav = new ModelAndView();
 		List<Departamento> departamentos = null;
-		if (AdminController.idusuario != 0) {
+		if (AdminController.validloginAdmin()) {
 		try {
 			departamentos = departamentoService.findAll();
 		}catch (Exception e) {
@@ -62,7 +62,7 @@ public class EscuelaController {
         Centro_escolar c = escuelaService.findOne(id);
         List<Departamento> departamentos = null;
         List<Municipio> municipios = null;
-		if (AdminController.idusuario != 0) {
+		if (AdminController.validloginAdmin()) {
         try {
             departamentos = departamentoService.findAll();
             municipios = municipioService.findAll();

@@ -41,7 +41,7 @@ public class UsuarioController {
 	public ModelAndView createCount(@Valid @ModelAttribute Usuario usuario, BindingResult result ) throws ParseException {
 		ModelAndView mav = new ModelAndView();
 		List<Departamento> departamentos = null;
-		if (AdminController.idusuario != 0) {
+		if (MainController.usuario != null) {
 		try {
 			departamentos = departamentoService.findAll();
 		}catch (Exception e) {
@@ -84,8 +84,8 @@ public class UsuarioController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        if (AdminController.idusuario != 0) {
+
+		if (AdminController.validloginAdmin()) {
             Usuario u = usuarioService.findOne(id);
             mav.addObject("usuario", u);
             mav.addObject("departamentos", departamentos);
