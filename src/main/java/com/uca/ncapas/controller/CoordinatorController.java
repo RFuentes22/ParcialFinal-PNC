@@ -72,7 +72,7 @@ public class CoordinatorController {
             }
             if (result.hasErrors()) {
                 mav.addObject("departamentos", departamentos);
-                if (MainController.usuario.getCusuario() == null){
+                if (estudiante.getCestudiante() == null){
                     mav.setViewName("negocio/crearEstudiante");
                 }else {mav.setViewName("negocio/editarEstudiante");}
 
@@ -139,15 +139,15 @@ public class CoordinatorController {
             auxNotasA = notaRepo.materiasAprobadas(u.getCestudiante());
             auxNotasR = notaRepo.materiasReprobadas(u.getCestudiante());
             promedio = notaRepo.promedio(u.getCestudiante());
-            
+
             //validar si algun campo es null
             String notaA="",notaB="",notaP="";
             if(auxNotasA==null) {notaA="0";}else{notaA=auxNotasA.toString();};
             if(auxNotasR==null) {notaB="0";}else{notaB=auxNotasR.toString();};
             if(promedio==null) {notaP="0";}else{notaP=promedio.toString();};
-            
-            
-            data.add(new String[] {u.getCestudiante().toString(),u.getSnombres(),u.getSapellidos(), 
+
+
+            data.add(new String[] {u.getCestudiante().toString(),u.getSnombres(),u.getSapellidos(),
             		notaA,notaB,notaP});
             System.out.println(data.toString());
         }
