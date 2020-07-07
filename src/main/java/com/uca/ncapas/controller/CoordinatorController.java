@@ -44,6 +44,9 @@ public class CoordinatorController {
     private NotaRepo notaRepo;
     
     @Autowired
+    private NotaService notaService;
+    
+    @Autowired
     MunicipioService municipioService;
 
     @Autowired
@@ -203,7 +206,7 @@ public class CoordinatorController {
         ModelAndView mav = new ModelAndView();
         List<Materia> materias = null;
         if (validloginCoord()) {
-            mav.setViewName("negocio/crearMateria");
+            
             try {
                 materias = materiaService.findAll();
             } catch (Exception e) {
@@ -211,6 +214,7 @@ public class CoordinatorController {
             }
             mav.addObject("materias", materias);
             mav.addObject("nota", new Nota());
+            mav.setViewName("negocio/crearMateria");
         } else mav.setViewName("index");
         return mav;
     }
@@ -242,6 +246,26 @@ public class CoordinatorController {
 		return mav;
 	}
 
+    @RequestMapping("/editarnuevamateriacursada")
+    public ModelAndView EditarNuevaMateria(@RequestParam Integer id) {
+        ModelAndView mav = new ModelAndView();
+        List<Materia> materias = null;
+        
+        try {
+        	materias = materiaService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (validloginCoord()) {
+            Nota n = notaService.findOne(id);
+            mav.addObject("materias",materias);
+            mav.addObject("nota", n);
+            mav.setViewName("negocio/crearMateria");
+        }
+        else mav.setViewName("index");
+        return mav;
+    }
 
 
 
