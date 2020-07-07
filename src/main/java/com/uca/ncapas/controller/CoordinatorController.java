@@ -10,6 +10,8 @@ import com.uca.ncapas.repositories.NotaRepo;
 import com.uca.ncapas.service.DepartamentoService;
 import com.uca.ncapas.service.EstudianteService;
 import com.uca.ncapas.service.MateriaService;
+import com.uca.ncapas.service.NotaService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,9 +45,12 @@ public class CoordinatorController {
     private MateriaService materiaService;
 
     @Autowired
-    NotaRepo notaRepo;
+    private NotaRepo notaRepo;
+    
+    @Autowired
+    private NotaService notaService;
 
-    Integer tipoFilter;
+    Integer tipoFilter,iestudent;
     String valorFilter;
 
     @RequestMapping("/coordinatorview")
@@ -166,14 +171,15 @@ public class CoordinatorController {
     }
 
     @RequestMapping("/materiascursadas")
-    public ModelAndView MateriasCursadas() {
+    public ModelAndView MateriasCursadas(@RequestParam(name = "id") Integer id) {
         ModelAndView mav = new ModelAndView();
+        iestudent = id;
         mav.setViewName(validloginCoord() ? "negocio/listaMateria" : "index");
         return mav;
     }
 
     @RequestMapping("/nuevamateriacursada")
-    public ModelAndView NuevaMateria() {
+    public ModelAndView NuevaMateria(@RequestParam(name="id") Integer id) {
         ModelAndView mav = new ModelAndView();
         List<Materia> materias = null;
         if (validloginCoord()) {
@@ -222,4 +228,39 @@ public class CoordinatorController {
         }
     }
 
+    
+    @RequestMapping("/cargarMateriasEstudiante")
+    public @ResponseBody TableDTO cargarMateriasEstudiante(@RequestParam Integer draw,
+           @RequestParam Integer start, @RequestParam Integer length,
+           @RequestParam(value="search[value]", required = false) String search) {
+    	
+    	Page<Nota> notas = null;
+        List<String[]> data = new ArrayList<>();
+    	
+        notas = notaRepo.findAllNotas(PageRequest.of(start / length, length, Sort.by(Sort.Direction.ASC, "c_nota")),iestudent);
+        
+        for(Nota n : notas) {
+        	
+        	Float nota = n.getInota();
+        	String resultado = "";
+        	if(nota>=6.0) {
+        		resultado="Aprobada";
+        	}else {resultado="Reprobada";}
+        	
+            data.add(new String[] {n.getIdnota().toString(),n.getMateria().getSnombre(),
+            						n.getIanio().toString(),n.getIciclo().toString(),
+            						n.getInota().toString(),resultado});     
+        }
+
+        TableDTO dto = new TableDTO();
+        dto.setData(data);
+        dto.setDraw(draw);
+        dto.setRecordsFiltered(estudianteService.countAll().intValue());
+        dto.setRecordsTotal(estudianteService.countAll().intValue());
+
+        return dto;
+
+    }
+    
+    
 }
