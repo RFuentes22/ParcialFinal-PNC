@@ -2,9 +2,13 @@ package com.uca.ncapas.repositories;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import com.uca.ncapas.domain.proceso_negocio.Estudiante;
 import com.uca.ncapas.domain.proceso_negocio.Nota;
 
 public interface NotaRepo extends JpaRepository<Nota, Integer>{
@@ -23,4 +27,10 @@ public interface NotaRepo extends JpaRepository<Nota, Integer>{
 			"", nativeQuery = true)
     public Float promedio(@Param("estudiante") Integer estudiante);
 	
+	public Page<Nota> findByIdnota(Pageable page, Integer id);
+	
+	@Query(value = "select *\r\n" + 
+			"from proceso_negocio.nota n\r\n" + 
+			"where n.c_estudiante=:id",nativeQuery = true)
+	public Page<Nota> findAllNotas(Pageable page,Integer id);
 }
