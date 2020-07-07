@@ -13,6 +13,14 @@
 	
   	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+	    	setTimeout(function() {
+	        	$("#saved").fadeOut();
+	    	},1000);
+		});
+	</script>
 	<script type="text/javascript">
         $(document).ready(function(){
             var table = $('#tablaMateriasC').DataTable( {
@@ -45,11 +53,12 @@
     <div class="panel__content" align="center">
       	<h1 class="panel__headline"><i class="fa fa-book"></i></i>Materias Cursadas</h1>
       	<div class="panel__block"></div>
-      	<div class="input-group" align="center">
+      	<p>
 	      	<button class="btn-new" th:onclick="|window.location.href='/nuevamateriacursada'|">
 				Agregar Nueva Materia
 			</button>
-		</div>
+			<br><label th:if="${save == 1}" class="panel__headline" id="saved">MATERIA GUARDADA CON EXITO</label>
+		</p>
 		<div class="panel__block"></div>
 		<table class="table table-bordered" id="tablaMateriasC"  width="100%" cellspacing="0">
 		<thead>
