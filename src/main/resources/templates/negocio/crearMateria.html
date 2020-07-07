@@ -46,13 +46,14 @@
   <article class="panel__wrapper" >
                 <div class="card-body">
                     <h2 class="title" align="center"><b>Datos de la Materia Cursada</b></h2>
-                    <p align="center">Nombre del Alumno</p>
+                    <p align="center">Nombre del Alumno:}</p>
               
                     <form th:action="@{/addMateria}" method="POST" th:object="${nota}">	
                     	<div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <div class="input-group">
+                                    	<input class="input--style-4" type="text" name="name" th:field="*{idnota}" hidden="true">
                             			<label class="label"><b>Materia</b></label>
                             			<div class="rs-select2 js-select-simple select--no-search">
 		                                	<select th:field="*{cmateria}">
@@ -72,7 +73,7 @@
                                 <div class="input-group">
                                     <label class="label"><b>Año</b></label>
                                     <input class="input--style-4" type="text" th:field="*{ianio}" 
-                                    pattern="([2]{1})+([0]{1})+([0-2]{1})+([5-9])" title="El año debe ser mayor o igual a 2005">
+                                    pattern="([2]{1})+([0]{1})+([0-1-2]{1})+([1-9])" title="El año debe ser mayor o igual a 2005">
                                     <br><span th:errors="*{ianio}" style="color:#FFFFFF"></span>
                                 </div>
                             </div>
