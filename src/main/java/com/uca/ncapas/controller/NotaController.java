@@ -28,30 +28,5 @@ public class NotaController {
 	@Autowired
 	private MateriaService materiaService;
 	
-	@RequestMapping("/addMateria")
-	public ModelAndView AddMateria(@Valid @ModelAttribute Nota nota, BindingResult r) throws ParseException, DataAccessException{
-		ModelAndView mav = new ModelAndView();
-		List<Materia> materias = null;
-		try {
-			materias = materiaService.findAll();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
 		
-		if(r.hasErrors()) {
-			mav.addObject("materias",materias);
-			mav.setViewName("negocio/crearMateria");
-		}else {
-			Integer annio = Integer.valueOf(nota.getIanio());
-			nota.setIanio(annio);
-			notaRepo.save(nota);
-			mav.addObject("nota", new Nota());
-			mav.addObject("materias",materias);
-			mav.addObject("exito", 1);
-			mav.setViewName("negocio/crearMateria");
-		}
-		
-		return mav;
-	}
-	
 }
