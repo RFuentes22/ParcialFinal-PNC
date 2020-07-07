@@ -8,6 +8,7 @@ import com.uca.ncapas.repositories.NotaRepo;
 import com.uca.ncapas.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -41,7 +42,7 @@ public class CoordinatorController {
 
     @Autowired
     private NotaRepo notaRepo;
-
+    
     @Autowired
     MunicipioService municipioService;
 
@@ -198,7 +199,7 @@ public class CoordinatorController {
     }
 
     @RequestMapping("/nuevamateriacursada")
-    public ModelAndView NuevaMateria(@RequestParam(name="id") Integer id) {
+    public ModelAndView NuevaMateria() {
         ModelAndView mav = new ModelAndView();
         List<Materia> materias = null;
         if (validloginCoord()) {
@@ -213,6 +214,33 @@ public class CoordinatorController {
         } else mav.setViewName("index");
         return mav;
     }
+    
+    @RequestMapping("/addMateria")
+	public ModelAndView AddMateria(@Valid @ModelAttribute Nota nota, BindingResult r) throws ParseException, DataAccessException{
+		ModelAndView mav = new ModelAndView();
+		List<Materia> materias = null;
+		try {
+			materias = materiaService.findAll();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(r.hasErrors()) {
+			mav.addObject("materias",materias);
+			mav.setViewName("negocio/crearMateria");
+		}else {
+			Integer annio = Integer.valueOf(nota.getIanio());
+			nota.setIanio(annio);
+			nota.setCestudiante(iestudent);
+			notaRepo.save(nota);
+			mav.addObject("nota", new Nota());
+			mav.addObject("materias",materias);
+			mav.addObject("save", 1);
+			mav.setViewName("negocio/listaMateria");
+		}
+		
+		return mav;
+	}
 
 
 
