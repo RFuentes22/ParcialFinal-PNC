@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
-  <meta charset="UTF-8">
-  <title>Expediente Alumno</title>
+    <meta charset="UTF-8">
+    <title>Expediente Alumno</title>
 
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -17,200 +17,200 @@
     <!-- Main CSS-->
     <link href="css/main2.css" rel="stylesheet" media="all">
     <link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-	<link rel="stylesheet" href="css/style.css">
-	
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 <!-- partial:index.partial.html -->
 <nav class="nav">
-  <div class="burger">
-    <div class="burger__patty"></div>
-  </div>
+    <div class="burger">
+        <div class="burger__patty"></div>
+    </div>
 
-  <ul class="nav__list">
-    <li class="nav__item">
-      <a href="#1" class="nav__link c-yellow scrolly"><i class="fa fa-users"></i></a>
-    </li>
-    <li class="nav__item">
-      <a th:onclick="|window.location.href='/alumnos'|" class="nav__link c-blue scrolly"><i class="fa fa-arrow-left"></i></a>
-    </li>
-  </ul>
+    <ul class="nav__list">
+        <li class="nav__item">
+            <a href="#1" class="nav__link c-yellow scrolly"><i class="fa fa-users"></i></a>
+        </li>
+        <li class="nav__item">
+            <a th:onclick="|window.location.href='/alumnos'|" class="nav__link c-blue scrolly"><i class="fa fa-arrow-left"></i></a>
+        </li>
+    </ul>
 </nav>
 
 <section class="panel b-yellow" id="1" >
-  <article class="panel__wrapper" >
-                <div class="card-body">
-                    <h2 class="title" align="center"><b>Editar Expediente</b></h2>
-                    <form th:action="@{/newalumno}" method="POST" th:object="${estudiante}">
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <input class="input--style-4" type="text" name="name" th:field="*{cestudiante}" hidden="true">
-                                    <label class="label"><b>Nombre</b></label>
-                                    <input class="input--style-4" type="text" name="name" th:field="*{snombres}">
-                                    <span th:errors="*{snombres}"style="color: #FF0000"></span>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label"><b>Apellido</b></label>
-                                    <input class="input--style-4" type="text" name="lastname" th:field="*{sapellidos}">
-                                    <span th:errors="*{sapellidos}"style="color: #FF0000"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label"><b>Carnet de Minoridad</b></label>
-                                    <input class="input--style-4" type="text" name="carnet" th:field="*{ccarnet}">
-                                    <span th:errors="*{ccarnet}"style="color: #FF0000"></span>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label"><b>Fecha de Nacimiento</b></label>
-                                    <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="birthday" th:field="*{ffnacimiento}">
-                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                    </div>
-                                    <span th:errors="*{ffnacimiento}"style="color: #FF0000"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <div class="input-group">
-                                        <label class="label"><b>Departamento</b></label>
-                                        <div class="rs-select2 js-select-simple select--no-search">
-                                            <select th:field="*{cdepartamento}" id="id">
-                                                <option selected="selected" value="">Seleccionar</option>
-                                                <option th:each="dep : ${departamentos}"
-                                                        th:value="${dep.cdepartamento}"
-                                                        th:text="${dep.snombre}"></option>
-                                            </select>
-                                            <br><span th:errors="*{cdepartamento}" style="color:#FF0000"></span>
-                                            <div class="select-dropdown"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <div class="input-group">
-                                        <label class="label"><b>Municipio</b></label>
-                                        <div class="rs-select2 js-select-simple select--no-search">
-                                            <select  th:field="${estudiante.cmunicipio}" id="mun">
-                                                <option  selected="selected" value="">Seleccionar</option>
-                                                <option th:each="mun : ${municipios}"
-                                                        th:value="${mun.cmunicipio}"
-                                                        th:text="${mun.snombre}">
-                                            </select>
-                                            <br><span th:errors="*{cmunicipio}" style="color:#FF0000"></span>
-                                            <div class="select-dropdown"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row row-space input-group">
-                            <label class="label"><b>Direccion de residencia</b></label>
-                            <input class="input--style-4" type="text" name="address" th:field="*{sdireccion}">
-                            <span th:errors="*{sdireccion}"style="color: #FF0000"></span><br>
-                        </div>
+    <article class="panel__wrapper" >
+        <div class="card-body">
+            <h2 class="title" align="center"><b>Editar Expediente</b></h2>
+            <form th:action="@{/newalumno}" method="POST" th:object="${estudiante}">
+                <div class="row row-space">
+                    <div class="col-2">
                         <div class="input-group">
-                            <div class="row row-space">
-                                <div class="col-2">
-                                    <div class="input-group">
-                                        <label class="label"><b>Telefono fijo</b></label>
-                                        <input class="input--style-4" type="number" name="tel" th:field="*{itelefono}">
-                                        <span th:errors="*{itelefono}"style="color: #FF0000"></span><br>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="input-group">
-                                        <label class="label"><b>Telefono movil</b></label>
-                                        <input class="input--style-4" type="number" name="movil" th:field="*{icelular}">
-                                        <span th:errors="*{icelular}"style="color: #FF0000"></span><br>
-                                    </div>
-                                </div>
-                            </div>
+                            <input class="input--style-4" type="text" name="name" th:field="*{cestudiante}" hidden="true">
+                            <label class="label"><b>Nombre</b></label>
+                            <input class="input--style-4" type="text" name="name" th:field="*{snombres}">
+                            <span th:errors="*{snombres}"style="color: #FF0000"></span>
                         </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <label class="label"><b>Apellido</b></label>
+                            <input class="input--style-4" type="text" name="lastname" th:field="*{sapellidos}">
+                            <span th:errors="*{sapellidos}"style="color: #FF0000"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <div class="input-group">
+                            <label class="label"><b>Carnet de Minoridad</b></label>
+                            <input class="input--style-4" type="text" name="carnet" th:field="*{ccarnet}">
+                            <span th:errors="*{ccarnet}"style="color: #FF0000"></span>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <label class="label"><b>Fecha de Nacimiento</b></label>
+                            <div class="input-group-icon">
+                                <input class="input--style-4 js-datepicker" type="text" name="birthday" th:field="*{ffnacimiento}">
+                                <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                            </div>
+                            <span th:errors="*{ffnacimiento}"style="color: #FF0000"></span>
+                        </div>
+                    </div>
+                </div>
 
-
+                <div class="row row-space">
+                    <div class="col-2">
                         <div class="input-group">
                             <div class="input-group">
-                                <label class="label"><b>Institucion de procedencia</b></label>
+                                <label class="label"><b>Departamento</b></label>
                                 <div class="rs-select2 js-select-simple select--no-search">
-                                    <select th:field="*{cescuela}" id="sch">
+                                    <select th:field="*{cdepartamento}" id="id">
                                         <option selected="selected" value="">Seleccionar</option>
-                                        <option th:each="escu : ${escuelas}"
-                                                th:value="${escu.cescuela}"
-                                                th:text="${escu.snombre}">
+                                        <option th:each="dep : ${departamentos}"
+                                                th:value="${dep.cdepartamento}"
+                                                th:text="${dep.snombre}"></option>
                                     </select>
-                                    <br><span th:errors="*{cescuela}" style="color:#FF0000"></span>
+                                    <br><span th:errors="*{cdepartamento}" style="color:#FF0000"></span>
                                     <div class="select-dropdown"></div>
                                 </div>
                             </div>
                         </div>
-
-
-                        <div class="row row-space input-group">
-                            <label class="label"><b>Nombre del Padre</b></label>
-                            <input class="input--style-4" type="text" name="name_dad" th:field="*{snombre_padre}">
-                            <span th:errors="*{snombre_padre}"style="color: #FF0000"></span><br>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group">
+                                <label class="label"><b>Municipio</b></label>
+                                <div class="rs-select2 js-select-simple select--no-search">
+                                    <select  th:field="${estudiante.cmunicipio}" id="mun">
+                                        <option  selected="selected" value="">Seleccionar</option>
+                                        <option th:each="mun : ${municipios}"
+                                                th:value="${mun.cmunicipio}"
+                                                th:text="${mun.snombre}">
+                                    </select>
+                                    <br><span th:errors="*{cmunicipio}" style="color:#FF0000"></span>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="row row-space input-group">
-                            <label class="label"><b>Nombre de la Madre</b></label>
-                            <input class="input--style-4" type="text" name="name_mom" th:field="*{snombre_madre}">
-                            <span th:errors="*{snombre_madre}"style="color: #FF0000"></span><br>
-                        </div>
-
-                        <div class="input-group" align="center">
-                            <button class="btn-new">
-                                Editar estudiante
-                            </button>
-                            <button class="btn-blue" type="reset">
-                                Limpiar
-                            </button>
-                        </div>
-
-                    </form>
-                    <div class="input-group" align="center">
-                    	<button class="btn-index" th:onclick="|window.location.href='/alumnos'|">
-								Regresar
-						</button>
                     </div>
                 </div>
-    
-  </article>
+                <div class="row row-space input-group">
+                    <label class="label"><b>Direccion de residencia</b></label>
+                    <input class="input--style-4" type="text" name="address" th:field="*{sdireccion}">
+                    <span th:errors="*{sdireccion}"style="color: #FF0000"></span><br>
+                </div>
+                <div class="input-group">
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label"><b>Telefono fijo</b></label>
+                                <input class="input--style-4" type="number" name="tel" th:field="*{itelefono}">
+                                <span th:errors="*{itelefono}"style="color: #FF0000"></span><br>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label"><b>Telefono movil</b></label>
+                                <input class="input--style-4" type="number" name="movil" th:field="*{icelular}">
+                                <span th:errors="*{icelular}"style="color: #FF0000"></span><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="input-group">
+                    <div class="input-group">
+                        <label class="label"><b>Institucion de procedencia</b></label>
+                        <div class="rs-select2 js-select-simple select--no-search">
+                            <select th:field="*{cescuela}" id="sch">
+                                <option selected="selected" value="">Seleccionar</option>
+                                <option th:each="escu : ${escuelas}"
+                                        th:value="${escu.cescuela}"
+                                        th:text="${escu.snombre}">
+                            </select>
+                            <br><span th:errors="*{cescuela}" style="color:#FF0000"></span>
+                            <div class="select-dropdown"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row row-space input-group">
+                    <label class="label"><b>Nombre del Padre</b></label>
+                    <input class="input--style-4" type="text" name="name_dad" th:field="*{snombre_padre}">
+                    <span th:errors="*{snombre_padre}"style="color: #FF0000"></span><br>
+                </div>
+
+                <div class="row row-space input-group">
+                    <label class="label"><b>Nombre de la Madre</b></label>
+                    <input class="input--style-4" type="text" name="name_mom" th:field="*{snombre_madre}">
+                    <span th:errors="*{snombre_madre}"style="color: #FF0000"></span><br>
+                </div>
+
+                <div class="input-group" align="center">
+                    <button class="btn-new">
+                        Editar estudiante
+                    </button>
+                    <button class="btn-blue" type="reset">
+                        Limpiar
+                    </button>
+                </div>
+
+            </form>
+            <div class="input-group" align="center">
+                <button class="btn-index" th:onclick="|window.location.href='/alumnos'|">
+                    Regresar
+                </button>
+            </div>
+        </div>
+
+    </article>
 </section>
 
 <a href="http://ettrics.com/code/vertical-layout-navigation/" class="logo" target="_blank">
- 	<form th:action="@{/cerrarsesion}" method="post">
+    <form th:action="@{/cerrarsesion}" method="post">
         <input class="btn-logout" type="submit" value="Cerrar Sesion">
-    </form> 
+    </form>
 </a>
 <!-- partial -->
-  	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="js/script.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="js/script.js"></script>
 
-    <!-- Jquery JS-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <!-- Vendor JS-->
-    <script src="vendor/select2/select2.min.js"></script>
-    <script src="vendor/datepicker/moment.min.js"></script>
-    <script src="vendor/datepicker/daterangepicker.js"></script>
+<!-- Jquery JS-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<!-- Vendor JS-->
+<script src="vendor/select2/select2.min.js"></script>
+<script src="vendor/datepicker/moment.min.js"></script>
+<script src="vendor/datepicker/daterangepicker.js"></script>
 
-    <!-- Main JS-->
-    <script src="js/global.js"></script>
+<!-- Main JS-->
+<script src="js/global.js"></script>
 
 
 <script>

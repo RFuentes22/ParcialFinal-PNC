@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  
-  	<title>Catalogo Escuelas</title>
+
+	<title>Catalogo Escuelas</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -11,67 +11,67 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-	
-  	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-	
+
 	<script type="text/javascript">
 		$(document).ready(function() {
-		    setTimeout(function() {
-		        $("#aviso").fadeOut();
-		    },1000);
+			setTimeout(function() {
+				$("#aviso").fadeOut();
+			},1000);
 		});
 	</script>
 
 </head>
 <script type="text/javascript">
-		$(document).ready(function(){
-			var table = $('#tablaEscuelas').DataTable( {
-		        "processing": true,
-		        "serverSide": true,
-		        "ajax": "./cargarEscuelas",
-		        "language": {
-		            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
-		        },
-		        "pageLength": 5,
-		        "columnDefs": [ {
-		            "targets": 0,
-		            "data": null,
-		            "defaultContent": "<button  title='Editar escuela'><i class='fa fa-pencil'></i></button>"
-		        }]
-		    });
-			
-			$('#tablaEscuelas tbody').on( 'click', 'button', function () {
-		        var data = table.row( $(this).parents('tr') ).data();
-		        	location.href = './editarEscuela?id=' + data[0];
-		    } );
+	$(document).ready(function(){
+		var table = $('#tablaEscuelas').DataTable( {
+			"processing": true,
+			"serverSide": true,
+			"ajax": "./cargarEscuelas",
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+			},
+			"pageLength": 5,
+			"columnDefs": [ {
+				"targets": 0,
+				"data": null,
+				"defaultContent": "<button  title='Editar escuela'><i class='fa fa-pencil'></i></button>"
+			}]
 		});
-	</script>
+
+		$('#tablaEscuelas tbody').on( 'click', 'button', function () {
+			var data = table.row( $(this).parents('tr') ).data();
+			location.href = './editarEscuela?id=' + data[0];
+		} );
+	});
+</script>
 
 <body>
 <section class="panel b-yellow" id="1" >
-  <article class="panel__wrapper" >
-    <div class="panel__content" align="center">
-      	<h1 class="panel__headline"><i class="fa fa-home"></i>Centros Escolares</h1>
-      	<div class="panel__block"></div>
-      	<p>
-      		<button class="btn-new" th:onclick="|window.location.href='/escuela'|">
-				Nuevo Centro Escolar
-			</button>
-			<br><label th:if="${save == 1}" class="panel__headline" id="aviso">CENTRO GUARDADO CON EXITO</label>
-      	</p>
-		
-		<div class="panel__block"></div>
-      	<p>Ver Registros</p>	
-		<a href="#2" class="scrolly"><i class="fa fa-arrow-down arrow"></i></a>
-    </div>
-    
-  </article>
+	<article class="panel__wrapper" >
+		<div class="panel__content" align="center">
+			<h1 class="panel__headline"><i class="fa fa-home"></i>Centros Escolares</h1>
+			<div class="panel__block"></div>
+			<p>
+				<button class="btn-new" th:onclick="|window.location.href='/escuela'|">
+					Nuevo Centro Escolar
+				</button>
+				<br><label th:if="${save == 1}" class="panel__headline" id="aviso">CENTRO GUARDADO CON EXITO</label>
+			</p>
+
+			<div class="panel__block"></div>
+			<p>Ver Registros</p>
+			<a href="#2" class="scrolly"><i class="fa fa-arrow-down arrow"></i></a>
+		</div>
+
+	</article>
 </section>
 <section class="panel b-yellow" id="2" >
 	<div class="padding-table">
 		<table class="table table-bordered" id="tablaEscuelas" width="100%" cellspacing="0">
-		<thead>
+			<thead>
 			<tr>
 				<th style="width: 80px">Acci&oacute;n</th>
 				<th>Codigo</th>
@@ -80,11 +80,11 @@
 				<th>Departamento</th>
 				<th>Municipio</th>
 			</tr>
-			
-		</thead>
+
+			</thead>
 		</table>
 	</div>
-	
+
 </section>
 
 <a class="logo" target="_blank">
@@ -92,13 +92,13 @@
 		<button class="btn-index" th:onclick="|window.location.href='/adminview'|">
 			Regresar
 		</button>
-    </p>
- 	<form th:action="@{/cerrarsesion}" method="post">
-        <input class="btn-logout" type="submit" value="Cerrar Sesion">
-    </form>
+	</p>
+	<form th:action="@{/cerrarsesion}" method="post">
+		<input class="btn-logout" type="submit" value="Cerrar Sesion">
+	</form>
 </a>
 <!-- partial -->
-  	<script  src="js/script.js"></script>
+<script  src="js/script.js"></script>
 
 </body>
 </html>
