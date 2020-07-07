@@ -90,7 +90,6 @@ public class CoordinatorController {
             }
         } else mav.setViewName("index");
 
-
         return mav;
     }
 
