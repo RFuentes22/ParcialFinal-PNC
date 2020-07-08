@@ -59,7 +59,7 @@
                 <div class="input-group">
                     <label class="label"><b>Buscar Alumno Por</b></label>
                     <div class="rs-select2 js-select-simple select--no-search">
-                        <select  name="tipo">
+                        <select  name="tipo" required>
                             <option disabled="disabled" selected="selected">Seleccionar criterio [Nombres,Apellidos]</option>
                             <option value="1">Nombres</option>
                             <option value="2">Apelidos</option>
@@ -69,10 +69,10 @@
                 </div>
                 <div class="input-group">
                     <label class="label"><b>Valor de Busqueda</b></label>
-                    <input class="input--style-4" id="valor" type="text" name="valor">
+                    <input class="input--style-4" id="valor" type="text" name="valor" required>
                 </div>
                 <div class="input-group">
-                    <button th:onclick="|window.location.href='/lista'|" class="btn-index">
+                    <button class="btn-index">
                         Buscar
                     </button>
                 </div>
