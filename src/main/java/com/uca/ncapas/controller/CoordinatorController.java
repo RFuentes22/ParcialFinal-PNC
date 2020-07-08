@@ -92,6 +92,7 @@ public class CoordinatorController {
                 Integer acanio = Integer.parseInt(sdf.format(actual));
                 estudiante.setIedad(acanio - anio);
                 estudianteService.save(estudiante);
+                mav.addObject("saved",1);
                 mav.setViewName("negocio/expedienteAlumnos");
             }
         } else mav.setViewName("index");
@@ -197,6 +198,8 @@ public class CoordinatorController {
     public ModelAndView MateriasCursadas(@RequestParam(name = "id") Integer id) {
         ModelAndView mav = new ModelAndView();
         iestudent = id;
+        Estudiante e = estudianteService.findOne(id);
+        mav.addObject("estudiante",e);
         mav.setViewName(validloginCoord() ? "negocio/listaMateria" : "index");
         return mav;
     }
@@ -205,6 +208,7 @@ public class CoordinatorController {
     public ModelAndView NuevaMateria() {
         ModelAndView mav = new ModelAndView();
         List<Materia> materias = null;
+        Estudiante estudent = estudianteService.findOne(iestudent);
         if (validloginCoord()) {
             
             try {
@@ -214,6 +218,7 @@ public class CoordinatorController {
             }
             mav.addObject("materias", materias);
             mav.addObject("nota", new Nota());
+            mav.addObject("estudiante",estudent);
             mav.setViewName("negocio/crearMateria");
         } else mav.setViewName("index");
         return mav;
@@ -223,6 +228,7 @@ public class CoordinatorController {
 	public ModelAndView AddMateria(@Valid @ModelAttribute Nota nota, BindingResult r) throws ParseException, DataAccessException{
 		ModelAndView mav = new ModelAndView();
 		List<Materia> materias = null;
+		Estudiante estudent = estudianteService.findOne(iestudent);
 		try {
 			materias = materiaService.findAll();
 		}catch (Exception e) {
@@ -239,6 +245,7 @@ public class CoordinatorController {
 			notaRepo.save(nota);
 			mav.addObject("nota", new Nota());
 			mav.addObject("materias",materias);
+			mav.addObject("estudiante",estudent);
 			mav.addObject("save", 1);
 			mav.setViewName("negocio/listaMateria");
 		}
@@ -250,7 +257,7 @@ public class CoordinatorController {
     public ModelAndView EditarNuevaMateria(@RequestParam Integer id) {
         ModelAndView mav = new ModelAndView();
         List<Materia> materias = null;
-        
+        Estudiante estudent = estudianteService.findOne(iestudent);
         try {
         	materias = materiaService.findAll();
         } catch (Exception e) {
@@ -261,6 +268,7 @@ public class CoordinatorController {
             Nota n = notaService.findOne(id);
             mav.addObject("materias",materias);
             mav.addObject("nota", n);
+            mav.addObject("estudiante",estudent);
             mav.setViewName("negocio/crearMateria");
         }
         else mav.setViewName("index");
