@@ -53,6 +53,9 @@
     <div class="panel__content" align="center">
       	<h1 class="panel__headline"><i class="fa fa-book"></i></i>Materias Cursadas</h1>
       	<div class="panel__block"></div>
+      	
+      	<p align="center">Nombre del Alumno:<h2 th:object="${estudiante}" th:text="${estudiante.snombres}"></h2><h2 th:object="${estudiante}" th:text="${estudiante.sapellidos}"></h2></p>
+      	<div class="panel__block"></div>
       	<p>
 	      	<button class="btn-new" th:onclick="|window.location.href='/nuevamateriacursada'|">
 				Agregar Nueva Materia
