@@ -42,17 +42,17 @@ public class CoordinatorController {
 
     @Autowired
     private NotaRepo notaRepo;
-    
+
     @Autowired
     private NotaService notaService;
-    
+
     @Autowired
     MunicipioService municipioService;
 
     @Autowired
     EscuelaService escuelaService;
 
-    Integer tipoFilter,iestudent;
+    Integer tipoFilter, iestudent;
     String valorFilter;
 
 
@@ -78,9 +78,11 @@ public class CoordinatorController {
             }
             if (result.hasErrors()) {
                 mav.addObject("departamentos", departamentos);
-                if (estudiante.getCestudiante() == null){
+                if (estudiante.getCestudiante() == null) {
                     mav.setViewName("negocio/crearEstudiante");
-                }else {mav.setViewName("negocio/editarEstudiante");}
+                } else {
+                    mav.setViewName("negocio/editarEstudiante");
+                }
 
             } else {
                 DateFormat fecha = new SimpleDateFormat("dd/mm/yyyy");
@@ -91,9 +93,16 @@ public class CoordinatorController {
                 Integer anio = Integer.parseInt(sdf.format(convert));
                 Integer acanio = Integer.parseInt(sdf.format(actual));
                 estudiante.setIedad(acanio - anio);
+
+                if (estudiante.getCestudiante() == null) {
+                    mav.setViewName("negocio/expedienteAlumnos");
+                } else {
+                    mav.addObject("saved", 1);
+                    mav.setViewName("negocio/editarEstudiante");
+                }
+
                 estudianteService.save(estudiante);
-                mav.addObject("saved",1);
-                mav.setViewName("negocio/editarEstudiante");
+
             }
         } else mav.setViewName("index");
 
@@ -121,9 +130,10 @@ public class CoordinatorController {
     }
 
     @RequestMapping("/filterStudent")
-    public @ResponseBody TableDTO filterStudent(@RequestParam Integer draw,
-                                                @RequestParam Integer start, @RequestParam Integer length,
-                                                @RequestParam(value="search[value]", required = false) String search) {
+    public @ResponseBody
+    TableDTO filterStudent(@RequestParam Integer draw,
+                           @RequestParam Integer start, @RequestParam Integer length,
+                           @RequestParam(value = "search[value]", required = false) String search) {
 
         Page<Estudiante> estudiantes = null;
         List<String[]> data = new ArrayList<>();
@@ -132,29 +142,44 @@ public class CoordinatorController {
 
 
         if (tipoFilter.equals(1)) {
-            estudiantes = estudianteService.findByName(PageRequest.of(start / length, length, Sort.by(Sort.Direction.ASC, "cestudiante")),valorFilter);
+            estudiantes = estudianteService.findByName(PageRequest.of(start / length, length, Sort.by(Sort.Direction.ASC, "cestudiante")), valorFilter);
             System.out.println("Filtrar Nombre");
-        }else {
-            estudiantes = estudianteService.findByLastname(PageRequest.of(start / length, length, Sort.by(Sort.Direction.ASC, "cestudiante")),valorFilter);
+        } else {
+            estudiantes = estudianteService.findByLastname(PageRequest.of(start / length, length, Sort.by(Sort.Direction.ASC, "cestudiante")), valorFilter);
             System.out.println("Filtrar Apellido");
         }
 
         Integer auxNotasA, auxNotasR;
         Float promedio;
-        for(Estudiante u : estudiantes) {
+        for (Estudiante u : estudiantes) {
             auxNotasA = notaRepo.materiasAprobadas(u.getCestudiante());
             auxNotasR = notaRepo.materiasReprobadas(u.getCestudiante());
             promedio = notaRepo.promedio(u.getCestudiante());
 
             //validar si algun campo es null
-            String notaA="",notaB="",notaP="";
-            if(auxNotasA==null) {notaA="0";}else{notaA=auxNotasA.toString();};
-            if(auxNotasR==null) {notaB="0";}else{notaB=auxNotasR.toString();};
-            if(promedio==null) {notaP="0";}else{notaP=promedio.toString();};
+            String notaA = "", notaB = "", notaP = "";
+            if (auxNotasA == null) {
+                notaA = "0";
+            } else {
+                notaA = auxNotasA.toString();
+            }
+            ;
+            if (auxNotasR == null) {
+                notaB = "0";
+            } else {
+                notaB = auxNotasR.toString();
+            }
+            ;
+            if (promedio == null) {
+                notaP = "0";
+            } else {
+                notaP = promedio.toString();
+            }
+            ;
 
 
-            data.add(new String[] {u.getCestudiante().toString(),u.getSnombres(),u.getSapellidos(),
-                    notaA,notaB,notaP});
+            data.add(new String[]{u.getCestudiante().toString(), u.getSnombres(), u.getSapellidos(),
+                    notaA, notaB, notaP});
             System.out.println(data.toString());
         }
 
@@ -168,6 +193,7 @@ public class CoordinatorController {
 
 
     }
+
     @RequestMapping("/editarexpediente")
     public ModelAndView EditarAlumno(@RequestParam Integer id) {
         ModelAndView mav = new ModelAndView();
@@ -189,8 +215,7 @@ public class CoordinatorController {
             mav.addObject("municipios", municipios);
             mav.addObject("escuelas", centro_escolars);
             mav.setViewName("negocio/editarEstudiante");
-        }
-        else mav.setViewName("index");
+        } else mav.setViewName("index");
         return mav;
     }
 
@@ -199,7 +224,7 @@ public class CoordinatorController {
         ModelAndView mav = new ModelAndView();
         iestudent = id;
         Estudiante e = estudianteService.findOne(id);
-        mav.addObject("estudiante",e);
+        mav.addObject("estudiante", e);
         mav.setViewName(validloginCoord() ? "negocio/listaMateria" : "index");
         return mav;
     }
@@ -210,7 +235,7 @@ public class CoordinatorController {
         List<Materia> materias = null;
         Estudiante estudent = estudianteService.findOne(iestudent);
         if (validloginCoord()) {
-            
+
             try {
                 materias = materiaService.findAll();
             } catch (Exception e) {
@@ -218,40 +243,40 @@ public class CoordinatorController {
             }
             mav.addObject("materias", materias);
             mav.addObject("nota", new Nota());
-            mav.addObject("estudiante",estudent);
+            mav.addObject("estudiante", estudent);
             mav.setViewName("negocio/crearMateria");
         } else mav.setViewName("index");
         return mav;
     }
-    
+
     @RequestMapping("/addMateria")
-	public ModelAndView AddMateria(@Valid @ModelAttribute Nota nota, BindingResult r) throws ParseException, DataAccessException{
-		ModelAndView mav = new ModelAndView();
-		List<Materia> materias = null;
-		Estudiante estudent = estudianteService.findOne(iestudent);
-		try {
-			materias = materiaService.findAll();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		if(r.hasErrors()) {
-			mav.addObject("materias",materias);
-			mav.setViewName("negocio/crearMateria");
-		}else {
-			Integer annio = Integer.valueOf(nota.getIanio());
-			nota.setIanio(annio);
-			nota.setCestudiante(iestudent);
-			notaRepo.save(nota);
-			mav.addObject("nota", new Nota());
-			mav.addObject("materias",materias);
-			mav.addObject("estudiante",estudent);
-			mav.addObject("save", 1);
-			mav.setViewName("negocio/listaMateria");
-		}
-		
-		return mav;
-	}
+    public ModelAndView AddMateria(@Valid @ModelAttribute Nota nota, BindingResult r) throws ParseException, DataAccessException {
+        ModelAndView mav = new ModelAndView();
+        List<Materia> materias = null;
+        Estudiante estudent = estudianteService.findOne(iestudent);
+        try {
+            materias = materiaService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (r.hasErrors()) {
+            mav.addObject("materias", materias);
+            mav.setViewName("negocio/crearMateria");
+        } else {
+            Integer annio = Integer.valueOf(nota.getIanio());
+            nota.setIanio(annio);
+            nota.setCestudiante(iestudent);
+            notaRepo.save(nota);
+            mav.addObject("nota", new Nota());
+            mav.addObject("materias", materias);
+            mav.addObject("estudiante", estudent);
+            mav.addObject("save", 1);
+            mav.setViewName("negocio/listaMateria");
+        }
+
+        return mav;
+    }
 
     @RequestMapping("/editarnuevamateriacursada")
     public ModelAndView EditarNuevaMateria(@RequestParam Integer id) {
@@ -259,19 +284,18 @@ public class CoordinatorController {
         List<Materia> materias = null;
         Estudiante estudent = estudianteService.findOne(iestudent);
         try {
-        	materias = materiaService.findAll();
+            materias = materiaService.findAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         if (validloginCoord()) {
             Nota n = notaService.findOne(id);
-            mav.addObject("materias",materias);
+            mav.addObject("materias", materias);
             mav.addObject("nota", n);
-            mav.addObject("estudiante",estudent);
+            mav.addObject("estudiante", estudent);
             mav.setViewName("negocio/crearMateria");
-        }
-        else mav.setViewName("index");
+        } else mav.setViewName("index");
         return mav;
     }
 
@@ -307,28 +331,31 @@ public class CoordinatorController {
         }
     }
 
-    
+
     @RequestMapping("/cargarMateriasEstudiante")
-    public @ResponseBody TableDTO cargarMateriasEstudiante(@RequestParam Integer draw,
-           @RequestParam Integer start, @RequestParam Integer length,
-           @RequestParam(value="search[value]", required = false) String search) {
-    	
-    	Page<Nota> notas = null;
+    public @ResponseBody
+    TableDTO cargarMateriasEstudiante(@RequestParam Integer draw,
+                                      @RequestParam Integer start, @RequestParam Integer length,
+                                      @RequestParam(value = "search[value]", required = false) String search) {
+
+        Page<Nota> notas = null;
         List<String[]> data = new ArrayList<>();
-    	
-        notas = notaRepo.findAllNotas(PageRequest.of(start / length, length, Sort.by(Sort.Direction.ASC, "c_nota")),iestudent);
-        
-        for(Nota n : notas) {
-        	
-        	Float nota = n.getInota();
-        	String resultado = "";
-        	if(nota>=6.0) {
-        		resultado="Aprobada";
-        	}else {resultado="Reprobada";}
-        	
-            data.add(new String[] {n.getIdnota().toString(),n.getMateria().getSnombre(),
-            						n.getIanio().toString(),n.getIciclo().toString(),
-            						n.getInota().toString(),resultado});     
+
+        notas = notaRepo.findAllNotas(PageRequest.of(start / length, length, Sort.by(Sort.Direction.ASC, "c_nota")), iestudent);
+
+        for (Nota n : notas) {
+
+            Float nota = n.getInota();
+            String resultado = "";
+            if (nota >= 6.0) {
+                resultado = "Aprobada";
+            } else {
+                resultado = "Reprobada";
+            }
+
+            data.add(new String[]{n.getIdnota().toString(), n.getMateria().getSnombre(),
+                    n.getIanio().toString(), n.getIciclo().toString(),
+                    n.getInota().toString(), resultado});
         }
 
         TableDTO dto = new TableDTO();
@@ -340,6 +367,6 @@ public class CoordinatorController {
         return dto;
 
     }
-    
-    
+
+
 }
