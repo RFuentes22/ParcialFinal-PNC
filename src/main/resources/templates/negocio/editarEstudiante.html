@@ -46,6 +46,7 @@
     <article class="panel__wrapper" >
         <div class="card-body">
             <h2 class="title" align="center"><b>Editar Expediente</b></h2>
+            <p><br><label th:if="${saved == 1}" class="panel__headline" id="exito">EXPEDIENTE ACTUALIZADO</label></p>
             <form th:action="@{/newalumno}" method="POST" th:object="${estudiante}">
                 <div class="row row-space">
                     <div class="col-2">

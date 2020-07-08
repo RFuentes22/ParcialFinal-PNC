@@ -93,7 +93,7 @@ public class CoordinatorController {
                 estudiante.setIedad(acanio - anio);
                 estudianteService.save(estudiante);
                 mav.addObject("saved",1);
-                mav.setViewName("negocio/expedienteAlumnos");
+                mav.setViewName("negocio/editarEstudiante");
             }
         } else mav.setViewName("index");
 
