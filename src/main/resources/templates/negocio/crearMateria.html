@@ -37,7 +37,7 @@
       <a href="#1" class="nav__link c-red scrolly"><i class="fa fa-book"></i></a>
     </li>
     <li class="nav__item">
-      <a th:onclick="|window.location.href='/materiascursadas'|" class="nav__link c-blue scrolly"><i class="fa fa-arrow-left"></i></a>
+      <a th:object="${estudiante}"  th:onclick="|window.location.href='/materiascursadas?id=${estudiante.cestudiante}'|" class="nav__link c-blue scrolly"><i class="fa fa-arrow-left"></i></a>
     </li>
   </ul>
 </nav>
@@ -46,8 +46,8 @@
   <article class="panel__wrapper" >
                 <div class="card-body">
                     <h2 class="title" align="center"><b>Datos de la Materia Cursada</b></h2>
-                    <p align="center">Nombre del Alumno:}</p>
-              
+                    <p align="center">Nombre del Alumno:<h2 align="center" th:object="${estudiante}" th:text="${estudiante.snombres}"></h2><h2 align="center" th:object="${estudiante}" th:text="${estudiante.sapellidos}"></h2></p>
+              		<div class="panel__block"></div>
                     <form th:action="@{/addMateria}" method="POST" th:object="${nota}">	
                     	<div class="row row-space">
                             <div class="col-2">
