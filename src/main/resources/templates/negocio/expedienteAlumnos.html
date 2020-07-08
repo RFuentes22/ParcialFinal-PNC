@@ -22,7 +22,14 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="css/style.css">
-
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+	    	setTimeout(function() {
+	        	$("#exito").fadeOut();
+	    	},1000);
+		});
+	</script>
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -47,6 +54,7 @@
         <div class="panel__content" align="center">
             <h1 class="panel__headline"><i class="fa fa-users"></i></i>Alumnos</h1>
             <div class="panel__block"></div>
+            <p><br><label th:if="${saved == 1}" class="panel__headline" id="exito">EXPEDIENTE ACTUALIZADO</label></p>
             <form th:action="@{/lista}" >
                 <div class="input-group">
                     <label class="label"><b>Buscar Alumno Por</b></label>
